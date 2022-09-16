@@ -1,0 +1,234 @@
+@font-face {
+    font-family: 'OverpassMedium';
+    src: url('Overpass-Medium.eot');
+    src: url('Overpass-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-Medium.woff2') format('woff2'),
+        url('Overpass-Medium.woff') format('woff'),
+        url('Overpass-Medium.ttf') format('truetype'),
+        url('Overpass-Medium.svg#Overpass-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassItalic';
+    src: url('Overpass-Italic.eot');
+    src: url('Overpass-Italic.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-Italic.woff2') format('woff2'),
+        url('Overpass-Italic.woff') format('woff'),
+        url('Overpass-Italic.ttf') format('truetype'),
+        url('Overpass-Italic.svg#Overpass-Italic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassLight';
+    src: url('Overpass-Light.eot');
+    src: url('Overpass-Light.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-Light.woff2') format('woff2'),
+        url('Overpass-Light.woff') format('woff'),
+        url('Overpass-Light.ttf') format('truetype'),
+        url('Overpass-Light.svg#Overpass-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassLightItalic';
+    src: url('Overpass-LightItalic.eot');
+    src: url('Overpass-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-LightItalic.woff2') format('woff2'),
+        url('Overpass-LightItalic.woff') format('woff'),
+        url('Overpass-LightItalic.ttf') format('truetype'),
+        url('Overpass-LightItalic.svg#Overpass-LightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassThinItalic';
+    src: url('Overpass-ThinItalic.eot');
+    src: url('Overpass-ThinItalic.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-ThinItalic.woff2') format('woff2'),
+        url('Overpass-ThinItalic.woff') format('woff'),
+        url('Overpass-ThinItalic.ttf') format('truetype'),
+        url('Overpass-ThinItalic.svg#Overpass-ThinItalic') format('svg');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassRegular';
+    src: url('Overpass-Regular.eot');
+    src: url('Overpass-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-Regular.woff2') format('woff2'),
+        url('Overpass-Regular.woff') format('woff'),
+        url('Overpass-Regular.ttf') format('truetype'),
+        url('Overpass-Regular.svg#Overpass-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassThin';
+    src: url('Overpass-Thin.eot');
+    src: url('Overpass-Thin.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-Thin.woff2') format('woff2'),
+        url('Overpass-Thin.woff') format('woff'),
+        url('Overpass-Thin.ttf') format('truetype'),
+        url('Overpass-Thin.svg#Overpass-Thin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassSemiBold';
+    src: url('Overpass-SemiBold.eot');
+    src: url('Overpass-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-SemiBold.woff2') format('woff2'),
+        url('Overpass-SemiBold.woff') format('woff'),
+        url('Overpass-SemiBold.ttf') format('truetype'),
+        url('Overpass-SemiBold.svg#Overpass-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassMediumItalic';
+    src: url('Overpass-MediumItalic.eot');
+    src: url('Overpass-MediumItalic.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-MediumItalic.woff2') format('woff2'),
+        url('Overpass-MediumItalic.woff') format('woff'),
+        url('Overpass-MediumItalic.ttf') format('truetype'),
+        url('Overpass-MediumItalic.svg#Overpass-MediumItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassSemiBoldItalic';
+    src: url('Overpass-SemiBoldItalic.eot');
+    src: url('Overpass-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-SemiBoldItalic.woff2') format('woff2'),
+        url('Overpass-SemiBoldItalic.woff') format('woff'),
+        url('Overpass-SemiBoldItalic.ttf') format('truetype'),
+        url('Overpass-SemiBoldItalic.svg#Overpass-SemiBoldItalic') format('svg');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassBold';
+    src: url('Overpass-Bold.eot');
+    src: url('Overpass-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-Bold.woff2') format('woff2'),
+        url('Overpass-Bold.woff') format('woff'),
+        url('Overpass-Bold.ttf') format('truetype'),
+        url('Overpass-Bold.svg#Overpass-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassExtraBold';
+    src: url('Overpass-ExtraBold.eot');
+    src: url('Overpass-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-ExtraBold.woff2') format('woff2'),
+        url('Overpass-ExtraBold.woff') format('woff'),
+        url('Overpass-ExtraBold.ttf') format('truetype'),
+        url('Overpass-ExtraBold.svg#Overpass-ExtraBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassExtraBoldItalic';
+    src: url('Overpass-ExtraBoldItalic.eot');
+    src: url('Overpass-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-ExtraBoldItalic.woff2') format('woff2'),
+        url('Overpass-ExtraBoldItalic.woff') format('woff'),
+        url('Overpass-ExtraBoldItalic.ttf') format('truetype'),
+        url('Overpass-ExtraBoldItalic.svg#Overpass-ExtraBoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassBoldItalic';
+    src: url('Overpass-BoldItalic.eot');
+    src: url('Overpass-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-BoldItalic.woff2') format('woff2'),
+        url('Overpass-BoldItalic.woff') format('woff'),
+        url('Overpass-BoldItalic.ttf') format('truetype'),
+        url('Overpass-BoldItalic.svg#Overpass-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassBlack';
+    src: url('Overpass-Black.eot');
+    src: url('Overpass-Black.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-Black.woff2') format('woff2'),
+        url('Overpass-Black.woff') format('woff'),
+        url('Overpass-Black.ttf') format('truetype'),
+        url('Overpass-Black.svg#Overpass-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassBlackItalic';
+    src: url('Overpass-BlackItalic.eot');
+    src: url('Overpass-BlackItalic.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-BlackItalic.woff2') format('woff2'),
+        url('Overpass-BlackItalic.woff') format('woff'),
+        url('Overpass-BlackItalic.ttf') format('truetype'),
+        url('Overpass-BlackItalic.svg#Overpass-BlackItalic') format('svg');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassExtraLight';
+    src: url('Overpass-ExtraLight.eot');
+    src: url('Overpass-ExtraLight.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-ExtraLight.woff2') format('woff2'),
+        url('Overpass-ExtraLight.woff') format('woff'),
+        url('Overpass-ExtraLight.ttf') format('truetype'),
+        url('Overpass-ExtraLight.svg#Overpass-ExtraLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OverpassExtraLightItalic';
+    src: url('Overpass-ExtraLightItalic.eot');
+    src: url('Overpass-ExtraLightItalic.eot?#iefix') format('embedded-opentype'),
+        url('Overpass-ExtraLightItalic.woff2') format('woff2'),
+        url('Overpass-ExtraLightItalic.woff') format('woff'),
+        url('Overpass-ExtraLightItalic.ttf') format('truetype'),
+        url('Overpass-ExtraLightItalic.svg#Overpass-ExtraLightItalic') format('svg');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
