@@ -1,0 +1,41 @@
+@import '../../globalStyles/styles'
+@import '../../globalStyles/fonts/stylesheet.css'
+    
+
+.category
+    position: relative
+    height: 30vh
+    width: 30vh
+    background-size: 100%
+    border-radius: 5px
+
+    &:hover
+        filter: brightness(60%)
+        .heading
+            color: #fff
+            filter: brightness(100%)
+
+    .heading
+        position: absolute
+        left: 5px
+        bottom: 0
+        font-family: 'OverpassMedium'
+        font-size: 40px
+        text-shadow: 1px 1px 2px #000
+        color: $cold_bg
+
+.bread
+    background-image: url('./img/bread.jpg')
+
+.milk
+    background-image: url('./img/milk.jpg')
+
+.meat
+    background-image: url('./img/meat.jpg')
+
+.coffee
+    background-image: url('./img/coffee.jpg')
+
+.tea
+    background-image: url('./img/tea.jpg')
+
