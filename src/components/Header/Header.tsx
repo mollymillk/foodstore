@@ -1,19 +1,23 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './Header.sass';
-
+import {BiSearchAlt} from 'react-icons/bi';
+import {VscAccount} from 'react-icons/vsc';
+import {BsCart} from 'react-icons/bs';
+ 
 export const Header = ():JSX.Element => {
 	return <header className='header'>
-		<div className='logo'>food store</div>
+		<div className='logo'>food store .</div>
 		<nav className='main_nav'>
-			<div className='menu_item'>Акции</div>
-			<div className='menu_item'>Продукты</div>
-			<div className='menu_item'>Блог</div>
-			<div className='menu_item'>Контакты</div>
+			<NavLink className='menu_item' to='/sales'>Акции</NavLink>
+			<NavLink className='menu_item' to='/products'>Продукты</NavLink>
+			<NavLink className='menu_item' to='/blog'>Блог</NavLink>
+			<NavLink className='menu_item' to='/contacts'>Контакты</NavLink>
 		</nav>
 		<nav className='icon_nav'>
-			<div className='menu_item'>Поиск</div>
-			<div className='menu_item'>Аккаунт</div>
-			<div className='menu_item'>Корзина</div>
+			<div className='menu_item'><BiSearchAlt/></div>
+			<div className='menu_item'><VscAccount/></div>
+			<div className='menu_item'><BsCart/></div>
 		</nav>
 	</header>;
 };

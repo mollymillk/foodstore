@@ -10,7 +10,23 @@
     color: $heading
     background: $cold_bg
 
+    .logo
+        font-family: 'OverpassLight'
+        text-decoration: underline
+
     .main_nav, .icon_nav
         display: flex
         flex-direction: row
         gap: 30px
+
+    .main_nav 
+        .menu_item
+            text-decoration: none
+            color: $heading
+            &:hover
+                opacity: 0.8
+        .active
+            font-family: 'OverpassBlack'
+            &:hover
+                opacity: 1
+                cursor: default

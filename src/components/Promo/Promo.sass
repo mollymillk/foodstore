@@ -1,0 +1,110 @@
+@import '../../globalStyles/styles'
+@import '../../globalStyles/fonts/stylesheet.css'
+
+@mixin container()
+    height: 30vh
+    box-shadow: 0px 0px 15px -6px $dark_heading
+    &:hover
+        box-shadow: 0px 0px 19px -5px $dark_heading
+
+@mixin font()
+    font-family: 'OverpassBold'
+    font-size: 25px
+    color: $cold_bg
+
+@mixin column()
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+
+@mixin circle()
+    background-color: $detailes
+    border-radius: 50px
+    height: 100px
+    width: 100px
+    font-size: 40px
+
+.first_sale_container
+    background: $dark_heading
+    background-image: url('./img/line.svg'), url('./img/glass.png')
+    background-size: auto, 60%
+    background-repeat: repeat, no-repeat
+    background-position: center, 80% 25%
+    @include container
+
+    .sale
+        display: flex
+        flex-direction: row
+        justify-content: space-around
+        padding-top: 40px
+        gap: 10px
+        @include font()
+
+        .size
+            @include column
+            @include circle()
+
+    .promo
+        @include column
+        padding: 3px
+        margin-left: 40px
+        height: 60px
+        width: 80px
+        background-color: $text
+
+        .code
+            @include font()
+            color: $heading
+
+
+.second_sale_container
+    @include container
+    @include column
+    background: $text
+    background-image: url('./img/food_bg.svg')
+    // background-size: auto, 100%
+
+    .sale
+        @include column()
+        @include font()
+        width: 50%
+        background: $dark_heading
+        text-align: center
+        color: $cold_bg
+    
+    .promo
+        display: flex
+        flex-direction: row
+        justify-content: flex-end
+        text-align: center
+        
+        .code
+            @include font()
+            background: $detailes
+            width: 50%
+
+.third_sale_container
+    @include container
+    @include column
+    @include font()
+    background: $dark_heading
+    background-image: url('./img/line.svg'), url('./img/dish.png')
+    background-size: auto, 120%
+    .sale 
+        align-items: center
+
+        .text
+            background: $text
+            text-align: center
+            color: $heading
+
+        .size
+            @include column
+            @include circle()
+            margin: 10px auto auto 20px
+
+    .promo .code
+        margin: 10px auto auto 20px
+        width: 90px
+        background: $text
+        color: $heading
