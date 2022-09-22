@@ -17,9 +17,11 @@ export const getGoods = () => {
 			if (!isLoading) {
 				const id = data.code;
 				result[category][id] = data.product;
+
 			}
 		});
 	});
+	// console.log(Object.values(result));
 
-	return  Object.entries(result);
+	return result;
 };
