@@ -1,5 +1,6 @@
 import React from 'react';
 import { Category } from '../../components/Category/Category';
+import { Goods } from '../../components/Goods/Goods';
 import './Products.sass';
 
 type Categories = {
@@ -29,5 +30,6 @@ export const Products = (): JSX.Element => {
 
 	return <div className='products_page'>
 		{categoriesList}
+		<Goods/>
 	</div>;
 };
