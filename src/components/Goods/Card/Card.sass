@@ -1,0 +1,45 @@
+@import '../../../globalStyles/styles'
+@import '../../../globalStyles/fonts/stylesheet.css'
+@import 'material-icons/iconfont/material-icons.css'
+    
+.card
+    width: 270px
+    margin-bottom: 20px
+    background: #fff
+    box-shadow: 0px 0px 15px -6px $dark_heading
+    &:hover
+        box-shadow: 0px 0px 19px -5px $dark_heading
+
+    .image
+        width: 270px
+        height: 270px
+        background: #fff
+        display: flex
+        justify-content: space-around
+        align-items: center
+    .info
+        padding: 10px
+        color: $dark_heading
+        .name
+            font-family: 'OverpassBold'
+            &:hover
+                color: $heading
+                cursor: default
+        .price
+            font-family: 'OverpassBold'
+        .button
+            background: $detailes
+            font-family: 'OverpassMedium'
+        .counter
+            display: flex
+            flex-direction: row
+
+            .remove, .add
+                width: 30px
+                height: 20px
+                border-radius: 5px
+                background: $dark_heading
+
+            .amount
+                margin: auto 10px auto 10px
+                font-family: 'OverpassBold'

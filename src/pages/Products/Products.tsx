@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+// import {useAppSelector, useAppDispatch}
 import { Category } from '../../components/Category/Category';
 import { Goods } from '../../components/Goods/Goods';
 import './Products.sass';
@@ -29,7 +30,11 @@ export const Products = (): JSX.Element => {
 	});
 
 	return <div className='products_page'>
-		{categoriesList}
-		<Goods/>
+		<div className='categories'>
+			{categoriesList}
+		</div>
+		<div className='goods'>
+			<Goods/>
+		</div>
 	</div>;
 };

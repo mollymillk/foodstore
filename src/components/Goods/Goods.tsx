@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card } from './Card/Card';
 import { getGoods } from './getGoods';
 
 export const Goods = ():JSX.Element => {
@@ -17,10 +18,14 @@ export const Goods = ():JSX.Element => {
 	
 	
 
-	return <div>
+	return <>
 		{goods && goods.map(item => {
-			return <img srcSet={item.image_front_small_url} alt="" srcset="" />
+			return <Card
+				img={item.image_front_small_url}
+				name={item.product_name}
+				key={item._id}
+				id={item.id}/>;
 		})}
-	</div>;
+	</>;
 	
 };
