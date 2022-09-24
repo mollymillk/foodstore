@@ -5,26 +5,14 @@ import { getGoods } from './getGoods';
 export const Goods = ():JSX.Element => {
 	
 	const data = getGoods();
-	const goods = [];
-
-	const values = Object.values(data);
-
-	values.forEach(value => {
-		Object.values(value).forEach(item => {
-			goods.push(item);
-		});
-	});
-	
-	
-	
 
 	return <>
-		{goods && goods.map(item => {
+		{data && data.map(product => {
 			return <Card
-				img={item.image_front_small_url}
-				name={item.product_name}
-				key={item._id}
-				id={item.id}/>;
+				img={product.image_front_small_url}
+				name={product.product_name}
+				key={product.id}
+				id={product.id}/>;
 		})}
 	</>;
 	

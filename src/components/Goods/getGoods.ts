@@ -1,26 +1,33 @@
 import { useGetGoodsByNameQuery } from '../../store/goodsApi';
-import { productsData, Entries } from '../../store/queries/productsQuery';
+import { productsData } from '../../store/queries/productsQuery';
+
+type Product = { 
+	image_front_small_url: string,
+	product_name: string,
+	id: string,
+	price: number,
+	category: string
+}
+
+type Products = {
+	[id: string] : Product
+}
 
 export const getGoods = () => {
-	const result = {};
 
-	const entries:Entries = Object.entries(productsData);
+	const result:Products = {};
 
-	entries.forEach(([category, productData]) => {
+	productsData.forEach(product => {
 
-		result[category] = {};
+		const {data, isLoading} = useGetGoodsByNameQuery(product.id);
 
-		productData.forEach((product) => {
+		if (data && !isLoading) {
+			const id = product.id;
+			result[id] = {...data.product, ...product};
+		}
 
-			const {data, isLoading} = useGetGoodsByNameQuery(product.id);
-
-			if (!isLoading) {
-				const id = data.code;
-				result[category][id] = data.product;
-			}
-		});
 	});
-	// console.log(Object.values(result));
+	
 
-	return result;
+	return Object.values(result);
 };
