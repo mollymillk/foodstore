@@ -1,7 +1,13 @@
 @import '../../../globalStyles/styles'
 @import '../../../globalStyles/fonts/stylesheet.css'
 @import 'material-icons/iconfont/material-icons.css'
-    
+
+.card.discounted
+    border: 1px solid $heading
+    border-radius: 5px  
+    .image
+        border-radius: 5px  
+
 .card
     width: 270px
     margin-bottom: 20px
@@ -25,8 +31,14 @@
             &:hover
                 color: $heading
                 cursor: default
-        .price
+        .price, .sale_price
             font-family: 'OverpassBold'
+        .sale_price
+            color: $detailes
+            .oldPrice
+                margin-left: 5px
+                text-decoration: line-through
+                color: $dark_heading
         .button
             background: $detailes
             font-family: 'OverpassMedium'

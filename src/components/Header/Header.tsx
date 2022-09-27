@@ -17,7 +17,9 @@ export const Header = ():JSX.Element => {
 		<nav className='icon_nav'>
 			<div className='menu_item'><BiSearchAlt/></div>
 			<div className='menu_item'><VscAccount/></div>
-			<div className='menu_item'><BsCart/></div>
+			<NavLink to='/cart'>
+				<div className='menu_item'><BsCart/></div>
+			</NavLink>
 		</nav>
 	</header>;
 };

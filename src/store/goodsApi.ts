@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-type ProductData = {
+export type ProductData = {
 	product: {
 		image_front_small_url: string,
 		product_name: string,

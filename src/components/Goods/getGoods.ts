@@ -1,7 +1,8 @@
 import { useGetGoodsByNameQuery } from '../../store/goodsApi';
 import { productsData } from '../../store/queries/productsQuery';
 
-type Product = { 
+type Product = {
+	sale: any; 
 	image_front_small_url: string,
 	product_name: string,
 	id: string,
@@ -9,9 +10,10 @@ type Product = {
 	category: string
 }
 
-type Products = {
+export type Products = {
 	[id: string] : Product
 }
+
 
 export const getGoods = () => {
 
@@ -29,5 +31,5 @@ export const getGoods = () => {
 	});
 	
 
-	return Object.values(result);
+	return result;
 };

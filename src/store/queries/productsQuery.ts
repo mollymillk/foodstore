@@ -1,11 +1,39 @@
 export type ProductQuery = {
     id: string,
 	price: number,
-	category: string
+	category: string,
+	sale?: number
 }
 
 
 export const productsData: ProductQuery[] = [
+	{
+		id: '4607012590466',
+		price: 90,
+		category: 'base'
+	},
+	{
+		id: '4670002810028',
+		price: 160,
+		category: 'base',
+		sale: 35
+	},
+	{
+		id: '2180030090020',
+		price: 70,
+		category: 'base',
+		sale: 10
+	},
+	{
+		id: '4600699501121',
+		price: 120,
+		category: 'base'
+	},
+	{
+		id: '4601751015655',
+		price: 40,
+		category: 'base'
+	},
 	{
 		id: '2490035000010',
 		price: 40,
@@ -19,17 +47,19 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '4607065714192',
 		price: 120,
-		category: 'bread'
+		category: 'bread',
+		sale: 12
 	},
 	{
-		id: '4601347002212',
+		id: '4665297602496',
 		price: 40,
 		category: 'bread'
 	},
 	{
-		id: '4607001415046',
+		id: '4607064327188',
 		price: 220,
-		category: 'bread'
+		category: 'bread',
+		sale: 40
 	},
 	{
 		id: '4607016455341',
@@ -37,29 +67,32 @@ export const productsData: ProductQuery[] = [
 		category: 'bread'
 	},
 	{
-		id: '4607076490177',
+		id: '4601751003775',
 		price: 90,
-		category: 'milk'
+		category: 'milk',
+		sale: 20
 	},
 	{
-		id: '4600657410960',
+		id: '4601075342390',
 		price: 85,
 		category: 'milk'
 	},
 	{
 		id: '4602048004109',
 		price: 76,
-		category: 'milk'
+		category: 'milk',
+		sale: 14
 	},
 	{
-		id: '4607060501445',
-		price: 87,
+		id: '4620016810873',
+		price: 65,
 		category: 'milk'
 	},
 	{
 		id: '4600657412117',
 		price: 97,
-		category: 'milk'
+		category: 'milk',
+		sale: 23
 	},
 	{
 		id: '4620016810354',
@@ -74,20 +107,22 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '2800110010146',
 		price: 350,
-		category: 'meat'
+		category: 'meat',
+		sale: 60
 	},
 	{
-		id: '4630016230588',
+		id: '4607808380578',
 		price: 410,
 		category: 'meat'
 	},
 	{
-		id: '4670012880424',
+		id: '2800110010009',
 		price: 340,
-		category: 'meat'
+		category: 'meat',
+		sale: 50
 	},
 	{
-		id: '4650063861634',
+		id: '4607066050077',
 		price: 310,
 		category: 'meat'
 	},
@@ -97,19 +132,20 @@ export const productsData: ProductQuery[] = [
 		category: 'meat'
 	},
 	{
-		id: '4610142390080',
+		id: '4607104812988',
 		price: 310,
 		category: 'meat'
 	},
 	{
-		id: '4607177072746',
+		id: '4610009511634',
 		price: 370,
 		category: 'meat'
 	},
 	{
 		id: '4607001771555',
 		price: 350,
-		category: 'coffee'
+		category: 'coffee',
+		sale: 100
 	},
 	{
 		id: '4620007590951',
@@ -119,7 +155,8 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '7610121710622',
 		price: 450,
-		category: 'coffee'
+		category: 'coffee',
+		sale: 120
 	},
 	{
 		id: '7613034227775',
@@ -172,9 +209,31 @@ export const productsData: ProductQuery[] = [
 		category: 'tea'
 	},
 	{
-		id: '7613035251779',
-		price: 370,
-		category: 'tea'
+		id: '4650061000097',
+		price: 270,
+		category: 'tea',
+		sale: 90
+	},
+	{
+		id: '4607117892113',
+		price: 120,
+		category: 'sweet'
+	},
+	{
+		id: '4600300071067',
+		price: 180,
+		category: 'sweet',
+		sale: 50
+	},
+	{
+		id: '4606272028757',
+		price: 95,
+		category: 'sweet'
+	},
+	{
+		id: '4607117891833',
+		price: 210,
+		category: 'sweet'
 	},
 ];
 

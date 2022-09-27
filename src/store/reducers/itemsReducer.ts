@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
-type cartItems = {
-	[id: string] : number
+export type cartItems = {
+	[id:string] : number
 }
 
 const initialState:cartItems = {};
@@ -14,11 +14,9 @@ export const itemsSlice = createSlice({
 	initialState,
 	reducers: {
 		addItem: (state, action: PayloadAction<string>) => {
-			// state.items.push(action.payload);
 			state[action.payload] = 1;
 		},
 		addCount: (state, action: PayloadAction<string>) => {
-			// state.items.push(action.payload);
 			state[action.payload] = state[action.payload] + 1;
 		},
 		remove: (state, action: PayloadAction<string>) => {

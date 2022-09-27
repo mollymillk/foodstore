@@ -1,0 +1,35 @@
+@import '../../globalStyles/styles'
+@import '../../globalStyles/fonts/stylesheet.css'
+    
+.order_container
+    display: flex
+    flex-direction: column
+    margin-left: 5%
+    padding: 20px
+    background: #fff
+    border: 2px solid $dark_heading
+    border-radius: 10px
+    width: 30%
+    font-family: 'OverpassBold'
+    max-height: 50vh
+
+    .order_goods, .order_sale, .order_shipping_cost, .order_promo
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+
+    .order_promo 
+
+        .text, .value
+            display: flex
+            flex-direction: column
+            justify-content: center
+
+        .value
+            border: 1px solid $dark_heading
+            border-radius: 5px
+    .order_button
+        background: $detailes
+        &:hover
+            opacity: 0.7
+            background: $detailes

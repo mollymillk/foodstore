@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-// import {useAppSelector, useAppDispatch}
+import React from 'react';
 import { Category } from '../../components/Category/Category';
 import { Goods } from '../../components/Goods/Goods';
 import './Products.sass';

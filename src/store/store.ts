@@ -4,8 +4,7 @@ import itemsReducer from './reducers/itemsReducer';
 
 const rootReducer = combineReducers({
 	[goodsApi.reducerPath]: goodsApi.reducer,
-	cartItems: itemsReducer,
-	// cartAmount: amountReducer
+	cartItems: itemsReducer
 });
 
 export const setupStore = () => {

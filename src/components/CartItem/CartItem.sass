@@ -1,0 +1,42 @@
+@import '../../globalStyles/styles'
+@import '../../globalStyles/fonts/stylesheet.css'
+@import 'material-icons/iconfont/material-icons.css'
+
+.cart_item
+    display: flex
+    flex-direction: row
+    .img
+        width: 150px
+        height: 150px
+        background: #fff
+        display: flex
+        justify-content: space-around
+        align-items: center
+        img
+            height: 70%
+
+    .info
+        font-family: 'OverpassBold'
+        margin-left: 30px
+
+        .name:hover
+            color: $heading
+            cursor: default
+
+        .price
+            font-size: 20px
+
+        .counter
+            display: flex
+            flex-direction: row
+            height: 40px
+
+            .remove, .add
+                width: 30px
+                height: 20px
+                border-radius: 5px
+                background: $detailes
+
+            .amount
+                margin: auto 10px auto 10px
+                font-family: 'OverpassBold'
