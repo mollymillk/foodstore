@@ -3,6 +3,7 @@ import { Button, Fab } from '@mui/material';
 import type { RootState } from '../../../store/store';
 import {useSelector, useDispatch} from 'react-redux';
 import { addItem, addCount, remove } from '../../../store/reducers/itemsReducer';
+import { addToCost, removeFromCost } from '../../../store/reducers/costReducer';
 import './Card.sass';
 
 type Props = {
@@ -23,6 +24,23 @@ export const Card = (props:Props):JSX.Element => {
 	
 	const dispatch = useDispatch();
 
+	const priceToAdd = props.sale ? props.price - props.sale : props.price;
+
+	const handleAddItem = () => {
+		dispatch(addItem(props.id));
+		dispatch(addToCost(priceToAdd));
+	};
+
+	const handleAddCount = () => {
+		dispatch(addCount(props.id));
+		dispatch(addToCost(priceToAdd));
+	};
+
+	const handleRemove = () => {
+		dispatch(remove(props.id));
+		dispatch(removeFromCost(priceToAdd));
+	};
+
 	const price = props.sale > 0 ?
 		<p className='sale_price'>
 			{props.price - props.sale}₽
@@ -41,8 +59,7 @@ export const Card = (props:Props):JSX.Element => {
 			<img srcSet={props.img} className='photo'/>
 		</div>
 		<div className='info'>
-			<h3 className='name'
-				onClick={() => dispatch(addItem(props.id))}>{name}</h3>
+			<h3 className='name'>{name}</h3>
 			{price}
 
 			{!items[props.id] ?
@@ -50,7 +67,7 @@ export const Card = (props:Props):JSX.Element => {
 				<Button 
 					className='button'
 					variant='contained'
-					onClick={() => dispatch(addItem(props.id))}
+					onClick={() => handleAddItem()}
 				>
 					В корзину
 				</Button>
@@ -58,13 +75,13 @@ export const Card = (props:Props):JSX.Element => {
 				: 
 
 				<div className='counter'>
-					<Fab className='remove' color="primary" onClick={() => dispatch(remove(props.id))}>
+					<Fab className='remove' color="primary" onClick={() => handleRemove()}>
 						<span className="material-icons-outlined">
 							remove_circle_outline
 						</span>
 					</Fab>
 					<p className='amount'>{items[props.id]}</p>
-					<Fab className='add'color="primary" onClick={() => dispatch(addCount(props.id))}>
+					<Fab className='add'color="primary" onClick={() => handleAddCount()}>
 						<span className="material-icons-outlined">
 							add_circle_outline
 						</span>

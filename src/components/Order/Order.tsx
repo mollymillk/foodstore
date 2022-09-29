@@ -1,5 +1,8 @@
 import { Button, TextField } from '@mui/material';
-import React, { ChangeEvent, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { applyPromo } from './applyPromo';
 import './Order.sass';
 
 type Props = {
@@ -7,28 +10,31 @@ type Props = {
 	sale: number
 }
 
-const promocodes = [ 'new50', 'catch200', 'fresh20' ];
-
+// const promocodes = [ 'new50', 'catch200', 'fresh20' ];
 
 export const Order = (props:Props) => {
 
-	const [isPromoActive, setIsPromoActive] = useState(false);
+	const [promo, setPromo] = useState('');
 
-	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>)=> {
-		const promoValue = e.target.value;
-		const activePromo = promocodes.find(promo => {
-			return promo === promoValue;
-		});
-		if (activePromo) {
-			setIsPromoActive(true);
-		} else {
-			setIsPromoActive(false);
-		}
+	// const handleChange = (e: ChangeEvent<HTMLTextAreaElement>)=> {
+	// 	const promoValue = e.target.value;
+	// 	const activePromo = promocodes.find(promo => {
+	// 		return promo === promoValue;
+	// 	});
+	// 	if (activePromo) {
+	// 		setPromo(promoValue);
+	// 	} else {
+	// 		setPromo('');
+	// 	}
 
-	};
+	// };
 
+	const totalCost = useSelector((state:RootState) => state.totalCost);
 
-	const helperText = isPromoActive ? 'Промокод применен!' : '';
+	let text = applyPromo(promo);
+	const helperText = promo ? text : '';
+
+	
 
 
 	return <div className='order_container'>
@@ -40,13 +46,13 @@ export const Order = (props:Props) => {
 			<h3>Ваш заказ</h3>
 
 			<div className='order_goods'>
-				<p className='goods_category'>Товары(amount)</p>
+				<p className='goods_category'>Товары</p>
 				<p className='value'>{props.sum}₽</p>
 			</div>
 
 			<div className='order_sale'>
 				<p className='sale_category'>Скидка</p>
-				<p className='value'>{props.sale}₽</p>
+				<p className='value'>{props.sum - Math.floor(totalCost.cost)}₽</p>
 			</div>
 
 			<div className='order_shipping_cost'>
@@ -59,18 +65,18 @@ export const Order = (props:Props) => {
 			<div className='text'>Промокод</div>
 			<TextField
 				
-				id='standard-disabled'
+				// id='standard-disabled'
 				label=""
 				helperText={helperText}
 				variant="standard"
-				onChange={handleChange}
+				onChange={(e) => setPromo(e.target.value)}
 				
 			/>
 		</div>
 
 		<div className='order_cost'>
 			<h3 className='cost_text'>Итого</h3>
-			<p className='value'>{props.sum - props.sale}₽</p>
+			<p className='value'>{Math.floor(totalCost.cost)}₽</p>
 		</div>
 
 		<Button className='order_button' variant="contained">Оплатить</Button>

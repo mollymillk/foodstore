@@ -3,8 +3,8 @@ import { Card } from './Card/Card';
 import { getGoods } from './getGoods';
 
 type Props = {
-	onlyDiscounted: boolean
-};
+	category: string
+}
 
 export const Goods = (props:Props):JSX.Element => {
 	
@@ -12,19 +12,21 @@ export const Goods = (props:Props):JSX.Element => {
 	const data = Object.values(products);	
 
 	return <>
-		{props.onlyDiscounted ? 
+			{props.category ? 
 			data && data.map(product => {
 				const sale = product.sale ? product.sale : 0;
-				if(product.sale) {
-					return <Card
-						img={product.image_front_small_url}
-						name={product.product_name}
-						key={product.id}
-						price={product.price}
-						sale={sale}
-						id={product.id}
-					/>;
-				}}) :
+			
+				if (product.category == props.category) {
+					console.log(props.category);
+				return <Card
+					img={product.image_front_small_url}
+					name={product.product_name}
+					key={product.id}
+					price={product.price}
+					sale={sale}
+					id={product.id}
+				/>;
+			}}) :
 			data && data.map(product => {
 				const sale = product.sale ? product.sale : 0;
 				return <Card
@@ -34,7 +36,7 @@ export const Goods = (props:Props):JSX.Element => {
 					price={product.price}
 					sale={sale}
 					id={product.id}
-				/>;
+					/>
 			})}
 	</>;
 	

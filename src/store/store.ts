@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { goodsApi } from './goodsApi';
+import costReducer from './reducers/costReducer';
 import itemsReducer from './reducers/itemsReducer';
 
 const rootReducer = combineReducers({
 	[goodsApi.reducerPath]: goodsApi.reducer,
-	cartItems: itemsReducer
+	cartItems: itemsReducer,
+	totalCost: costReducer,
 });
 
 export const setupStore = () => {

@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
-export type cartItems = {
+export type CartItems = {
 	[id:string] : number
 }
 
-const initialState:cartItems = {};
+const initialState:CartItems = {};
 
 
 export const itemsSlice = createSlice({
