@@ -16,7 +16,7 @@ export const Header = ():JSX.Element => {
 		<nav className='main_nav'>
 			<NavLink className='menu_item' to='/products'>Продукты</NavLink>
 			<NavLink to='/cart' className='to_cart'>
-				<p className='cart_sum'>{totalCost.cost}</p>
+				<p className='cart_sum'>{totalCost.cost - totalCost.promoSale[1]}</p>
 				<div className='cart_icon'><BsCart size={30}/></div>
 			</NavLink>
 		</nav>

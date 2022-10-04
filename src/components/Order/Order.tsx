@@ -16,45 +16,30 @@ type Props = {
 
 
 export const Order = (props:Props) => {
-
-	const [promo, setPromo] = useState<keyof PromoCodes|''>('');
-
 	const dispatch = useDispatch();
 	const totalCost = useSelector((state:RootState) => state.totalCost);
 	const settedPromo = useSelector((state:RootState) => state.promo);
 	const orderItems = useSelector((state: RootState)=> state.cartItems);
 
+	const [promo, setPromo] = useState<string>(totalCost.promoSale[0]);
+
+
 	const handleChange = (input:keyof PromoCodes|string) => {
-		dispatch(resetPromo());
-		
-		Object.keys(promoCodes).forEach((item:keyof PromoCodes) => {
-			if (item === input) {
-				setPromo(input);
-				dispatch(applyPromo(input))
-			} 
-		})
+		setPromo(input)
 	}
 
 	console.log(promo);
 	
 	useEffect(() => {
-
-		if (settedPromo[promo]) {
+		if (promo in promoCodes) {
 			const sales = promoCodes[promo];
-			const sale = sales(totalCost.cost)
-			dispatch(removeFromCost(sale));
+			const sale = sales(totalCost.cost);
 			dispatch(addPromoSale([promo, sale]))
-			// setPromoSale(sale);
 		} else {
-			if (totalCost.promoSale[1]) {
-				dispatch(addToCost(totalCost.promoSale[1])) 
-				dispatch(removePromoSale()) 
-			} else {
-				dispatch(addToCost(0));
-			}
+			dispatch(removePromoSale())
 		}
 		
-	}, [settedPromo, orderItems])
+	}, [promo, orderItems])
 
 
 	const helperText = 'apply promo';
@@ -78,7 +63,7 @@ export const Order = (props:Props) => {
 
 			<div className='order_sale'>
 				<p className='sale_category'>Скидка</p>
-				<p className='value'>{props.sum - Math.floor(totalCost.cost)}₽</p>
+				<p className='value'>{props.sum - Math.floor(totalCost.cost) + totalCost.promoSale[1]}₽</p>
 			</div>
 
 			<div className='order_shipping_cost'>
@@ -101,7 +86,7 @@ export const Order = (props:Props) => {
 
 		<div className='order_cost'>
 			<h3 className='cost_text'>Итого</h3>
-			<p className='value'>{Math.floor(totalCost.cost)}₽</p>
+			<p className='value'>{Math.floor(totalCost.cost - totalCost.promoSale[1])}₽</p>
 		</div>
 
 		<Button className='order_button' variant="contained">Оплатить</Button>

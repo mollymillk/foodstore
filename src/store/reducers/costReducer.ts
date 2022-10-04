@@ -4,12 +4,12 @@ import type { RootState } from '../store';
 
 type TotalCost = {
 	cost: number,
-	promoSale: [] | [string, number]
+	promoSale: [string, number]
 }
 
 const initialState:TotalCost = {
 	cost: 0,
-	promoSale: []
+	promoSale: ['promo', 0]
 };
 
 export const costSlice = createSlice({
@@ -26,7 +26,7 @@ export const costSlice = createSlice({
 			state.promoSale = action.payload
 		},
 		removePromoSale: (state) => {
-			state.promoSale = []
+			state.promoSale = ['promo', 0]
 		}
 	}
 });
