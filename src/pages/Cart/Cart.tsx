@@ -14,8 +14,6 @@ export const Cart = () => {
 	const items = useSelector((state: RootState) => state.cartItems);
 	const entries:Entries[] = Object.entries(items);
 	const data = getGoods();
-
-	console.log(data);
 	
 
 	let orderSum = 0;

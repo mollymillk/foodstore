@@ -3,11 +3,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
 type TotalCost = {
-	cost: number
+	cost: number,
+	promoSale: [] | [string, number]
 }
 
 const initialState:TotalCost = {
-	cost: 0
+	cost: 0,
+	promoSale: []
 };
 
 export const costSlice = createSlice({
@@ -20,19 +22,16 @@ export const costSlice = createSlice({
 		removeFromCost: (state, action: PayloadAction<number>) => {
 			state.cost -= action.payload;
 		},
-		discount50: (state) => {
-			state.cost = (state.cost / 100) * 50;
+		addPromoSale: (state, action: PayloadAction<[string, number]>) => {
+			state.promoSale = action.payload
 		},
-		discount200: (state) => {
-			state.cost = state.cost - 200;
-		},
-		discount20: (state) => {
-			state.cost = state.cost / 100 * 80;
-		},
+		removePromoSale: (state) => {
+			state.promoSale = []
+		}
 	}
 });
 
-export const {addToCost, removeFromCost, discount200, discount50, discount20} = costSlice.actions;
+export const {addToCost, removeFromCost, addPromoSale, removePromoSale} = costSlice.actions;
 export const selectCost = (state: RootState) => state.totalCost.cost;
 
 export default costSlice.reducer;

@@ -1,40 +1,66 @@
 import { Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { applyPromo, resetPromo } from '../../store/reducers/promoReducer';
 import { RootState } from '../../store/store';
-import { applyPromo } from './applyPromo';
+import { PromoCodes, promoCodes } from './promoCodes';
 import './Order.sass';
+import { addToCost, removeFromCost, addPromoSale, removePromoSale } from '../../store/reducers/costReducer';
 
 type Props = {
 	sum: number,
 	sale: number
 }
 
-// const promocodes = [ 'new50', 'catch200', 'fresh20' ];
+
 
 export const Order = (props:Props) => {
 
-	const [promo, setPromo] = useState('');
+	const [promo, setPromo] = useState<keyof PromoCodes|''>('');
 
-	// const handleChange = (e: ChangeEvent<HTMLTextAreaElement>)=> {
-	// 	const promoValue = e.target.value;
-	// 	const activePromo = promocodes.find(promo => {
-	// 		return promo === promoValue;
-	// 	});
-	// 	if (activePromo) {
-	// 		setPromo(promoValue);
-	// 	} else {
-	// 		setPromo('');
-	// 	}
-
-	// };
-
+	const dispatch = useDispatch();
 	const totalCost = useSelector((state:RootState) => state.totalCost);
+	const settedPromo = useSelector((state:RootState) => state.promo);
+	const orderItems = useSelector((state: RootState)=> state.cartItems);
 
-	let text = applyPromo(promo);
-	const helperText = promo ? text : '';
+	const handleChange = (input:keyof PromoCodes|string) => {
+		dispatch(resetPromo());
+		
+		Object.keys(promoCodes).forEach((item:keyof PromoCodes) => {
+			if (item === input) {
+				setPromo(input);
+				dispatch(applyPromo(input))
+			} 
+		})
+	}
 
+	console.log(promo);
 	
+	useEffect(() => {
+
+		if (settedPromo[promo]) {
+			const sales = promoCodes[promo];
+			const sale = sales(totalCost.cost)
+			dispatch(removeFromCost(sale));
+			dispatch(addPromoSale([promo, sale]))
+			// setPromoSale(sale);
+		} else {
+			if (totalCost.promoSale[1]) {
+				dispatch(addToCost(totalCost.promoSale[1])) 
+				dispatch(removePromoSale()) 
+			} else {
+				dispatch(addToCost(0));
+			}
+		}
+		
+	}, [settedPromo, orderItems])
+
+
+	const helperText = 'apply promo';
+	console.log(settedPromo);
+	console.log(totalCost.promoSale);
+
 
 
 	return <div className='order_container'>
@@ -64,12 +90,11 @@ export const Order = (props:Props) => {
 		<div className='order_promo'>
 			<div className='text'>Промокод</div>
 			<TextField
-				
-				// id='standard-disabled'
+				defaultValue={totalCost.promoSale[0] ? totalCost.promoSale[0] : ''}
 				label=""
 				helperText={helperText}
 				variant="standard"
-				onChange={(e) => setPromo(e.target.value)}
+				onChange={(e) => handleChange(e.target.value)}
 				
 			/>
 		</div>
