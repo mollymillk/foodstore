@@ -1,39 +1,50 @@
-import { Button, TextField } from '@mui/material';
+import { Button, OutlinedInput, styled, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { applyPromo, resetPromo } from '../../store/reducers/promoReducer';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { PromoCodes, promoCodes } from './promoCodes';
 import './Order.sass';
-import { addToCost, removeFromCost, addPromoSale, removePromoSale } from '../../store/reducers/costReducer';
+import { addPromoSale, removePromoSale } from '../../store/reducers/costReducer';
 
 type Props = {
 	sum: number,
 	sale: number
 }
 
-
-
 export const Order = (props:Props) => {
 	const dispatch = useDispatch();
 	const totalCost = useSelector((state:RootState) => state.totalCost);
-	const settedPromo = useSelector((state:RootState) => state.promo);
 	const orderItems = useSelector((state: RootState)=> state.cartItems);
 
 	const [promo, setPromo] = useState<string>(totalCost.promoSale[0]);
+	const [helperText, setHelperText] = useState<string>('Введите промокод')
 
 
 	const handleChange = (input:keyof PromoCodes|string) => {
 		setPromo(input)
 	}
 
-	console.log(promo);
+	const errorMessages:ErrorMessages = {
+		catch200: `Добавьте товары на сумму ${1500 - totalCost.cost} рублей`,
+		fresh20: 'Акция действует до 12:00'
+	}
+
+
+	useEffect(()=> {
+		if (totalCost.promoSale[0] == 'promo') {
+			setHelperText('Введите промокод')
+		} else if (totalCost.promoSale[0] !== 'promo' && totalCost.promoSale[1] == 0) {
+			setHelperText(errorMessages[totalCost.promoSale[0]])
+		} else {
+			setHelperText('Промокод применён');
+		}
+	}, [totalCost])
 	
 	useEffect(() => {
 		if (promo in promoCodes) {
 			const sales = promoCodes[promo];
 			const sale = sales(totalCost.cost);
+			
 			dispatch(addPromoSale([promo, sale]))
 		} else {
 			dispatch(removePromoSale())
@@ -41,10 +52,20 @@ export const Order = (props:Props) => {
 		
 	}, [promo, orderItems])
 
-
-	const helperText = 'apply promo';
-	console.log(settedPromo);
-	console.log(totalCost.promoSale);
+	const ValidationTextField = styled(TextField)({
+		'& input:valid + fieldset': {
+		  borderColor: 'green',
+		  borderWidth: 2,
+		},
+		'& input:invalid + fieldset': {
+		  borderColor: 'red',
+		  borderWidth: 2,
+		},
+		'& input:valid:focus + fieldset': {
+		  borderLeftWidth: 6,
+		  padding: '4px !important', // override inline-style
+		},
+	  });
 
 
 
@@ -75,12 +96,25 @@ export const Order = (props:Props) => {
 		<div className='order_promo'>
 			<div className='text'>Промокод</div>
 			<TextField
-				defaultValue={totalCost.promoSale[0] ? totalCost.promoSale[0] : ''}
-				label=""
+				className='promo_input'
+				defaultValue={totalCost.promoSale[1] ? totalCost.promoSale[0] : ''}
 				helperText={helperText}
-				variant="standard"
-				onChange={(e) => handleChange(e.target.value)}
-				
+				placeholder='Промокод'
+				variant='outlined'
+				sx={{
+					'& .MuiOutlinedInput-root': {
+						'& fieldset': {
+						  borderColor: '#38595E',
+						},
+						'&:hover fieldset': {
+						  borderColor: '#FF4E4E',
+						},
+						'&.Mui-focused fieldset': {
+						  borderColor: '#FF4E4E',
+						},
+					  },
+				}}
+				onChange={(e) => handleChange(e.target.value)}		
 			/>
 		</div>
 
