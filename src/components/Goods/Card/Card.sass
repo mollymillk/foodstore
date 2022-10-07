@@ -2,19 +2,33 @@
 @import '../../../globalStyles/fonts/stylesheet.css'
 @import 'material-icons/iconfont/material-icons.css'
 
-.card.discounted
-    border: 1px solid $heading
-    border-radius: 5px  
-    .image
-        border-radius: 5px  
 
 .card
     width: 270px
+    height: 450px
     margin-bottom: 20px
     background: #fff
     box-shadow: 0px 0px 15px -6px $dark_heading
     &:hover
         box-shadow: 0px 0px 19px -5px $dark_heading
+    @media screen and (max-width: 1485px)
+        width: 230px
+        height: 380px
+        font-size: 15px
+    @media screen and (max-width: 1290px)
+        width: 200px
+        height: 350px
+        font-size: 12px
+    @media screen and (max-width: 750px)
+        width: 150px
+        height: 270px
+        font-size: 9px
+    
+    @media screen and (max-width: 600px)
+        width: 120px
+        height: 210px
+        font-size: 7px
+    
 
     .image
         width: 270px
@@ -23,14 +37,44 @@
         display: flex
         justify-content: space-around
         align-items: center
+
+        @media screen and (max-width: 1485px)
+            width: 230px
+            height: 230px
+        @media screen and (max-width: 1290px)
+            width: 190px
+            height: 230px
+            padding: 5px
+        @media screen and (max-width: 750px)
+            width: 140px
+            height: 170px
+            padding: 5px
+            .photo
+                max-height: 130px
+                max-width: 120px
+        
+        @media screen and (max-width: 600px)
+            width: 100px
+            height: 130px
+            padding: 5px
+            .photo
+                max-height: 110px
+                max-width: 100px
+        
     .info
         padding: 10px
         color: $dark_heading
+        @media screen and (max-width: 600px)
+            padding: 0 0 0 5px
         .name
             font-family: 'OverpassBold'
+            margin: 10px auto 10px auto
             &:hover
                 color: $heading
                 cursor: default
+        @media screen and (max-width: 600px)
+            margin: 5px auto 5px auto
+            
         .price, .sale_price
             font-family: 'OverpassBold'
         .sale_price
@@ -42,6 +86,20 @@
         .button
             background: $detailes
             font-family: 'OverpassMedium'
+            @media screen and (max-width: 1290px)
+                height: 30px
+                width: 110px
+                font-size: 12px
+            @media screen and (max-width: 750px)
+                height: 20px
+                width: 90px
+                font-size: 10px
+                padding: 6px 10px 6px 10px
+            @media screen and (max-width: 600px)
+                height: 20px
+                width: 80px
+                font-size: 8px
+            
         .counter
             display: flex
             flex-direction: row

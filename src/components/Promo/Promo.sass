@@ -2,16 +2,33 @@
 @import '../../globalStyles/fonts/stylesheet.css'
 
 @mixin container()
-    height: 30vh
+    height: 230px
     box-shadow: 0px 0px 15px -6px $dark_heading
     cursor: pointer
     &:hover
         box-shadow: 0px 0px 19px -5px $dark_heading
+    @media screen and (max-width: 1200px)
+        height: 180px
+    @media screen and (max-width: 1000px)
+        height: 120px
+    @media screen and (max-width: 800px)
+        height: 100px
+    @media screen and (max-width: 600px)
+        height: 70px
+
 
 @mixin font()
     font-family: 'OverpassBold'
     font-size: 25px
     color: $cold_bg
+    @media screen and (max-width: 1200px)
+        font-size: 17px
+    @media screen and (max-width: 1000px)
+        font-size: 12px
+    @media screen and (max-width: 800px)
+        font-size: 10px
+    @media screen and (max-width: 600px)
+        font-size: 7px
 
 @mixin column()
     display: flex
@@ -24,22 +41,42 @@
     height: 100px
     width: 100px
     font-size: 40px
+    @media screen and (max-width: 1200px)
+        height: 60px
+        width: 60px
+        font-size: 20px
+    @media screen and (max-width: 1000px)
+        height: 50px
+        width: 50px
+        font-size: 15px
+    @media screen and (max-width: 800px)
+        height: 30px
+        width: 30px
+        font-size: 10px
+    @media screen and (max-width: 600px)
+        height: 20px
+        width: 20px
+        font-size: 7px
 
 .first_sale_container
-    background: $dark_heading
-    background-image: url('./img/line.svg'), url('./img/glass.png')
-    background-size: auto, 60%
-    background-repeat: repeat, no-repeat
-    background-position: center, 80% 25%
     @include container
+    background: 
+        color: $dark_heading
+        image: url('./img/line.svg'), url('./img/glass.png')
+        size: auto, 60%
+        repeat: repeat, no-repeat
+        position: center, 80% 25%
+
 
     .sale
         display: flex
         flex-direction: row
         justify-content: space-around
-        padding-top: 40px
+        padding-top: 30px
         gap: 10px
         @include font()
+        @media screen and (max-width: 800px)
+            padding-top: 15px
 
         .size
             @include column
@@ -48,10 +85,26 @@
     .promo
         @include column
         padding: 3px
-        margin-left: 40px
+        margin-left: 30px
         height: 60px
         width: 80px
         background-color: $text
+        @media screen and (max-width: 1200px)
+            height: 40px
+            width: 60px
+            margin-left: 20px
+        @media screen and (max-width: 1000px)
+            height: 20px
+            width: 40px
+            margin-left: 20px
+        @media screen and (max-width: 800px)
+            height: 10px
+            width: 30px
+            margin-left: 15px
+        @media screen and (max-width: 600px)
+            height: 8px
+            width: 20px
+            margin-left: 5px
 
         .code
             @include font()
@@ -61,14 +114,14 @@
 .second_sale_container
     @include container
     @include column
-    background: $text
-    background-image: url('./img/food_bg.svg')
-    // background-size: auto, 100%
+    background:
+        color: $text
+        image: url('./img/food_bg.svg')
 
     .sale
         @include column()
         @include font()
-        width: 50%
+        width: 90%
         background: $dark_heading
         text-align: center
         color: $cold_bg
@@ -88,9 +141,10 @@
     @include container
     @include column
     @include font()
-    background: $dark_heading
-    background-image: url('./img/line.svg'), url('./img/dish.png')
-    background-size: auto, 120%
+    background: 
+        color: $dark_heading
+        image: url('./img/line.svg'), url('./img/dish.png')
+        size: auto, 120%
     .sale 
         align-items: center
 
@@ -102,10 +156,22 @@
         .size
             @include column
             @include circle()
-            margin: 10px auto auto 20px
+            margin: 10px auto auto 10px
+            @media screen and (max-width: 600px)
+                margin: 5px auto auto 5px
 
     .promo .code
-        margin: 10px auto auto 20px
+        margin: 10px auto auto 10px
         width: 90px
         background: $text
         color: $heading
+        @media screen and (max-width: 1000px)
+            height: 15px
+            width: 50px
+        @media screen and (max-width: 800px)
+            height: 10px
+            width: 40px
+        @media screen and (max-width: 600px)
+            height: 8px
+            width: 30px
+            margin: 5px auto auto 5px

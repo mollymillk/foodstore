@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import '../../components/Category/Category.sass';
 import { Goods } from '../../components/Goods/Goods';
 import { Promo } from '../../components/Promo/Promo';
 import './Products.sass';
@@ -59,7 +58,7 @@ export const Products = (): JSX.Element => {
 			<Promo
 				num='second'
 				key={2}
-				heading='При заказе от 1500₽ -'
+				heading='При заказе от 1500₽'
 				size='скидка 200₽'
 				promo='catch200'
 			/>
