@@ -5,6 +5,7 @@ import { RootState } from '../../store/store';
 import { PromoCodes, promoCodes } from './promoCodes';
 import './Order.sass';
 import { addPromoSale, removePromoSale } from '../../store/reducers/costReducer';
+import { Modal } from '../Modal/Modal';
 
 type Props = {
 	sum: number,
@@ -15,16 +16,18 @@ export const Order = (props:Props) => {
 	const dispatch = useDispatch();
 	const totalCost = useSelector((state:RootState) => state.totalCost);
 	const orderItems = useSelector((state: RootState)=> state.cartItems);
+	const orderInfo = useSelector((state:RootState) => state.orderInfo)
 
 	const [promo, setPromo] = useState<string>(totalCost.promoSale[0]);
-	const [helperText, setHelperText] = useState<string>('Введите промокод')
+	const [helperText, setHelperText] = useState<string>('Введите промокод');
+	const [modalActive, setModalActive] = useState<boolean>(false);
 
 
 	const handleChange = (input:keyof PromoCodes|string) => {
 		setPromo(input)
 	}
 
-	const errorMessages:ErrorMessages = {
+	const errorMessages = {
 		catch200: `Добавьте товары на сумму ${1500 - totalCost.cost} рублей`,
 		fresh20: 'Акция действует до 12:00'
 	}
@@ -70,8 +73,21 @@ export const Order = (props:Props) => {
 
 
 	return <div className='order_container'>
-		<div className='address'>Адрес: Заводская 1/38</div>
-		<div className='payment_method'>Оплата: карта ****2030</div>
+		<div className='address'>
+				<p className='goods_category'>Адрес</p>
+				<p className='address_value'>Выбрать</p>
+		</div>
+		<div className='payment_method'>
+				<p className='goods_category'>Способо оплаты</p>
+				{
+					orderInfo.card ? 
+					<div className='card_info'>
+						<p className='card_text'>Карта **{orderInfo.card}</p>
+						<p className='change_button' onClick={()=>setModalActive(true)}>изменить</p>
+					</div> 
+					: <p className='payment_value' onClick={()=>setModalActive(true)}>Выбрать</p>
+				}
+		</div>
 
 		<div className='order_info'>
 
@@ -124,6 +140,8 @@ export const Order = (props:Props) => {
 		</div>
 
 		<Button className='order_button' variant="contained">Оплатить</Button>
+
+		<Modal active={modalActive} setActive={setModalActive}/>
 
 	</div>;
 };

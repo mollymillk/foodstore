@@ -39,7 +39,8 @@ export const Cart = () => {
 			{!orderSum && 
 			<p className='empty_cart'>В корзине пусто :(</p>}
 		</div>
-		{!!orderSum &&
-		<Order sum={orderSum} sale={orderSale}/>}
+		{/* {!!orderSum && */}
+		{/* // <Order sum={orderSum} sale={orderSale}/>} */}
+		<Order sum={orderSum} sale={orderSale}/>
 	</div>;
 };

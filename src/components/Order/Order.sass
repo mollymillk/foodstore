@@ -11,12 +11,34 @@
     border-radius: 10px
     width: 30%
     font-family: 'OverpassBold'
-    max-height: 50vh
 
-    .order_goods, .order_sale, .order_shipping_cost, .order_promo
+    .address, .payment_method, .order_goods, .order_sale, .order_shipping_cost, .order_promo
         display: flex
         flex-direction: row
         justify-content: space-between
+
+    .address_value, .payment_value
+        display: flex
+        flex-direction: row
+        font-family: 'OverpassExtraBold'
+        color: $heading
+        cursor: pointer
+        &:hover
+            opacity: 0.9
+
+    .card_info
+        display: flex
+        flex-direction: row
+        gap: 5px
+        .change_button
+            font-family: 'OverpassMedium'
+            color: $dark_heading
+            margin: auto
+            height: 20px
+            font-size: 12px
+            cursor: pointer
+        .card_text
+            height: 20px
 
     .order_promo 
 
