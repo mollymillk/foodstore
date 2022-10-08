@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Goods } from '../../components/Goods/Goods';
 import { Promo } from '../../components/Promo/Promo';
 import './Products.sass';
@@ -33,14 +33,13 @@ export const Products = (): JSX.Element => {
 
 	const categoriesList = entries.map(([key,value]) => {
 		const categoryClass = key == selectedCategory ? 
-			'active' + ' category': 'category'
-
+			'active' + ' category': 'category';
 		return <div 
 			className={categoryClass} 
 			key={key}
 			onClick={()=>setSelectedCategory(key)}>
 			{value}
-	</div>;
+		</div>;
 	});
 
 	console.log(selectedCategory);

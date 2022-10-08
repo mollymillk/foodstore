@@ -4,17 +4,27 @@
     
 .payment_card
     padding: 0 20px 20px 20px
+
     .card_info
         display: flex
         flex-direction: column
         gap: 10px
         margin-top: 10px
+
+        .empty:hover, .empty .Mui-focused
+            fieldset
+                border-color: $detailes
+
+        .accepted:hover fieldset, .accepted .Mui-focused fieldset, .accepted .MuiOutlinedInput-root fieldset
+            border: 2px solid $heading
+
     .button 
         margin-top: 10px
         width: 100%
         background: $detailes
         font-family: 'OverpassMedium'
         color: $cold_bg
+
         &:hover
             opacity: 0.8
             background: $detailes

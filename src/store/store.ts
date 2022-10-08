@@ -3,7 +3,7 @@ import { goodsApi } from './goodsApi';
 import costReducer from './reducers/costReducer';
 import itemsReducer from './reducers/itemsReducer';
 import orderInfoReducer from './reducers/orderInfoReducer';
-import promoReducer from './reducers/promoReducer'
+import promoReducer from './reducers/promoReducer';
 
 const rootReducer = combineReducers({
 	[goodsApi.reducerPath]: goodsApi.reducer,
