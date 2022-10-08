@@ -26,19 +26,24 @@
         &:hover
             opacity: 0.9
 
-    .card_info
+    .card_info, .address_info
         display: flex
-        flex-direction: row
-        gap: 5px
+        flex-direction: column
         .change_button
+            display: flex
+            flex-direction: row
+            justify-content: flex-end
+            float: right
             font-family: 'OverpassMedium'
             color: $dark_heading
-            margin: auto
-            height: 20px
+            margin-right: 0
             font-size: 12px
             cursor: pointer
-        .card_text
+        .text
+            text-align: right
             height: 20px
+            margin-bottom: 0
+            margin-left: 20px
 
     .order_promo 
 

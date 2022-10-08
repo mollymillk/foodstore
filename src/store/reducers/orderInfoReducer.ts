@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
@@ -8,21 +8,21 @@ type orderInfo = {
 }
 
 const initialState:orderInfo = {
-    card: '',
-    address: ''
-}
+	card: '',
+	address: ''
+};
 
 export const orderInfoSlice = createSlice({
-    name: 'orderInfo',
-    initialState,
-    reducers: {
-        setCard: (state, action: PayloadAction<string>) => {
-            state.card = action.payload
-        },
-        setAddress: (state, action: PayloadAction<string>) => {
-            state.address= action.payload
-        },
-    }
+	name: 'orderInfo',
+	initialState,
+	reducers: {
+		setCard: (state, action: PayloadAction<string>) => {
+			state.card = action.payload;
+		},
+		setAddress: (state, action: PayloadAction<string>) => {
+			state.address= action.payload;
+		},
+	}
 });
 
 export const {setCard, setAddress} = orderInfoSlice.actions;

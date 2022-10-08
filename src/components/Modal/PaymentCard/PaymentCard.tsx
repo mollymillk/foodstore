@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import './PaymentCard.sass';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
@@ -8,7 +8,7 @@ import { setCard } from '../../../store/reducers/orderInfoReducer';
 
 
 type Props = {
-	isActive: (arg:boolean) => boolean
+	setActive: Dispatch<SetStateAction<boolean>>
 }
 
 export const PaymentCard = (props:Props) => {
