@@ -13,7 +13,7 @@ type Props = {
 export const Address = (props:Props) => {
 
 	const [value, setValue] = useState<DaDataSuggestion<DaDataAddress> | undefined>();
-	const [isAddressSelected, setIsAddressSelected] = useState(false)
+	const [isAddressSelected, setIsAddressSelected] = useState(false);
 	const dispatch = useDispatch();
 
 	const handleSendAddress = () => {
@@ -30,11 +30,20 @@ export const Address = (props:Props) => {
 	}, [value]);
 
 	return <div className='order_address'>
+
 		<p>Введите адрес:</p>
-		<AddressSuggestions token="5bbd873cbd4a8e545ab54ec9bb1b04bb69131173" value={value} onChange={setValue} />
+
+		<AddressSuggestions
+			token="5bbd873cbd4a8e545ab54ec9bb1b04bb69131173"
+			value={value}
+			onChange={setValue}
+		/>
+
 		<Button className='button'
 			disabled={!isAddressSelected}
 			onClick={()=>handleSendAddress()}
-		>Отправить</Button>
+		>
+			Отправить
+		</Button>
 	</div>;
 };

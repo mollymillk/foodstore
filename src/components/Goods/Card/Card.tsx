@@ -14,55 +14,59 @@ type Props = {
 	sale: number,
 }
 
-export const Card = (props:Props):JSX.Element => {
+export const Card = ({img, name, id, price, sale}:Props):JSX.Element => {
 
-	const name = props.name.length < 20 ? props.name : props.name.substr(0, 19) + '...';
-
+	const productName = name.length < 20 ? name : name.substr(0, 19) + '...';
 	const items = useSelector((state: RootState) => state.cartItems);
-	const isDiscounted = props.sale ? ' discounted' : '';
-	const cardClassName = `card${isDiscounted}`;
 	
 	const dispatch = useDispatch();
 
-	const priceToAdd = props.sale ? props.price - props.sale : props.price;
+	const priceToAdd = sale ? 
+		price - sale :
+		price;
 
 	const handleAddItem = () => {
-		dispatch(addItem(props.id));
+		dispatch(addItem(id));
 		dispatch(addToCost(priceToAdd));
 	};
 
 	const handleAddCount = () => {
-		dispatch(addCount(props.id));
+		dispatch(addCount(id));
 		dispatch(addToCost(priceToAdd));
 	};
 
 	const handleRemove = () => {
-		dispatch(remove(props.id));
+		dispatch(remove(id));
 		dispatch(removeFromCost(priceToAdd));
 	};
 
-	const price = props.sale > 0 ?
+	const saledPrice = sale > 0 ?
+
 		<p className='sale_price'>
-			{props.price - props.sale}₽
+			{price - sale}₽
 			<span className='oldPrice'>
-				{props.price}₽
+				{price}₽
 			</span>
 		</p>
+
 		:
+
 		<p className='price'>
-			{props.price}₽
+			{price}₽
 		</p>;
 
 
-	return <div className={cardClassName}>
-		<div className='image'>
-			<img srcSet={props.img} className='photo'/>
-		</div>
-		<div className='info'>
-			<h3 className='name'>{name}</h3>
-			{price}
+	return <div className='card'>
 
-			{!items[props.id] ?
+		<div className='image'>
+			<img srcSet={img} className='photo'/>
+		</div>
+
+		<div className='info'>
+			<h3 className='name'>{productName}</h3>
+			{saledPrice}
+
+			{!items[id] ?
 
 				<Button 
 					className='button'
@@ -75,12 +79,15 @@ export const Card = (props:Props):JSX.Element => {
 				: 
 
 				<div className='counter'>
+
 					<Fab className='remove' color="primary" onClick={() => handleRemove()}>
 						<span className="material-icons-outlined">
 							remove_circle_outline
 						</span>
 					</Fab>
-					<p className='amount'>{items[props.id]}</p>
+
+					<p className='amount'>{items[id]}</p>
+
 					<Fab className='add'color="primary" onClick={() => handleAddCount()}>
 						<span className="material-icons-outlined">
 							add_circle_outline

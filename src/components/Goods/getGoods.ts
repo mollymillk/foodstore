@@ -2,7 +2,7 @@ import { useGetGoodsByNameQuery } from '../../store/goodsApi';
 import { productsData } from '../../store/queries/productsQuery';
 
 type Product = {
-	sale: any; 
+	sale?: number; 
 	image_front_small_url: string,
 	product_name: string,
 	id: string,

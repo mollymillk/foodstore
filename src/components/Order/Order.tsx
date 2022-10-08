@@ -1,6 +1,5 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-import { Button, OutlinedInput, styled, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { Button, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { PromoCodes, promoCodes } from './promoCodes';
@@ -14,18 +13,19 @@ type Props = {
 }
 
 export const Order = (props:Props) => {
+
 	const dispatch = useDispatch();
 	const totalCost = useSelector((state:RootState) => state.totalCost);
 	const orderItems = useSelector((state: RootState)=> state.cartItems);
 	const orderInfo = useSelector((state:RootState) => state.orderInfo);
 
-	const [promo, setPromo] = useState<string>(totalCost.promoSale[0]);
+	const [promo, setPromo] = useState<keyof PromoCodes|string>(totalCost.promoSale[0]);
 	const [helperText, setHelperText] = useState<string>('Введите промокод');
 	const [cardModalActive, setCardModalActive] = useState<boolean>(false);
 	const [addressModalActive, setAddressModalActive] = useState<boolean>(false);
 
 
-	const handleChange = (input:keyof PromoCodes|string) => {
+	const handleChange = (input:keyof PromoCodes) => {
 		setPromo(input);
 	};
 
@@ -39,7 +39,7 @@ export const Order = (props:Props) => {
 		if (totalCost.promoSale[0] == 'promo') {
 			setHelperText('Введите промокод');
 		} else if (totalCost.promoSale[0] !== 'promo' && totalCost.promoSale[1] == 0) {
-			setHelperText(errorMessages[totalCost.promoSale[0]]);
+			setHelperText(errorMessages[promo]);
 		} else {
 			setHelperText('Промокод применён');
 		}
@@ -56,23 +56,6 @@ export const Order = (props:Props) => {
 		}
 		
 	}, [promo, orderItems]);
-
-	const ValidationTextField = styled(TextField)({
-		'& input:valid + fieldset': {
-		  borderColor: 'green',
-		  borderWidth: 2,
-		},
-		'& input:invalid + fieldset': {
-		  borderColor: 'red',
-		  borderWidth: 2,
-		},
-		'& input:valid:focus + fieldset': {
-		  borderLeftWidth: 6,
-		  padding: '4px !important', // override inline-style
-		},
-	  });
-
-
 
 	return <><div className='order_container'>
 		<div className='address'>
@@ -118,19 +101,19 @@ export const Order = (props:Props) => {
 				helperText={helperText}
 				placeholder='Промокод'
 				variant='outlined'
-				sx={{
-					'& .MuiOutlinedInput-root': {
-						'& fieldset': {
-							borderColor: '#38595E',
-						},
-						'&:hover fieldset': {
-							borderColor: '#FF4E4E',
-						},
-						'&.Mui-focused fieldset': {
-							borderColor: '#FF4E4E',
-						},
-					},
-				}}
+				// sx={{
+				// 	'& .MuiOutlinedInput-root': {
+				// 		'& fieldset': {
+				// 			borderColor: '#38595E',
+				// 		},
+				// 		'&:hover fieldset': {
+				// 			borderColor: '#FF4E4E',
+				// 		},
+				// 		'&.Mui-focused fieldset': {
+				// 			borderColor: '#FF4E4E',
+				// 		},
+				// 	},
+				// }}
 				onChange={(e) => handleChange(e.target.value)} />
 		</div><div className='order_cost'>
 			<h3 className='cost_text'>Итого</h3>

@@ -12,7 +12,9 @@
     width: 30%
     font-family: 'OverpassBold'
 
-    .address, .payment_method, .order_goods, .order_sale, .order_shipping_cost, .order_promo
+    .address, .payment_method,
+    .order_goods, .order_sale,
+    .order_shipping_cost, .order_promo
         display: flex
         flex-direction: row
         justify-content: space-between
@@ -51,6 +53,15 @@
             display: flex
             flex-direction: column
             justify-content: center
+
+        .promo_input
+            .MuiOutlinedInput-root 
+                fieldset
+                    border-color: $dark_heading
+                &:hover fieldset
+                    border-color: $detailes
+                .Mui-focused fieldset
+                    border-color: $detailes
     .order_button
         background: $detailes
         &:hover

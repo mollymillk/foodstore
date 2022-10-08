@@ -1,6 +1,6 @@
-declare module '*.svg';
-
 import * as React from 'react';
+
+declare module '*.svg'
 
 export interface CallbackArgument {
     issuer: string;

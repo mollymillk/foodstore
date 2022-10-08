@@ -11,11 +11,22 @@ type Props = {
 }
 
 export const Modal = (props:Props):JSX.Element => {
-	return <div className={props.active ? 'modal active' : 'modal'} onClick={() => props.setActive(false)}>
-		<div className='modal_container' onClick={e => e.stopPropagation()}>
+
+	return <div 
+		className={props.active ? 'modal active' : 'modal'}
+		onClick={() => props.setActive(false)}
+	>
+		<div
+			className='modal_container'
+			onClick={e => e.stopPropagation()}>
+
 			<div className="close_button">
-				<GrFormClose size={25} onClick={()=>props.setActive(false)}/>
+
+				<GrFormClose
+					size={25}
+					onClick={()=>props.setActive(false)}/>
 			</div>
+
 			{props.data === 'card' && <PaymentCard setActive={props.setActive}/>}
 			{props.data === 'address' && <Address setActive={props.setActive}/>}
 
