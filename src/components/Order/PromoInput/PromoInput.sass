@@ -1,0 +1,21 @@
+@import '../../../globalStyles/styles'
+@import '../../../globalStyles/fonts/stylesheet.css'
+    
+.order_promo 
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+    .text, .value
+        display: flex
+        flex-direction: column
+        justify-content: center
+
+    .promo_input
+        .MuiOutlinedInput-root 
+            fieldset
+                border-color: $dark_heading
+            &:hover fieldset
+                border-color: $detailes
+            .Mui-focused fieldset
+                border-color: $detailes

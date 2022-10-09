@@ -1,0 +1,35 @@
+@import '../../../globalStyles/styles'
+@import '../../../globalStyles/fonts/stylesheet.css'
+    
+.address_container, .card_container
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+    .address_value, .card_value
+        display: flex
+        flex-direction: row
+        font-family: 'OverpassExtraBold'
+        color: $heading
+        cursor: pointer
+        &:hover
+            opacity: 0.9
+
+    .card_info, .address_info
+        display: flex
+        flex-direction: column
+    .change_button
+        display: flex
+        flex-direction: row
+        justify-content: flex-end
+        float: right
+        font-family: 'OverpassMedium'
+        color: $dark_heading
+        margin-right: 0
+        font-size: 12px
+        cursor: pointer
+    .text
+        text-align: right
+        height: 20px
+        margin-bottom: 0
+        margin-left: 20px

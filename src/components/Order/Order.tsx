@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextField } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { Button } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { PromoCodes, promoCodes } from './promoCodes';
 import './Order.sass';
-import { addPromoSale, removePromoSale } from '../../store/reducers/costReducer';
 import { Modal } from '../Modal/Modal';
+import { OrderInput } from './OrderInput/OrderInput';
+import { OrderInfo } from './OrderInfo/OrderInfo';
+import { PromoInput } from './PromoInput/PromoInput';
 
 type Props = {
 	sum: number,
@@ -14,114 +15,49 @@ type Props = {
 
 export const Order = (props:Props) => {
 
-	const dispatch = useDispatch();
 	const totalCost = useSelector((state:RootState) => state.totalCost);
-	const orderItems = useSelector((state: RootState)=> state.cartItems);
 	const orderInfo = useSelector((state:RootState) => state.orderInfo);
 
-	const [promo, setPromo] = useState<keyof PromoCodes|string>(totalCost.promoSale[0]);
-	const [helperText, setHelperText] = useState<string>('Введите промокод');
 	const [cardModalActive, setCardModalActive] = useState<boolean>(false);
 	const [addressModalActive, setAddressModalActive] = useState<boolean>(false);
+	const [isPaymentAllowed, setIsPaymentAllowed] = useState<boolean>(false);
 
-
-	const handleChange = (input:keyof PromoCodes) => {
-		setPromo(input);
-	};
-
-	const errorMessages = {
-		catch200: `Добавьте товары на сумму ${1500 - totalCost.cost} рублей`,
-		fresh20: 'Акция действует до 12:00'
-	};
-
-
-	useEffect(()=> {
-		if (totalCost.promoSale[0] == 'promo') {
-			setHelperText('Введите промокод');
-		} else if (totalCost.promoSale[0] !== 'promo' && totalCost.promoSale[1] == 0) {
-			setHelperText(errorMessages[promo]);
-		} else {
-			setHelperText('Промокод применён');
-		}
-	}, [totalCost]);
-	
 	useEffect(() => {
-		if (promo in promoCodes) {
-			const sales = promoCodes[promo];
-			const sale = sales(totalCost.cost);
-			
-			dispatch(addPromoSale([promo, sale]));
-		} else {
-			dispatch(removePromoSale());
+		if (orderInfo.card && orderInfo.address) {
+			setIsPaymentAllowed(true);
 		}
-		
-	}, [promo, orderItems]);
+	}, [orderInfo]);
 
 	return <><div className='order_container'>
-		<div className='address'>
-			<p className='goods_category'>Адрес</p>
-			{orderInfo.address ?
-				<div className='address_info'>
-					<p className='text'>{orderInfo.address}</p>
-					<p className='change_button' onClick={() => setAddressModalActive(true)}>изменить</p>
-				</div>
-				: <p className='address_value' onClick={() => setAddressModalActive(true)}>Выбрать</p>}
-		</div>
-		<div className='payment_method'>
-			<p className='goods_category'>Способо оплаты</p>
-			{orderInfo.card ?
-				<div className='card_info'>
-					<p className='text'>Карта **{orderInfo.card}</p>
-					<p className='change_button' onClick={() => setCardModalActive(true)}>изменить</p>
-				</div>
-				: <p className='payment_value' onClick={() => setCardModalActive(true)}>Выбрать</p>}
-		</div><div className='order_info'>
+		
+		<OrderInput inputType='address' setModalActive={setAddressModalActive}/>
+		<OrderInput inputType='card' setModalActive={setCardModalActive}/>
 
+		<div className='order_info'>
 			<h3>Ваш заказ</h3>
 
-			<div className='order_goods'>
-				<p className='goods_category'>Товары</p>
-				<p className='value'>{props.sum}₽</p>
-			</div>
+			<OrderInfo type='goods' category='Товары' value={props.sum + 'Р'}/>
+			<OrderInfo type='sale' category='Скидка' value={props.sum - Math.floor(totalCost.cost) + totalCost.promoSale[1]}/>
+			<OrderInfo type='cost' category='Стоимость доставки' value='Бесплатно'/>
 
-			<div className='order_sale'>
-				<p className='sale_category'>Скидка</p>
-				<p className='value'>{props.sum - Math.floor(totalCost.cost) + totalCost.promoSale[1]}₽</p>
-			</div>
+		</div>
 
-			<div className='order_shipping_cost'>
-				<p className='cost_category'>Стоимость доставки</p>
-				<p className='value'>Бесплатно</p>
-			</div>
-		</div><div className='order_promo'>
-			<div className='text'>Промокод</div>
-			<TextField
-				className='promo_input'
-				defaultValue={totalCost.promoSale[1] ? totalCost.promoSale[0] : ''}
-				helperText={helperText}
-				placeholder='Промокод'
-				variant='outlined'
-				// sx={{
-				// 	'& .MuiOutlinedInput-root': {
-				// 		'& fieldset': {
-				// 			borderColor: '#38595E',
-				// 		},
-				// 		'&:hover fieldset': {
-				// 			borderColor: '#FF4E4E',
-				// 		},
-				// 		'&.Mui-focused fieldset': {
-				// 			borderColor: '#FF4E4E',
-				// 		},
-				// 	},
-				// }}
-				onChange={(e) => handleChange(e.target.value)} />
-		</div><div className='order_cost'>
+		<PromoInput/>
+
+		<div className='order_cost'>
 			<h3 className='cost_text'>Итого</h3>
 			<p className='value'>{Math.floor(totalCost.cost - totalCost.promoSale[1])}₽</p>
-		</div><Button className='order_button' variant="contained">Оплатить</Button>
-		<Modal data='card' active={cardModalActive} setActive={setCardModalActive} />
-		<Modal data='address' active={addressModalActive} setActive={setAddressModalActive} /></div>
+		</div>
 
+		<Button
+			disabled={!isPaymentAllowed}
+			className='order_button'
+			variant="contained"
+		>
+			Оплатить
+		</Button>
+
+		<Modal data='card' active={cardModalActive} setActive={setCardModalActive} />
+		<Modal data='address' active={addressModalActive} setActive={setAddressModalActive} /></div>;
 	</>;
-	
 };
