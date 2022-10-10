@@ -2,6 +2,7 @@ import React, { Dispatch } from 'react';
 import {GrFormClose} from 'react-icons/gr';
 import { Address } from './Address/Address';
 import './Modal.sass';
+import { PaidOrder } from './PaidOrder/PaidOrder';
 import { PaymentCard } from './PaymentCard/PaymentCard';
 
 type Props = {
@@ -29,6 +30,7 @@ export const Modal = (props:Props):JSX.Element => {
 
 			{props.data === 'card' && <PaymentCard setActive={props.setActive}/>}
 			{props.data === 'address' && <Address setActive={props.setActive}/>}
+			{props.data === 'paidOrder' && <PaidOrder setActive={props.setActive}/>}
 
 		</div>
 	</div>;

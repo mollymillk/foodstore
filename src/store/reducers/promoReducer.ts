@@ -7,20 +7,20 @@ type Promo = {
 }
 
 const initialState:Promo = {
-    'new50': false,
-    'catch200': false,
-    'fresh20': false
-}
+	'new50': false,
+	'catch200': false,
+	'fresh20': false
+};
 
 export const promoSlice = createSlice({
-    name: 'promo',
-    initialState,
-    reducers: {
-        applyPromo: (state, action: PayloadAction<keyof Promo>) => {
-            state[action.payload] = true;
-        }, 
-        resetPromo: () => initialState
-    }
+	name: 'promo',
+	initialState,
+	reducers: {
+		applyPromo: (state, action: PayloadAction<keyof Promo>) => {
+			state[action.payload] = true;
+		}, 
+		resetPromo: () => initialState
+	}
 });
 
 export const {applyPromo, resetPromo} = promoSlice.actions;

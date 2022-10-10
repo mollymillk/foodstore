@@ -21,11 +21,14 @@ export const itemsSlice = createSlice({
 		},
 		remove: (state, action: PayloadAction<string>) => {
 			state[action.payload] = state[action.payload] - 1;
+		},
+		setDefaultItems: (state) => {
+			Object.keys(state).map(id => state[id] = 0);
 		}
 	}
 });
 
-export const {addItem, addCount, remove} = itemsSlice.actions;
+export const {addItem, addCount, remove, setDefaultItems} = itemsSlice.actions;
 export const selectItems = (state: RootState) => state.cartItems;
 
 export default itemsSlice.reducer;

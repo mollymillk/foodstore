@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import './Order.sass';
@@ -7,6 +6,7 @@ import { Modal } from '../Modal/Modal';
 import { OrderInput } from './OrderInput/OrderInput';
 import { OrderInfo } from './OrderInfo/OrderInfo';
 import { PromoInput } from './PromoInput/PromoInput';
+import { OrderButton } from './OrderButton/OrderButton';
 
 type Props = {
 	sum: number,
@@ -15,7 +15,8 @@ type Props = {
 
 export const Order = (props:Props) => {
 
-	const totalCost = useSelector((state:RootState) => state.totalCost);
+	const totalCost = useSelector((state:RootState) => state.totalCost.cost);
+	const promoSale = useSelector((state:RootState) => state.totalCost.promoSale);
 	const orderInfo = useSelector((state:RootState) => state.orderInfo);
 
 	const [cardModalActive, setCardModalActive] = useState<boolean>(false);
@@ -23,12 +24,15 @@ export const Order = (props:Props) => {
 	const [isPaymentAllowed, setIsPaymentAllowed] = useState<boolean>(false);
 
 	useEffect(() => {
-		if (orderInfo.card && orderInfo.address) {
+		if (orderInfo.card
+			&& orderInfo.address
+			&&totalCost >= 500) {
 			setIsPaymentAllowed(true);
 		}
-	}, [orderInfo]);
+	}, [orderInfo, totalCost]);
 
-	return <><div className='order_container'>
+
+	return <div className='order_container'>
 		
 		<OrderInput inputType='address' setModalActive={setAddressModalActive}/>
 		<OrderInput inputType='card' setModalActive={setCardModalActive}/>
@@ -37,7 +41,7 @@ export const Order = (props:Props) => {
 			<h3>Ваш заказ</h3>
 
 			<OrderInfo type='goods' category='Товары' value={props.sum + 'Р'}/>
-			<OrderInfo type='sale' category='Скидка' value={props.sum - Math.floor(totalCost.cost) + totalCost.promoSale[1]}/>
+			<OrderInfo type='sale' category='Скидка' value={props.sum - Math.floor(totalCost) + promoSale[1]}/>
 			<OrderInfo type='cost' category='Стоимость доставки' value='Бесплатно'/>
 
 		</div>
@@ -46,18 +50,12 @@ export const Order = (props:Props) => {
 
 		<div className='order_cost'>
 			<h3 className='cost_text'>Итого</h3>
-			<p className='value'>{Math.floor(totalCost.cost - totalCost.promoSale[1])}₽</p>
+			<p className='value'>{Math.floor(totalCost - promoSale[1])}₽</p>
 		</div>
 
-		<Button
-			disabled={!isPaymentAllowed}
-			className='order_button'
-			variant="contained"
-		>
-			Оплатить
-		</Button>
+		<OrderButton isPaymentAllowed={isPaymentAllowed}/>
 
 		<Modal data='card' active={cardModalActive} setActive={setCardModalActive} />
-		<Modal data='address' active={addressModalActive} setActive={setAddressModalActive} /></div>;
-	</>;
+		<Modal data='address' active={addressModalActive} setActive={setAddressModalActive} />
+	</div>;
 };

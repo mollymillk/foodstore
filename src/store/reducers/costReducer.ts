@@ -23,15 +23,18 @@ export const costSlice = createSlice({
 			state.cost -= action.payload;
 		},
 		addPromoSale: (state, action: PayloadAction<[string, number]>) => {
-			state.promoSale = action.payload
+			state.promoSale = action.payload;
 		},
 		removePromoSale: (state) => {
-			state.promoSale = ['promo', 0]
+			state.promoSale = ['promo', 0];
+		},
+		setDefaultCost: (state) => {
+			state.cost = 0;
 		}
 	}
 });
 
-export const {addToCost, removeFromCost, addPromoSale, removePromoSale} = costSlice.actions;
+export const {addToCost, removeFromCost, addPromoSale, removePromoSale, setDefaultCost} = costSlice.actions;
 export const selectCost = (state: RootState) => state.totalCost.cost;
 
 export default costSlice.reducer;
