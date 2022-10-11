@@ -7,7 +7,7 @@ import './Cart.sass';
 import { Order } from '../../components/Order/Order';
 
 
-type Entries = [string, number]
+type Entries = [string, number];
 
 export const Cart = () => {
 

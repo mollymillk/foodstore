@@ -1,0 +1,51 @@
+@import '../../globalStyles/styles'
+@import '../../globalStyles/fonts/stylesheet.css'
+    
+.current_order
+    margin: 20px
+    width: 80%
+    background: #fff
+    border: 2px solid $heading
+    border-radius: 30px
+    font-family: 'OverpassMedium'
+
+    .order_data
+        display: flex
+        flex-direction: column
+        margin-left: 20px
+
+        .address, .time
+            margin: 0 0 10px 0
+
+    .goods
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        gap: 10px
+        margin: 10px
+
+        .product 
+
+            .image
+                display: flex
+                flex-direction: column
+                justify-content: center
+                width: 120px
+                height: 120px
+                .photo
+                    display: block
+                    max-width: 100px
+                    max-height: 100px
+                    margin: auto
+
+            .amount
+                margin: 0 25px 0 auto
+                float: right
+    .order_payment
+        display: flex
+        flex-direction: row
+        gap: 10px
+        margin-left: 20px
+
+        .order_card
+            box-shadow: none

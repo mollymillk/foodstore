@@ -1,0 +1,35 @@
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '../store';
+
+type Goods = {
+	[id:string]: number
+}
+
+type Order = {
+		orderId: number;
+        goods: Goods,
+        time: string;
+		seconds: number;
+        address: string,
+        totalCost: number
+}
+
+type Orders = Order[];
+
+const initialState:Orders = [];
+
+export const processingOrderSlice = createSlice({
+	name: 'processingOrder',
+	initialState,
+	reducers: {
+		proccessOrder: (state, action: PayloadAction<Order>) => {
+			state.push(action.payload);
+		}
+	}
+});
+
+export const {proccessOrder} = processingOrderSlice.actions;
+export const selectProccesingOrder = (state: RootState) => state;
+
+export default processingOrderSlice.reducer;

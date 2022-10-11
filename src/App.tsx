@@ -5,6 +5,7 @@ import './globalStyles/styles.sass';
 import { Routes, Route } from 'react-router-dom';
 import { Products } from './pages/Products/Products';
 import { Cart } from './pages/Cart/Cart';
+import { User } from './pages/User/User';
 
 export const App = () => {
 	return (
@@ -13,6 +14,7 @@ export const App = () => {
 			<Routes>
 				<Route path='/' element={<Products/>} />
 				<Route path='/cart' element={<Cart/>} />
+				<Route path='/user' element={<User/>} />
 			</Routes>
 			<Footer />
 		</>

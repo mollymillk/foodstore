@@ -4,13 +4,15 @@ import costReducer from './reducers/costReducer';
 import itemsReducer from './reducers/itemsReducer';
 import orderInfoReducer from './reducers/orderInfoReducer';
 import promoReducer from './reducers/promoReducer';
+import proccessOrderReducer from './reducers/processingOrderReducer';
 
 const rootReducer = combineReducers({
 	[goodsApi.reducerPath]: goodsApi.reducer,
 	cartItems: itemsReducer,
 	totalCost: costReducer,
 	promo: promoReducer,
-	orderInfo: orderInfoReducer
+	orderInfo: orderInfoReducer,
+	processingOrder: proccessOrderReducer
 });
 
 export const setupStore = () => {

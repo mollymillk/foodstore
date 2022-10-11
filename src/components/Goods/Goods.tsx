@@ -6,6 +6,7 @@ type Props = {
 	category: string
 }
 
+
 export const Goods = (props:Props):JSX.Element => {
 	
 	const products = getGoods();
