@@ -1,26 +1,28 @@
 @import '../../globalStyles/styles'
 @import '../../globalStyles/fonts/stylesheet.css'
+@import '../CurrentOrder/CurrentOrder'
     
 .old_orders
-    width: 80%
-    background: #fff
-    border: 2px solid $dark_heading
-    border-radius: 20px
+    @include order()
+//     width: 80%
+//     background: #fff
+//     border: 2px solid $dark_heading
+//     border-radius: 20px
 
-    .order_data
-        display: flex
-        flex-direction: row
-        margin: 20px
-        gap: 20px
-        font-family: 'OverpassMedium'
-        color: $heading
+//     .order_data
+//         display: flex
+//         flex-direction: row
+//         margin: 20px
+//         gap: 20px
+//         font-family: 'OverpassMedium'
+//         color: $heading
 
-    .goods
-        display: flex
-        flex-direction: row
-        gap: 10px
+//     .goods
+//         display: flex
+//         flex-direction: row
+//         gap: 10px
 
-        .product
-            min-width: 200px
-            min-height: 200px
-            background: green
+//         .product
+//             min-width: 200px
+//             min-height: 200px
+            // background: green

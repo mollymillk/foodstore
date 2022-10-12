@@ -1,30 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { getGoods } from '../Goods/getGoods';
 import './CurrentOrder.sass';
+import type {Products} from '../Goods/getGoods';
 
-export const CurrentOrder = () => {
+type Props = {
+	data: Products,
+	index: number
+}
 
-	const goodsData = getGoods();
-	const {orderId, goods, time, seconds, address, totalCost} = useSelector((state:RootState) => state.processingOrder[0]);
+export const CurrentOrder = ({data, index}:Props) => {
+
+	const {orderId, goods, time, seconds, address, totalCost} = useSelector((state:RootState) => state.processingOrder[index]);
+	console.log('orderId ' + orderId);
+	console.log(goods);
+	console.log('seconds ' + seconds);
+	console.log('address ' + address);
+	console.log('totalCost ' + totalCost);
+	
 	const entries = Object.entries(goods);
 
 	const date = new Date();
-	const deliveryTime = 150000 + seconds;
+	const deliveryTime = 900000 + seconds;
 	const updatedTime = (deliveryTime - date.getTime()) / 60000;
 
 	const [timer, setTimer] = useState<number>(updatedTime);
 	const [isDelivered, setIsDelivered] = useState<boolean>(false);
+	
 
 	useEffect(() => {
 		timer > 1 ? setInterval(() => {
 			const date = new Date();
 			const updatedTime = (deliveryTime - date.getTime()) / 60000;
 			setTimer(updatedTime);
-		}, 3000)
+		}, 60000)
 			: setIsDelivered(true);
 	}, [deliveryTime, timer]);
+
+	console.log(timer);
+	
 
 
 	return <div className='current_order'>
@@ -41,11 +55,11 @@ export const CurrentOrder = () => {
 			<p className='time'>{time}</p>
 		</div>
 		<div className='goods'>
-			{entries.map(([id, amount])=> {
-				return <div className='product' key={id}> 
+			{data && entries.map(([id, amount])=> {
+				return !!amount && <div className='product' key={id}> 
 					<div className='image'>
 						<img
-							srcSet={goodsData[id].image_front_small_url}
+							srcSet={data[id].image_front_small_url}
 							className='photo'
 						/>
 					</div>
@@ -55,7 +69,7 @@ export const CurrentOrder = () => {
 		</div>
 
 		<div className='order_payment'>
-			<p className='order_cost'>{totalCost} ₽</p>
+			<h3 className='order_cost'>{totalCost} ₽</h3>
 			<p className='order_card'>Карта ***6767</p>
 		</div>
 

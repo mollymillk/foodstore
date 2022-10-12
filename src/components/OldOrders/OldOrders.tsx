@@ -1,29 +1,50 @@
 import React from 'react';
-import { getGoods } from '../Goods/getGoods';
+import { oldOrdersData } from './oldOrdersData/oldOrdersData';
 import './OldOrders.sass';
+import type {Products} from '../Goods/getGoods';
 
-export const OldOrders = () => {
 
-	const data = getGoods();
+type Props = {
+	index: number,
+	data: Products
+}
+
+export const OldOrders = ({index, data}:Props) => {
+
+	const {orderId, goods, address, time, totalCost} = oldOrdersData[index];
+	const entries = Object.entries(goods);
 
 	return <div className='old_orders'>
 
 		<div className='order_data'>
 
-			<p className='address'>Заводская 1/38</p>
-			<p className='data'>5 октября 13:00</p>
-			<p className='sum'>558p</p>
+			<h3 className='orderId'>Заказ {orderId}</h3>
+			<p className='message'>Заказ доставлен</p>
+			<p className='address'>{address}</p>
+			<p className='data'>{time}</p>
 
 		</div>
 
 		<div className='goods'>
 
-			<div className='product'></div>
-			<div className='product'></div>
-			<div className='product'></div>
-			<div className='product'></div>
-			<div className='product'></div>
+			{entries.map(([id, amount])=> {
+				
+				return data[id] && <div className='product' key={id}> 
+					<div className='image'>
+						<img
+							srcSet={data[id].image_front_small_url}
+							className='photo'
+						/>
+					</div>
+					<p className='amount'>X {amount}</p>
+				</div>;
+			})}
 
+		</div>
+		
+		<div className='order_payment'>
+			<h3 className='sum'>{totalCost} ₽</h3>
+			<p className='order_card'>Карта ***6767</p>
 		</div>
 
 	</div>;
