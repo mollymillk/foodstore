@@ -4,6 +4,7 @@ import './Signup.sass';
 import { isPossiblePhoneNumber, isValidPhoneNumber,validatePhoneNumberLength} from 'libphonenumber-js';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../store/reducers/authorizationReducer';
+import { Form, Input } from 'antd';
 
 
 type Props = {
@@ -33,7 +34,7 @@ export const Signup = ({setActive}:Props) => {
 	}, [email, password, phone, userName]);
 
 	const checkUserName = (value:string) => {
-		if (value.match(/[A-Za-z0-9]/g)) {
+		if (value.match(/[a-zа-я]/gi)) {
 			setUserName(value);
 			
 		} else {
@@ -68,40 +69,59 @@ export const Signup = ({setActive}:Props) => {
 
 
 	return <div className='signup'>
-		<TextField
-			className='signup_username'
-			required
-			variant='outlined'
-			label="Логин"
-			type="text"
-			onChange={(e)=>checkUserName(e.target.value)}
-			autoComplete="nickname"
-		/>
-		<TextField
-			className='signup_email'
-			required
-			variant='outlined'
-			label="Email"
-			type="email"
-			onChange={(e)=>checkEmail(e.target.value)}
-			autoComplete="email"
-		/>
-		<TextField
-			className='signup_phone'
-			required
-			variant='outlined'
-			label="Телефон"
-			type="phone"
-			onChange={(e)=>checkPhone(e.target.value)}
-		/>
-		<TextField
-			className='signup_password'
-			required
-			variant='outlined'
-			label="Пароль"
-			type="password"
-			onChange={(e)=>setPassword(e.target.value)}
-		/>
+		<Form
+			name="basic"
+			labelCol={{
+				span: 8,
+			}}
+			wrapperCol={{
+				span: 16,
+			}}>
+
+			<Form.Item
+				className='signup_username'
+				required
+				label="Имя"
+				rules={[
+					{
+						required: true,
+						message: ''
+					},
+				]}
+			>
+				<Input
+					onChange={(e)=>checkUserName(e.target.value)}
+					maxLength={15}
+				/>
+			</Form.Item>
+			<Form.Item
+				className='signup_email'
+				required
+				label="Email"
+			>
+				<Input
+					onChange={(e)=>checkEmail(e.target.value)}
+				/>
+			</Form.Item>
+			<Form.Item
+				className='signup_phone'
+				required
+				label="Телефон"
+			>
+				<Input 
+					onChange={(e)=>checkPhone(e.target.value)}
+				/>
+			</Form.Item>
+			<Form.Item
+				className='signup_password'
+				required
+				label="Пароль"
+			>
+				<Input.Password
+					onChange={(e)=>setPassword(e.target.value)}
+				/>
+			</Form.Item>
+		</Form>
 
 		<Button
 			variant="contained"
@@ -111,5 +131,6 @@ export const Signup = ({setActive}:Props) => {
 		>
 				Зарегистрироваться
 		</Button>
+
 	</div>;
 };
