@@ -5,20 +5,37 @@
 .cart
     display: flex
     flex-direction: row
+    justify-content: space-evenly
     min-height: 80vh
     
     .goods
         display: flex
         flex-direction: column
-        margin-left: 10%
         padding: 20px
         background: #fff
         border: 2px solid $dark_heading
         border-radius: 10px
-        width: 40%
+        width: 30%
         min-height: 50%
-    .empty_cart
-        display: flex
-        flex-direction: row
-        justify-content: space-around
-        font-family: 'OverpassBold'
+
+    .empty_cart_container
+        align-items: center
+
+        .cart_img
+            width: 150px
+            display: block
+            margin-left: auto
+            margin-right: auto
+
+        .empty_cart, .to_main
+            text-decoration: none
+            display: flex
+            flex-direction: row
+            justify-content: space-around
+            font-family: 'OverpassBold'
+            color: $dark_heading
+
+        .to_main:hover
+            color: $heading
+            cursor: pointer
+            

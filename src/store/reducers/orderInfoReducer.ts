@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
-type orderInfo = {
+type OrderInfo = {
     card: string,
     address: string
 }
 
-const initialState:orderInfo = {
+const initialState:OrderInfo = {
 	card: '',
 	address: ''
 };

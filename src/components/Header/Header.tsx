@@ -13,10 +13,10 @@ export const Header = ():JSX.Element => {
 	const totalCost = useSelector((state:RootState) => state.totalCost);
 
 	return <header className='header'>
+		<NavLink to='/' className='logo'>
+			<img className="logo_img" alt="logo" srcSet={logo} />
+		</NavLink>
 		<nav className='main_nav'>
-			<NavLink to='/' className='logo'>
-				<img className="logo_img" alt="logo" srcSet={logo} />
-			</NavLink>
 			<UserMenu/>
 			<NavLink to='/cart' className='to_cart'>
 				<p className='cart_sum'>{totalCost.cost - totalCost.promoSale[1]}</p>

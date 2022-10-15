@@ -1,28 +1,94 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import {BiUser} from 'react-icons/bi';
 import './UserMenu.sass';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import { Modal } from '../../Modal/Modal';
+import { Dropdown, Menu } from 'antd';
+import 'antd/dist/antd.css';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../store/reducers/authorizationReducer';
+
 
 export const UserMenu = () => {
-	return <PopupState variant="popover" popupId="demo-popup-menu">
-		{(popupState) => (
-			<div className='user_menu'>
-				<Button startIcon={<BiUser />} variant="contained" className='menu_button' {...bindTrigger(popupState)}>
-			Дарья
-				</Button>
-				<Menu {...bindMenu(popupState)}>
-					<MenuItem onClick={popupState.close}>
-						<NavLink to='/user' className='to_user'>
-							Заказы
-						</NavLink>
-					</MenuItem>
-					<MenuItem onClick={popupState.close}>Выйти</MenuItem>
-				</Menu>
-			</div>
-		)}
-	</PopupState>;
+
+
+	const isAuthorized = useSelector((state:RootState) => state.authorization.isAuthorized);
+	const name = useSelector((state:RootState) => state.authorization.name);
+
+	const [isLoginModalActive, setIsLoginModalActive] = useState<boolean>(false);
+	const [isSignUpModalActive, setIsSignUpModalActive] = useState<boolean>(false);
+
+	const dispatch = useDispatch();
+	const loginMenu = (
+		<Menu 
+			items={[
+				{
+					key: '1',
+					label: (
+						<><Button
+							className='menu_item'
+							onClick={()=>setIsLoginModalActive(true)}					
+						>
+							Войти
+						</Button></>
+					)
+				},
+				{
+					key: '2',
+					label: (
+						<><Button
+							className='menu_item'
+							onClick={()=>setIsSignUpModalActive(true)}>
+							Регистрация
+						</Button></>
+					)
+				}
+	
+			]}/>
+	);
+
+	const authMenu = (
+		<Menu 
+			items={[
+				{
+					key: '1',
+					label: (
+						<><Button
+							className='menu_item'					
+						>
+							<NavLink to='/user'>Заказы</NavLink>
+						</Button></>
+					)
+				},
+				{
+					key: '2',
+					label: (
+						<><Button
+							className='menu_item'
+							onClick={() => dispatch(logout())}
+						>
+							Выйти
+						</Button></>
+					)
+				}
+	
+			]}/>
+	);
+
+
+	return <><Dropdown 
+		overlay= {isAuthorized ? authMenu : loginMenu}
+		placement='bottom'
+	>
+		<Button className='menu_button'>
+			<BiUser size={25}/>
+			<p className='button_text'>{name ? name : 'Войти'}</p>
+		</Button>
+	</Dropdown>
+	<Modal data='login' active={isLoginModalActive} setActive={setIsLoginModalActive}/>
+	<Modal data='signup' active={isSignUpModalActive} setActive={setIsSignUpModalActive}/>
+	</>;
 };

@@ -14,7 +14,8 @@ type Props = {
 		product_name: string,
 		id: string,
 		price: number,
-		category: string
+		category: string,
+		sale: number
 	}
 }
 
@@ -22,14 +23,18 @@ export const CartItem = (props:Props):JSX.Element => {
 
 	const dispatch = useDispatch();
 
+	const priceToAdd = props.data.sale ? 
+		props.data.price - props.data.sale :
+		props.data.price;
+
 	const handleAddCount = () => {
 		dispatch(addCount(props.product));
-		dispatch(addToCost(props.data.price));
+		dispatch(addToCost(priceToAdd));
 	};
 
 	const handleRemove = () => {
 		dispatch(remove(props.product));
-		dispatch(removeFromCost(props.data.price));
+		dispatch(removeFromCost(priceToAdd));
 	};
 
 	return <div className='cart_item'>
@@ -41,7 +46,7 @@ export const CartItem = (props:Props):JSX.Element => {
 		<div className='info'>
 
 			<p className='name'>{props.data.product_name}</p>
-			<p className='price'>{props.data.price}₽ x {props.amount}шт</p>
+			<p className='price'>{priceToAdd}₽ x {props.amount}шт</p>
 
 			<div className='counter'>
 

@@ -7,6 +7,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
 	entry: path.resolve(__dirname, './src/index.tsx'),
+	devtool: 'inline-source-map',
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js'],
 	},

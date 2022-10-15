@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-declare module '*.svg'
+declare module '*.svg' {
+    const content: unknown;
+    export default content;
+}
 
 export interface CallbackArgument {
     issuer: string;

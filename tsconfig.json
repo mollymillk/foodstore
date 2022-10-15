@@ -3,6 +3,7 @@
       "target": "ES5",
       "module": "ESNext",
       "moduleResolution": "node",
+      "sourceMap": true,
       "lib": [
         "DOM",
         "ESNext"

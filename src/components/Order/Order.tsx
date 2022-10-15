@@ -26,7 +26,7 @@ export const Order = (props:Props) => {
 	useEffect(() => {
 		if (orderInfo.card
 			&& orderInfo.address
-			&&totalCost >= 500) {
+			&& totalCost >= 500) {
 			setIsPaymentAllowed(true);
 		}
 	}, [orderInfo, totalCost]);
