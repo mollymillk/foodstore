@@ -5,6 +5,7 @@ import 'react-credit-cards/es/styles-compiled.css';
 import { Button, TextField } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setCard } from '../../../store/reducers/orderInfoReducer';
+import { Form, Input, InputNumber } from 'antd';
 
 
 type Props = {
@@ -81,52 +82,68 @@ export const PaymentCard = (props:Props) => {
 				cvc={cvc}
 				focused={focus}
 			/>
-			<form className='card_info'>
-				<TextField
-					name="number"
-					placeholder="Номер карты"
-					value={number}
-					className={number.length === 16 ? 'number accepted' : 'number empty'}
-					onChange = {(e:React.ChangeEvent<HTMLInputElement>) => validateNumberInput(e.target.value)}
-					onFocus={(e) => setFocus(e.target.name)}
-					ref={ref}
-					inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', maxlength: 16}}
-				/>
-				<TextField
-					name="name"
-					placeholder="Имя"
-					value={name}
-					className={name.match(/[A-Za-z][\s][A-Za-z]/g) ? 'name accepted' : 'name empty'}
-					onChange={(e:React.ChangeEvent<HTMLInputElement>) => validateNameInput(e.target.value)}
-					onFocus={(e) => setFocus(e.target.name)}
-				/>
-				<TextField
-					name="expiry"
-					placeholder="ММ/ГГ"
-					value={expiry}
-					className={expiry.length === 4 ? 'expiry accepted' : 'expiry empty'}
-					onChange={(e) => validateDateInput(e.target.value)}
-					onFocus={(e) => setFocus(e.target.name)}
-					inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', maxlength: 4}}
-				/>
-				<TextField
-					name="cvc"
-					placeholder="CVC"
-					value={cvc}
-					className={cvc.length === 3 ? 'cvc accepted' : 'cvc empty'}
-					onChange={(e) => validateCvcInput(e.target.value)}
-					onFocus={(e) => setFocus(e.target.name)}
-					inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', maxlength: 3}}
-				/>
-			</form>
-			<Button
-				disabled={!isAccepted}
-				className='button'
-				variant='contained'
-				onClick={()=>handleSendCard()}
-			>
-				Отправить
-			</Button>
+			{/* <form className='card_info'> */}
+			<Form className='card_form'>
+				<Form.Item className='form_item'>
+					<Input
+						size="large"
+						name='number'
+						value={number}
+						ref={ref}
+						placeholder="Номер карты"
+						onFocus={(e) => setFocus(e.target.name)}
+						onChange = {(e:React.ChangeEvent<HTMLInputElement>) => validateNumberInput(e.target.value)}
+						inputMode= 'numeric'
+						pattern= '[0-9]*'
+						maxLength={16}
+					/>
+				</Form.Item>
+				<Form.Item className='form_item'>
+					<Input
+						size="large"
+						name="name"
+						placeholder="Имя"
+						value={name}
+						onChange={(e:React.ChangeEvent<HTMLInputElement>) => validateNameInput(e.target.value)}
+						onFocus={(e) => setFocus(e.target.name)}/>
+				</Form.Item>
+				<Form.Item className='form_item'>
+					<Input
+						size="large"
+						name="expiry"
+						placeholder="ММ/ГГ"
+						value={expiry}
+						onChange={(e) => validateDateInput(e.target.value)}
+						onFocus={(e) => setFocus(e.target.name)}
+						inputMode='numeric'
+						pattern='[0-9]*'
+						maxLength={4}
+					/>
+				</Form.Item>
+				<Form.Item className='form_item'>
+					<Input
+						size="large"
+						name="cvc"
+						placeholder="CVC"
+						value={cvc}
+						onChange={(e) => validateCvcInput(e.target.value)}
+						onFocus={(e) => setFocus(e.target.name)}
+						inputMode='numeric'
+						pattern ='[0-9]*'
+						maxLength={3}
+					/>
+				</Form.Item>
+				<Form.Item>
+					<Button
+						disabled={!isAccepted}
+						className='button'
+						variant='contained'
+						onClick={()=>handleSendCard()}
+					>
+						Отправить
+					</Button>
+				</Form.Item>
+			</Form>
 		</div>
 	);
 };

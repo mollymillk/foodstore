@@ -1,7 +1,7 @@
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import './Signup.sass';
-import { isPossiblePhoneNumber, isValidPhoneNumber,validatePhoneNumberLength} from 'libphonenumber-js';
+import { isPossiblePhoneNumber} from 'libphonenumber-js';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../store/reducers/authorizationReducer';
 import { Form, Input } from 'antd';
@@ -22,6 +22,7 @@ export const Signup = ({setActive}:Props) => {
 	const [nameHelper, setNameHelper] = useState<string>('');
 	const [emailHelper, setEmailHelper] = useState<string>('');
 	const [phoneHelper, setPhoneHelper] = useState<string>('');
+	const [passwordHelper, setPasswordHelper] = useState<string>('');
 
 	const dispatch = useDispatch();
 
@@ -34,30 +35,40 @@ export const Signup = ({setActive}:Props) => {
 	}, [email, password, phone, userName]);
 
 	const checkUserName = (value:string) => {
-		if (value.match(/[a-zа-я]/gi)) {
+		if (/^[A-ZА-ЯЁ]+$/i.test(value)) {
 			setUserName(value);
-			
+			setNameHelper('');
 		} else {
-			setNameHelper('Может содержать латинские буквы и числа');
+			setNameHelper('Содержит только буквы?');
 		}
 	};
 
 	const checkEmail = (value:string) => {
 		const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 		if (value.match(EMAIL_REGEXP)) {
-			setEmail(value);			
+			setEmail(value);
+			setEmailHelper('');	
 		} else {
-			setEmailHelper('Проверьте правильность данных');
+			setEmailHelper('Проверьте данные');
 		}
 	};
 
 	const checkPhone = (value:string) => {
 		if (isPossiblePhoneNumber(value, 'RU')) {
 			setPhone(value);
-			console.log(value);
+			setPhoneHelper('');
 			
 		} else {
-			setPhoneHelper('Проверьте правильность данных');
+			setPhoneHelper('Проверьте данные');
+		}
+	};
+
+	const checkPassword = (value:string) => {
+		if (value.match(/[a-zа-я][0-9]/gi)) {
+			setPassword(value);
+			setPasswordHelper('');
+		} else {
+			setPasswordHelper('Содержит буквы и цифры?');
 		}
 	};
 
@@ -82,21 +93,24 @@ export const Signup = ({setActive}:Props) => {
 				className='signup_username'
 				required
 				label="Имя"
+				help={nameHelper}
 				rules={[
 					{
 						required: true,
-						message: ''
+						message: 'Обязательное поле'
 					},
 				]}
 			>
 				<Input
-					onChange={(e)=>checkUserName(e.target.value)}
+					// onBlur={}
+					onBlur={(e)=>checkUserName(e.target.value)}
 					maxLength={15}
 				/>
 			</Form.Item>
 			<Form.Item
 				className='signup_email'
 				required
+				help={emailHelper}
 				label="Email"
 			>
 				<Input
@@ -107,18 +121,21 @@ export const Signup = ({setActive}:Props) => {
 				className='signup_phone'
 				required
 				label="Телефон"
+				help={phoneHelper}
 			>
 				<Input 
-					onChange={(e)=>checkPhone(e.target.value)}
+					onBlur={(e)=>checkPhone(e.target.value)}
 				/>
 			</Form.Item>
 			<Form.Item
 				className='signup_password'
 				required
 				label="Пароль"
+				help={passwordHelper}
+
 			>
 				<Input.Password
-					onChange={(e)=>setPassword(e.target.value)}
+					onChange={(e)=>checkPassword(e.target.value)}
 				/>
 			</Form.Item>
 		</Form>

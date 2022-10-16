@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { Form, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -48,12 +48,17 @@ export const PromoInput = () => {
 
 	return <div className='order_promo'>
 		<div className='text'>Промокод</div>
-		<TextField
-			className='promo_input'
-			defaultValue={promoSale[1] ? promoSale[0] : ''}
-			helperText={helperText}
-			placeholder='Промокод'
-			variant='outlined'
-			onChange={(e) => setPromo(e.target.value)} />
+		<Form>
+			<Form.Item
+				help={helperText}
+			>
+				<Input
+					placeholder='Промокод'
+					defaultValue={promoSale[1] ? promoSale[0] : ''}
+					onChange={(e) => setPromo(e.target.value)}
+				/>
+
+			</Form.Item>
+		</Form>
 	</div>;
 };

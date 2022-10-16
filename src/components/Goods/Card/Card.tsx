@@ -59,7 +59,7 @@ export const Card = ({img, name, id, price, sale}:Props):JSX.Element => {
 	return <div className='card'>
 
 		<div className='image'>
-			<img srcSet={img} className='photo'/>
+			<img srcSet={img} className='photo' />
 		</div>
 
 		<div className='info'>
@@ -68,7 +68,7 @@ export const Card = ({img, name, id, price, sale}:Props):JSX.Element => {
 
 			{!items[id] ?
 
-				<Button 
+				<Button
 					className='button'
 					variant='contained'
 					onClick={() => handleAddItem()}
@@ -76,7 +76,7 @@ export const Card = ({img, name, id, price, sale}:Props):JSX.Element => {
 					В корзину
 				</Button>
 
-				: 
+				:
 
 				<div className='counter'>
 
@@ -88,13 +88,12 @@ export const Card = ({img, name, id, price, sale}:Props):JSX.Element => {
 
 					<p className='amount'>{items[id]}</p>
 
-					<Fab className='add'color="primary" onClick={() => handleAddCount()}>
+					<Fab className='add' color="primary" onClick={() => handleAddCount()}>
 						<span className="material-icons-outlined">
 							add_circle_outline
 						</span>
 					</Fab>
-				</div>
-			}
+				</div>}
 
 		</div>
 	</div>;

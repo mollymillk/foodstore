@@ -53,13 +53,6 @@ export const Login = ({setActive}:Props) => {
 			>
 			</Form.Item>
 
-			<Form.Item
-				// wrapperCol={{
-				// 	offset: 8,
-				// 	span: 16,
-				// }}
-			>
-			</Form.Item>
 		</Form>
 		<Button
 			variant="contained"

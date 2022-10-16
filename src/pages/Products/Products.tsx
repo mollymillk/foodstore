@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Goods } from '../../components/Goods/Goods';
+import React, { useState, Suspense } from 'react';
+const Goods = React.lazy(() => import('../../components/Goods/Goods'));
 import { Promo } from '../../components/Promo/Promo';
 import './Products.sass';
 
@@ -72,8 +72,10 @@ export const Products = (): JSX.Element => {
 		<div className='categories'>
 			{categoriesList}
 		</div>
-		<div className='goods'>
-			<Goods category={selectedCategory}/>
-		</div>
+		<Suspense fallback= {<h4>loading</h4>}>
+			<div className='goods'>
+				<Goods category={selectedCategory}/>
+			</div>
+		</Suspense>
 	</div>;
 };

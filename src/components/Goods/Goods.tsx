@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import { Card } from './Card/Card';
 import { getGoods } from './getGoods';
 
@@ -7,7 +7,7 @@ type Props = {
 }
 
 
-export const Goods = (props:Props):JSX.Element => {
+const Goods = (props:Props):JSX.Element => {
 	
 	const products = getGoods();
 	const data = Object.values(products);	
@@ -49,3 +49,5 @@ export const Goods = (props:Props):JSX.Element => {
 	</>;
 	
 };
+
+export default Goods;
