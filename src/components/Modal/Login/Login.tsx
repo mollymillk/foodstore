@@ -1,14 +1,26 @@
 import { Button } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.sass';
 import 'antd/dist/antd.css';
 import { Checkbox, Form, Input } from 'antd';
+import { useDispatch } from 'react-redux';
+import { login } from '../../../store/reducers/authorizationReducer';
 
 type Props = {
 	setActive: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 export const Login = ({setActive}:Props) => {
+
+	const dispatch = useDispatch();
+	const [phone, setPhone] = useState('');
+	const [password, setPassword] = useState('');
+
+	const handleSend = () => {
+		dispatch(login(['Дарья', phone]));
+		setActive(false)
+	};
+
 	return <div className='login'>
 		<Form
 			name="basic"
@@ -28,7 +40,11 @@ export const Login = ({setActive}:Props) => {
 					},
 				]}
 			>
-				<Input />
+				<Input
+					onChange={(e)=>setPhone(e.target.value)}
+					type='numeric'
+
+				/>
 			</Form.Item>
 
 			<Form.Item
@@ -40,24 +56,17 @@ export const Login = ({setActive}:Props) => {
 					},
 				]}
 			>
-				<Input.Password />
-			</Form.Item>
-
-			<Form.Item
-				name="remember"
-				valuePropName="checked"
-				wrapperCol={{
-					offset: 8,
-					span: 16,
-				}}
-			>
+				<Input.Password
+					onChange={(e)=>setPassword(e.target.value)}
+				/>
 			</Form.Item>
 
 		</Form>
 		<Button
+			disabled={(password && phone) ? false : true}
 			variant="contained"
 			className='login_button'
-			onClick={()=>setActive(false)}
+			onClick={()=>handleSend()}
 		>
 			Войти
 		</Button>

@@ -13,6 +13,8 @@ type Props = {
 
 export const Signup = ({setActive}:Props) => {
 
+	const [form] = Form.useForm();
+
 	const [userName, setUserName] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [phone, setPhone] = useState<string>('');
@@ -73,14 +75,16 @@ export const Signup = ({setActive}:Props) => {
 	};
 
 	const handleSend = () => {
+		form.resetFields();
 		dispatch(login([userName, phone]));
 		setActive(false);
+		setIsAccepted(false);
 	};
 
-
-
 	return <div className='signup'>
+
 		<Form
+			form={form}
 			name="basic"
 			labelCol={{
 				span: 8,
@@ -90,6 +94,7 @@ export const Signup = ({setActive}:Props) => {
 			}}>
 
 			<Form.Item
+				name='userName'
 				className='signup_username'
 				required
 				label="Имя"
@@ -102,12 +107,12 @@ export const Signup = ({setActive}:Props) => {
 				]}
 			>
 				<Input
-					// onBlur={}
 					onBlur={(e)=>checkUserName(e.target.value)}
 					maxLength={15}
 				/>
 			</Form.Item>
 			<Form.Item
+				name='email'
 				className='signup_email'
 				required
 				help={emailHelper}
@@ -118,6 +123,7 @@ export const Signup = ({setActive}:Props) => {
 				/>
 			</Form.Item>
 			<Form.Item
+				name='phone'
 				className='signup_phone'
 				required
 				label="Телефон"
@@ -128,6 +134,7 @@ export const Signup = ({setActive}:Props) => {
 				/>
 			</Form.Item>
 			<Form.Item
+				name='password'
 				className='signup_password'
 				required
 				label="Пароль"
@@ -138,16 +145,18 @@ export const Signup = ({setActive}:Props) => {
 					onChange={(e)=>checkPassword(e.target.value)}
 				/>
 			</Form.Item>
-		</Form>
 
-		<Button
-			variant="contained"
-			className='signup_button'
-			onClick={()=>handleSend()}
-			disabled={!isAccepted}
-		>
+			<Button
+				variant="contained"
+				className='signup_button'
+				onClick={()=>handleSend()}
+				disabled={!isAccepted}
+				type='submit'
+			>
 				Зарегистрироваться
-		</Button>
+			</Button>
+
+		</Form>
 
 	</div>;
 };

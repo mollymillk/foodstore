@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { oldOrdersData } from './oldOrdersData/oldOrdersData';
 import './OldOrders.sass';
 import type {Products} from '../Goods/getGoods';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { Rate } from 'antd';
 
 
 type Props = {
@@ -11,8 +14,11 @@ type Props = {
 
 export const OldOrders = ({index, data}:Props) => {
 
+	const [isRateDisabled, setIsRateDisabled] = useState(false);
 	const {orderId, goods, address, time, totalCost} = oldOrdersData[index];
 	const entries = Object.entries(goods);
+	const userName = useSelector((state:RootState) => state.authorization.name);
+	const userPhone = useSelector((state:RootState) => state.authorization.phone);
 
 	return <div className='old_orders'>
 
@@ -22,6 +28,7 @@ export const OldOrders = ({index, data}:Props) => {
 			<p className='message'>Заказ доставлен</p>
 			<p className='address'>{address}</p>
 			<p className='data'>{time}</p>
+			<p className='user_data'>Получатель: {userName} {userPhone}</p>
 
 		</div>
 
@@ -41,6 +48,14 @@ export const OldOrders = ({index, data}:Props) => {
 			})}
 
 		</div>
+
+		<div className='rate'>
+			<p>Пожалуйста, оцените заказ</p>
+			<Rate
+				disabled={isRateDisabled}
+				onChange={()=>setIsRateDisabled(true)}
+			/>
+		</div>
 		
 		<div className='order_payment'>
 			<h3 className='sum'>{totalCost} ₽</h3>
@@ -49,3 +64,4 @@ export const OldOrders = ({index, data}:Props) => {
 
 	</div>;
 };
+

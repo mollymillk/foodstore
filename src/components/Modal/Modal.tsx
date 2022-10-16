@@ -2,11 +2,9 @@ import React, { Dispatch } from 'react';
 import {GrFormClose} from 'react-icons/gr';
 import { Address } from './Address/Address';
 import { Authorization } from './Authorization/Authorization';
-import { Login } from './Login/Login';
 import './Modal.sass';
 import { PaidOrder } from './PaidOrder/PaidOrder';
 import { PaymentCard } from './PaymentCard/PaymentCard';
-import { Signup } from './Signup/Signup';
 
 type Props = {
     active: boolean,

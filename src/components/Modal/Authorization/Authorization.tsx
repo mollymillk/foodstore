@@ -17,12 +17,12 @@ export const Authorization = ({setActive, data}:Props) => {
 	return <div className='authorization'>
 		<div className='auth_type'>
 			<Button
-				className='login'
+				className={authType === 'login' ? 'login active' : 'login'}
 				onClick={()=>setAuthType('login')}>
 				Вход
 			</Button>
 			<Button
-				className='signup'
+				className={authType === 'signup' ? 'signup active' : 'signup'}
 				onClick={()=>setAuthType('signup')}>
 				Регистрация
 			</Button>

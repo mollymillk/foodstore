@@ -5,11 +5,13 @@ import { CurrentOrder } from '../../components/CurrentOrder/CurrentOrder';
 import { OldOrders } from '../../components/OldOrders/OldOrders';
 import { RootState } from '../../store/store';
 import './User.sass';
+import { AuthContainer } from '../../components/AuthContainer/AuthContainer';
 
 export const User = () => {
 
 	const goodsData = getGoods();
 	const orderData = useSelector((state:RootState) => state.processingOrder);
+	const isAuthorized = useSelector((state:RootState) => state.authorization.isAuthorized);
 	
 	
 	return <div className='user_page'>
@@ -26,5 +28,6 @@ export const User = () => {
 			<OldOrders index={1} data={goodsData}/>
 		</>
 		}
+		{/* {!isAuthorized && <AuthContainer/>} */}
 	</div>; 
 };

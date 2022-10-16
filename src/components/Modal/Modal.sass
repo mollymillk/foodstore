@@ -14,13 +14,15 @@
 
 .modal.active
     opacity: 1
+    z-index: 99999
     pointer-events: all
 
 
 .modal_container
+    position: fixed
     border-radius: 12px
     background-color: #fff
-    filter: opacity(100%)
+    opacity: 1
 
     .close_button
         width: 100%
