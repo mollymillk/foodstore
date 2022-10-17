@@ -13,6 +13,7 @@ type Order = {
 		seconds: number;
         address: string,
         totalCost: number
+		canceled?: boolean
 }
 
 type Orders = Order[];
@@ -25,11 +26,15 @@ export const processingOrderSlice = createSlice({
 	reducers: {
 		proccessOrder: (state, action: PayloadAction<Order>) => {
 			state.push(action.payload);
+		},
+		cancel: (state, action: PayloadAction<Order['orderId']>) => {
+			const index = state.findIndex((order:Order) => order.orderId===action.payload);
+			state[index].canceled = true;
 		}
 	}
 });
 
-export const {proccessOrder} = processingOrderSlice.actions;
+export const {proccessOrder, cancel} = processingOrderSlice.actions;
 export const selectProccesingOrder = (state: RootState) => state;
 
 export default processingOrderSlice.reducer;

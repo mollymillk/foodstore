@@ -12,7 +12,8 @@ import { Modal } from '../../Modal/Modal';
 import { proccessOrder } from '../../../store/reducers/processingOrderReducer';
 
 type Props = {
-	isPaymentAllowed: boolean
+	isPaymentAllowed: boolean,
+	setActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 interface DateTimeFormatOptions {
@@ -33,9 +34,9 @@ const options:DateTimeFormatOptions = {
 	minute: 'numeric',
 };
 
-export const OrderButton = ({isPaymentAllowed}:Props) => {
+export const OrderButton = ({isPaymentAllowed, setActive}:Props) => {
 
-	const [isModalActive, setIsModalActive] = useState(false);
+	// const [isModalActive, setIsModalActive] = useState(false);
 
 	const totalCost = useSelector((state:RootState) => state.totalCost.cost);
 	const orderInfo = useSelector((state:RootState) => state.orderInfo);
@@ -57,14 +58,14 @@ export const OrderButton = ({isPaymentAllowed}:Props) => {
 			address: orderInfo.address,
 			totalCost: totalCost
 		};
-
+	
+		setActive(true);
 		dispatch(proccessOrder(dataToSend));
 		dispatch(setDefaultCost());
 		dispatch(setDefaultItems());
 		dispatch(setDefaultOrderInfo());
 		dispatch(removePromoSale());
 		dispatch(resetPromo());
-		setIsModalActive(true);
 	};
 
 	return <>
@@ -87,6 +88,6 @@ export const OrderButton = ({isPaymentAllowed}:Props) => {
 			totalCost >= 500 && (!orderInfo.card || !orderInfo.address) &&
 			<p className='order_hint'>Пожалуйста, введите данные для заказа</p>
 		}
-		<Modal data='paidOrder' active={isModalActive} setActive={setIsModalActive}/>
+		{/* <Modal data='paidOrder' active={isModalActive} setActive={setIsModalActive}/> */}
 	</>;
 };

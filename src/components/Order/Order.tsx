@@ -10,7 +10,8 @@ import { OrderButton } from './OrderButton/OrderButton';
 
 type Props = {
 	sum: number,
-	sale: number
+	sale: number,
+	setActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const Order = (props:Props) => {
@@ -53,7 +54,7 @@ export const Order = (props:Props) => {
 			<p className='value'>{Math.floor(totalCost - promoSale[1])}₽</p>
 		</div>
 
-		<OrderButton isPaymentAllowed={isPaymentAllowed}/>
+		<OrderButton isPaymentAllowed={isPaymentAllowed} setActive={props.setActive}/>
 
 		<Modal data='card' active={cardModalActive} setActive={setCardModalActive} />
 		<Modal data='address' active={addressModalActive} setActive={setAddressModalActive} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CartItem } from '../../components/CartItem/CartItem';
 import type { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
@@ -7,6 +7,8 @@ import './Cart.sass';
 import { Order } from '../../components/Order/Order';
 import img from './img/trolley.png';
 import { NavLink } from 'react-router-dom';
+import { Modal } from '../../components/Modal/Modal';
+import { AuthContainer } from '../../components/AuthContainer/AuthContainer';
 
 
 type Entries = [string, number];
@@ -14,16 +16,20 @@ type Entries = [string, number];
 export const Cart = () => {
 
 	const items = useSelector((state: RootState) => state.cartItems);
+	const isAuthorized = useSelector((state:RootState) => state.authorization.isAuthorized);
 	const entries:Entries[] = Object.entries(items);
 	const data = getGoods();
+
+	const [isModalActive, setIsModalActive] = useState(false);
 	
 
 	let orderSum = 0;
 	let orderSale = 0;	
 
-	return <div className='cart'>
+	return <><div className='cart'>
 		<div className="goods">
-			{entries && entries.map(([id, amount])=> {
+			{!isAuthorized && <AuthContainer/>}
+			{isAuthorized && entries && entries.map(([id, amount])=> {
 
 				if (amount) {
 
@@ -38,7 +44,7 @@ export const Cart = () => {
 					/>;
 				}
 			})}
-			{!orderSum &&
+			{!orderSum && isAuthorized &&
 			<div className='empty_cart_container'>
 				<img srcSet={img} className='cart_img'/>
 				<p className='empty_cart'>В корзине пусто :(</p>
@@ -46,8 +52,10 @@ export const Cart = () => {
 			</div>
 			}
 		</div>
-		{/* {!!orderSum && */}
-		{/* // <Order sum={orderSum} sale={orderSale}/>} */}
-		<Order sum={orderSum} sale={orderSale}/>
-	</div>;
+		{!!orderSum && 
+		<Order sum={orderSum} sale={orderSale} setActive={setIsModalActive}/>}
+		{/* <Order sum={orderSum} sale={orderSale}/> */}
+	</div>
+	<Modal data='paidOrder' active={isModalActive} setActive={setIsModalActive}/>
+	</>;
 };

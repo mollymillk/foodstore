@@ -12,13 +12,17 @@ export const PromoInput = () => {
 	const promoSale = useSelector((state:RootState) => state.totalCost.promoSale);
 	const cost = useSelector((state:RootState) => state.totalCost.cost);
 	const orderItems = useSelector((state: RootState)=> state.cartItems);
+	const ordersLength = useSelector((state:RootState) => state.processingOrder.length);
+	const newUser = useSelector((state:RootState) => state.authorization.newUser);
+
 
 	const [promo, setPromo] = useState<keyof PromoCodes|string>(promoSale[0]);
 	const [helperText, setHelperText] = useState<string>('Введите промокод');
 
 	const errorMessages = {
 		catch200: `Добавьте товары на сумму ${1500 - cost} рублей`,
-		fresh20: 'Акция действует до 12:00'
+		fresh20: 'Акция действует до 12:00',
+		new50: 'Акция действует на первый заказ :('
 	};
 
 	const dispatch = useDispatch();
@@ -36,7 +40,8 @@ export const PromoInput = () => {
 	useEffect(() => {
 		if (promoCodes[promo]) {
 			const sales = promoCodes[promo];
-			const sale = sales(cost);
+			const isFirst = (!ordersLength && newUser) ? true : false;
+			const sale = sales(cost, isFirst);
 			
 			dispatch(addPromoSale([promo, sale]));
 		} else {

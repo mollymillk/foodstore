@@ -41,6 +41,7 @@ export const Signup = ({setActive}:Props) => {
 			setUserName(value);
 			setNameHelper('');
 		} else {
+			setUserName('');
 			setNameHelper('Содержит только буквы?');
 		}
 	};
@@ -51,6 +52,7 @@ export const Signup = ({setActive}:Props) => {
 			setEmail(value);
 			setEmailHelper('');	
 		} else {
+			setEmail('');
 			setEmailHelper('Проверьте данные');
 		}
 	};
@@ -61,22 +63,24 @@ export const Signup = ({setActive}:Props) => {
 			setPhoneHelper('');
 			
 		} else {
+			setPhone('');
 			setPhoneHelper('Проверьте данные');
 		}
 	};
 
 	const checkPassword = (value:string) => {
-		if (value.match(/[a-zа-я][0-9]/gi)) {
+		if (value.match(/([a-zа-яё][0-9]|[0-9][a-zа-яё])/gi)) {
 			setPassword(value);
 			setPasswordHelper('');
 		} else {
+			setPassword('');
 			setPasswordHelper('Содержит буквы и цифры?');
 		}
 	};
 
 	const handleSend = () => {
 		form.resetFields();
-		dispatch(login([userName, phone]));
+		dispatch(login([userName, phone, true]));
 		setActive(false);
 		setIsAccepted(false);
 	};
@@ -102,7 +106,7 @@ export const Signup = ({setActive}:Props) => {
 				rules={[
 					{
 						required: true,
-						message: 'Обязательное поле'
+						message: ''
 					},
 				]}
 			>
@@ -117,6 +121,12 @@ export const Signup = ({setActive}:Props) => {
 				required
 				help={emailHelper}
 				label="Email"
+				rules={[
+					{
+						required: true,
+						message: ''
+					},
+				]}
 			>
 				<Input
 					onChange={(e)=>checkEmail(e.target.value)}
@@ -128,6 +138,12 @@ export const Signup = ({setActive}:Props) => {
 				required
 				label="Телефон"
 				help={phoneHelper}
+				rules={[
+					{
+						required: true,
+						message: ''
+					},
+				]}
 			>
 				<Input 
 					onBlur={(e)=>checkPhone(e.target.value)}
@@ -139,6 +155,12 @@ export const Signup = ({setActive}:Props) => {
 				required
 				label="Пароль"
 				help={passwordHelper}
+				rules={[
+					{
+						required: true,
+						message: ''
+					},
+				]}
 
 			>
 				<Input.Password

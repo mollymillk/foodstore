@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import './CurrentOrder.sass';
 import type {Products} from '../Goods/getGoods';
+import { Button } from '@mui/material';
+import { cancel } from '../../store/reducers/processingOrderReducer';
 
 type Props = {
 	data: Products,
@@ -11,12 +13,8 @@ type Props = {
 
 export const CurrentOrder = ({data, index}:Props) => {
 
-	const {orderId, goods, time, seconds, address, totalCost} = useSelector((state:RootState) => state.processingOrder[index]);
-	console.log('orderId ' + orderId);
-	console.log(goods);
-	console.log('seconds ' + seconds);
-	console.log('address ' + address);
-	console.log('totalCost ' + totalCost);
+	const {orderId, goods, time, seconds, address, totalCost, canceled} = useSelector((state:RootState) => state.processingOrder[index]);
+	const dispatch  = useDispatch();
 	
 	const entries = Object.entries(goods);
 
@@ -34,10 +32,13 @@ export const CurrentOrder = ({data, index}:Props) => {
 			const updatedTime = (deliveryTime - date.getTime()) / 60000;
 			setTimer(updatedTime);
 		}, 60000)
-			: setIsDelivered(true);
-	}, [deliveryTime, timer]);
+			:  !canceled  && setIsDelivered(true);
+	}, [canceled, deliveryTime, timer]);
 
-	console.log(timer);
+	const cancelOrder = () => {
+		setTimer(0);
+		dispatch(cancel(orderId));
+	};
 	
 
 
@@ -48,8 +49,10 @@ export const CurrentOrder = ({data, index}:Props) => {
 			{isDelivered ? 
 				<p className='message'>Заказ доставлен</p>
 				:
-				<p className='timer'>Курьер будет через {Math.floor(timer)} минут</p>
+				canceled ? <p>Заказ отменен</p> : <p className='timer'>Курьер будет через {Math.floor(timer)} минут</p>
 			}
+			{!isDelivered && !canceled &&
+			<Button onClick={()=> cancelOrder()}>Отменить заказ</Button>}
 
 			<p className='address'>{address}</p>
 			<p className='time'>{time}</p>

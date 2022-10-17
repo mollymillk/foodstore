@@ -17,8 +17,8 @@ export const Login = ({setActive}:Props) => {
 	const [password, setPassword] = useState('');
 
 	const handleSend = () => {
-		dispatch(login(['Дарья', phone]));
-		setActive(false)
+		dispatch(login(['Дарья', phone, false]));
+		setActive(false);
 	};
 
 	return <div className='login'>
