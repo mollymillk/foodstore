@@ -18,7 +18,7 @@ export const User = () => {
 	
 	return <div className='user_page'>
 		{orderData.length > 0 && isAuthorized &&
-			orderData.map((order, index) => {
+			orderData.reverse().map((order, index) => {
 				return <CurrentOrder
 					key={index}
 					data={goodsData}
@@ -31,7 +31,7 @@ export const User = () => {
 		</>
 		}
 		{!isAuthorized && <AuthContainer/>}
-		{isAuthorized && newUser &&
+		{isAuthorized && newUser && orderData.length === 0 &&
 			<EmptyUserPage/>}
 	</div>; 
 };

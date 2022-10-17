@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import { Button, Fab } from '@mui/material';
 import type { RootState } from '../../../store/store';
 import {useSelector, useDispatch} from 'react-redux';
 import { addItem, addCount, remove } from '../../../store/reducers/itemsReducer';
 import { addToCost, removeFromCost } from '../../../store/reducers/costReducer';
 import './Card.sass';
+import Spin from 'antd/lib/spin';
 
 type Props = {
 	img: string,
@@ -14,7 +15,7 @@ type Props = {
 	sale: number,
 }
 
-export const Card = ({img, name, id, price, sale}:Props):JSX.Element => {
+const Card = ({img, name, id, price, sale}:Props):JSX.Element => {
 
 	const productName = name.length < 20 ? name : name.substr(0, 19) + '...';
 	const items = useSelector((state: RootState) => state.cartItems);
@@ -98,3 +99,6 @@ export const Card = ({img, name, id, price, sale}:Props):JSX.Element => {
 		</div>
 	</div>;
 };
+
+
+export default Card;

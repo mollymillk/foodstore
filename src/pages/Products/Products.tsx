@@ -1,5 +1,8 @@
+import Spin from 'antd/lib/spin';
 import React, { useState, Suspense } from 'react';
+// import Goods from '../../components/Goods/Goods';
 const Goods = React.lazy(() => import('../../components/Goods/Goods'));
+
 import { Promo } from '../../components/Promo/Promo';
 import './Products.sass';
 
@@ -72,10 +75,10 @@ export const Products = (): JSX.Element => {
 		<div className='categories'>
 			{categoriesList}
 		</div>
-		<Suspense fallback= {<h4>loading</h4>}>
-			<div className='goods'>
+		<div className='goods'>
+			<Suspense fallback= {<Spin className='spin'/>}>
 				<Goods category={selectedCategory}/>
-			</div>
-		</Suspense>
+			</Suspense>
+		</div>
 	</div>;
 };
