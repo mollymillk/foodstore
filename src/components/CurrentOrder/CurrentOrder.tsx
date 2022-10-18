@@ -4,7 +4,8 @@ import { RootState } from '../../store/store';
 import './CurrentOrder.sass';
 import type {Products} from '../Goods/getGoods';
 import { Button } from '@mui/material';
-import { cancel } from '../../store/reducers/processingOrderReducer';
+import { Modal } from '../Modal/Modal';
+
 
 type Props = {
 	data: Products,
@@ -14,7 +15,6 @@ type Props = {
 export const CurrentOrder = ({data, index}:Props) => {
 
 	const {orderId, goods, time, seconds, address, totalCost, canceled} = useSelector((state:RootState) => state.processingOrder[index]);
-	const dispatch  = useDispatch();
 	
 	const entries = Object.entries(goods);
 
@@ -24,6 +24,7 @@ export const CurrentOrder = ({data, index}:Props) => {
 
 	const [timer, setTimer] = useState<number>(updatedTime);
 	const [isDelivered, setIsDelivered] = useState<boolean>(false);
+	const [isModalActive, setIsModalActive] = useState<boolean>(false);
 	
 
 	useEffect(() => {
@@ -32,17 +33,12 @@ export const CurrentOrder = ({data, index}:Props) => {
 			const updatedTime = (deliveryTime - date.getTime()) / 60000;
 			setTimer(updatedTime);
 		}, 60000)
-			:  !canceled  && setIsDelivered(true);
+			:  canceled ? setTimer(0) : setIsDelivered(true);
 	}, [canceled, deliveryTime, timer]);
-
-	const cancelOrder = () => {
-		setTimer(0);
-		dispatch(cancel(orderId));
-	};
 	
 
 
-	return <div className='current_order'>
+	return <> <div className='current_order'>
 		<div className='order_data'>
 			<h3 className='orderId'>Заказ {Math.floor(orderId)}</h3>
 
@@ -52,7 +48,7 @@ export const CurrentOrder = ({data, index}:Props) => {
 				canceled ? <p>Заказ отменен</p> : <p className='timer'>Курьер будет через {Math.floor(timer)} минут</p>
 			}
 			{!isDelivered && !canceled &&
-			<Button onClick={()=> cancelOrder()}>Отменить заказ</Button>}
+			<Button onClick={()=> setIsModalActive(true)}>Отменить заказ</Button>}
 
 			<p className='address'>{address}</p>
 			<p className='time'>{time}</p>
@@ -77,5 +73,7 @@ export const CurrentOrder = ({data, index}:Props) => {
 		</div>
 
 		
-	</div>;
+	</div>
+	<Modal orderId={orderId} active={isModalActive} setActive={setIsModalActive} data={'cancel'}/>
+	</>;
 };

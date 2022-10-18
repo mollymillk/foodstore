@@ -18,7 +18,7 @@ export const User = () => {
 	
 	return <div className='user_page'>
 		{orderData.length > 0 && isAuthorized &&
-			orderData.reverse().map((order, index) => {
+			orderData.map((order, index) => {
 				return <CurrentOrder
 					key={index}
 					data={goodsData}

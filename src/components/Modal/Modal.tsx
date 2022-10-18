@@ -2,6 +2,7 @@ import React, { Dispatch } from 'react';
 import {GrFormClose} from 'react-icons/gr';
 import { Address } from './Address/Address';
 import { Authorization } from './Authorization/Authorization';
+import { CancelOrder } from './CancelOrder/CancelOrder';
 import './Modal.sass';
 import { PaidOrder } from './PaidOrder/PaidOrder';
 import { PaymentCard } from './PaymentCard/PaymentCard';
@@ -9,7 +10,8 @@ import { PaymentCard } from './PaymentCard/PaymentCard';
 type Props = {
     active: boolean,
     setActive: Dispatch<React.SetStateAction<boolean>>,
-	data: string
+	data: string,
+	orderId?: string
 }
 
 export const Modal = (props:Props):JSX.Element => {
@@ -34,6 +36,8 @@ export const Modal = (props:Props):JSX.Element => {
 			{props.data === 'paidOrder' && <PaidOrder setActive={props.setActive}/>}
 			{props.data === 'login' && <Authorization setActive={props.setActive} data='login'/>}
 			{props.data === 'signup' && <Authorization setActive={props.setActive} data='signup'/>}
+			{props.data === 'cancel' && <CancelOrder orderId={props.orderId} setActive={props.setActive}/>}
+
 
 		</div>
 	</div>;

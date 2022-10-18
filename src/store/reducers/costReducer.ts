@@ -38,6 +38,7 @@ export const costSlice = createSlice({
 		},
 		setDefaultCost: (state) => {
 			state.cost = 0;
+			state.fullCost = 0;
 		}
 	}
 });
