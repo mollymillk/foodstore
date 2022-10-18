@@ -1,6 +1,5 @@
 import Spin from 'antd/lib/spin';
 import React, { useState, Suspense } from 'react';
-// import Goods from '../../components/Goods/Goods';
 const Goods = React.lazy(() => import('../../components/Goods/Goods'));
 
 import { Promo } from '../../components/Promo/Promo';
@@ -44,8 +43,6 @@ export const Products = (): JSX.Element => {
 			{value}
 		</div>;
 	});
-
-	console.log(selectedCategory);
 	
 
 	return <div className='products_page'>

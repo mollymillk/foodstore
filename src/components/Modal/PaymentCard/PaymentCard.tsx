@@ -2,10 +2,10 @@ import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 're
 import './PaymentCard.sass';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setCard } from '../../../store/reducers/orderInfoReducer';
-import { Form, Input, InputNumber } from 'antd';
+import { Form, Input } from 'antd';
 
 
 type Props = {
@@ -25,7 +25,7 @@ export const PaymentCard = (props:Props) => {
 	}, []);
 
 	useEffect(() => {
-		if (number.length === 16 
+		if (number.length >= 16 
 			&& name.match(/[A-Za-z][\s][A-Za-z]/g)
 			&& expiry.length === 4
 			&& cvc.length === 3) {
@@ -36,7 +36,7 @@ export const PaymentCard = (props:Props) => {
 	}, [name, expiry, number, cvc]);
 
 	const validateNumberInput = (value:string) => {
-		const validated = value.replace(/\D/g,'');
+		const validated = value.replace(/[^\d\s]/g,'');
 		setNumber(validated);
 	};
 
@@ -54,7 +54,7 @@ export const PaymentCard = (props:Props) => {
 
 	const validateDateInput = (value: string) => {
 
-		const validated = value.replace(/\D/g,'');
+		const validated = value.replace(/[\D]/g,'');
 		setExpiry(validated);
 	};
 
@@ -66,7 +66,9 @@ export const PaymentCard = (props:Props) => {
 	const dispatch = useDispatch();
 
 	const handleSendCard = () => {
-		const lastNumbers = number.substring(12);
+		const lastNumbers = number.includes(' ') ?
+			number.split(' ').join('').substring(12) :
+			number.substring(12);
 		dispatch(setCard(lastNumbers));
 		props.setActive(false);
 		
@@ -95,7 +97,7 @@ export const PaymentCard = (props:Props) => {
 						onChange = {(e:React.ChangeEvent<HTMLInputElement>) => validateNumberInput(e.target.value)}
 						inputMode= 'numeric'
 						pattern= '[0-9]*'
-						maxLength={16}
+						maxLength={19}
 					/>
 				</Form.Item>
 				<Form.Item className='form_item'>
@@ -111,7 +113,7 @@ export const PaymentCard = (props:Props) => {
 					<Input
 						size="large"
 						name="expiry"
-						placeholder="ММ/ГГ"
+						placeholder="ММГГ"
 						value={expiry}
 						onChange={(e) => validateDateInput(e.target.value)}
 						onFocus={(e) => setFocus(e.target.name)}
