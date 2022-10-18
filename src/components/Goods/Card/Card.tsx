@@ -3,7 +3,7 @@ import { Button, Fab } from '@mui/material';
 import type { RootState } from '../../../store/store';
 import {useSelector, useDispatch} from 'react-redux';
 import { addItem, addCount, remove } from '../../../store/reducers/itemsReducer';
-import { addToCost, removeFromCost } from '../../../store/reducers/costReducer';
+import { addToCost, addToFullCost, removeFromCost, removeFromFullCost } from '../../../store/reducers/costReducer';
 import './Card.sass';
 import Spin from 'antd/lib/spin';
 
@@ -29,16 +29,19 @@ const Card = ({img, name, id, price, sale}:Props):JSX.Element => {
 	const handleAddItem = () => {
 		dispatch(addItem(id));
 		dispatch(addToCost(priceToAdd));
+		dispatch(addToFullCost(price));
 	};
 
 	const handleAddCount = () => {
 		dispatch(addCount(id));
 		dispatch(addToCost(priceToAdd));
+		dispatch(addToFullCost(price));
 	};
 
 	const handleRemove = () => {
 		dispatch(remove(id));
 		dispatch(removeFromCost(priceToAdd));
+		dispatch(removeFromFullCost(price));
 	};
 
 	const saledPrice = sale > 0 ?

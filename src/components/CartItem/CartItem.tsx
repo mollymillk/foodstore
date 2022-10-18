@@ -1,7 +1,7 @@
 import React from 'react';
 import { Fab } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addToCost, removeFromCost } from '../../store/reducers/costReducer';
+import { addToCost, addToFullCost, removeFromCost, removeFromFullCost } from '../../store/reducers/costReducer';
 import { remove, addCount } from '../../store/reducers/itemsReducer';
 import './CartItem.sass';
 
@@ -30,11 +30,14 @@ export const CartItem = (props:Props):JSX.Element => {
 	const handleAddCount = () => {
 		dispatch(addCount(props.product));
 		dispatch(addToCost(priceToAdd));
+		dispatch(addToFullCost(props.data.price));
 	};
 
 	const handleRemove = () => {
 		dispatch(remove(props.product));
 		dispatch(removeFromCost(priceToAdd));
+		dispatch(removeFromFullCost(props.data.price));
+
 	};
 
 	return <div className='cart_item'>
@@ -46,7 +49,10 @@ export const CartItem = (props:Props):JSX.Element => {
 		<div className='info'>
 
 			<p className='name'>{props.data.product_name}</p>
-			<p className='price'>{priceToAdd}₽ x {props.amount}шт</p>
+			<p className='price'>
+				{props.data.sale && <span className='full_price'>{props.data.price}₽</span>}
+				{priceToAdd}₽ x {props.amount}шт
+			</p>
 
 			<div className='counter'>
 

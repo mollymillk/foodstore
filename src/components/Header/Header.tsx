@@ -19,7 +19,11 @@ export const Header = ():JSX.Element => {
 		<nav className='main_nav'>
 			<UserMenu/>
 			<NavLink to='/cart' className='to_cart'>
-				<p className='cart_sum'>{totalCost.cost - totalCost.promoSale[1]}</p>
+				<p className='cart_sum'>
+					{totalCost.fullCost - (totalCost.cost - totalCost.promoSale[1]) > 0 &&
+					<span className='full_price'>{totalCost.fullCost}</span>}
+					{totalCost.cost - totalCost.promoSale[1]}
+				</p>
 				<div className='cart_icon'><BsCart size={30}/></div>
 			</NavLink>
 		</nav>
