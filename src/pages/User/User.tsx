@@ -14,11 +14,13 @@ export const User = () => {
 	const orderData = useSelector((state:RootState) => state.processingOrder);
 	const isAuthorized = useSelector((state:RootState) => state.authorization.isAuthorized);
 	const newUser = useSelector((state:RootState) => state.authorization.newUser);
-	
+	const userPhone = useSelector((state:RootState) => state.authorization.phone);
+
+	const currentUserOrders = orderData.filter(order => order.phone === userPhone);
 	
 	return <div className='user_page'>
-		{orderData.length > 0 && isAuthorized &&
-			orderData.map((order, index) => {
+		{currentUserOrders.length > 0 && isAuthorized &&
+			currentUserOrders.map((order, index) => {
 				return <CurrentOrder
 					key={index}
 					data={goodsData}
@@ -30,8 +32,10 @@ export const User = () => {
 			<OldOrders index={1} data={goodsData}/>
 		</>
 		}
+
 		{!isAuthorized && <AuthContainer/>}
-		{isAuthorized && newUser && orderData.length === 0 &&
+
+		{isAuthorized && newUser && currentUserOrders.length == 0 &&
 			<EmptyUserPage/>}
 	</div>; 
 };

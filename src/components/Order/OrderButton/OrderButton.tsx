@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
@@ -8,7 +8,6 @@ import { setDefaultItems } from '../../../store/reducers/itemsReducer';
 import { setDefaultOrderInfo } from '../../../store/reducers/orderInfoReducer';
 import { resetPromo } from '../../../store/reducers/promoReducer';
 import './OrderButton.sass';
-import { Modal } from '../../Modal/Modal';
 import { proccessOrder } from '../../../store/reducers/processingOrderReducer';
 
 type Props = {
@@ -41,6 +40,7 @@ export const OrderButton = ({isPaymentAllowed, setActive}:Props) => {
 	const totalCost = useSelector((state:RootState) => state.totalCost.cost);
 	const orderInfo = useSelector((state:RootState) => state.orderInfo);
 	const goods = useSelector((state:RootState) => state.cartItems);
+	const user = useSelector((state:RootState) => state.authorization);
 
 
 	const dispatch = useDispatch();
@@ -56,7 +56,8 @@ export const OrderButton = ({isPaymentAllowed, setActive}:Props) => {
 			time: timeToSend,
 			seconds: now.getTime(),
 			address: orderInfo.address,
-			totalCost: totalCost
+			totalCost: totalCost,
+			phone: user.phone
 		};
 	
 		setActive(true);
@@ -88,6 +89,6 @@ export const OrderButton = ({isPaymentAllowed, setActive}:Props) => {
 			totalCost >= 500 && (!orderInfo.card || !orderInfo.address) &&
 			<p className='order_hint'>Пожалуйста, введите данные для заказа</p>
 		}
-		{/* <Modal data='paidOrder' active={isModalActive} setActive={setIsModalActive}/> */}
+
 	</>;
 };

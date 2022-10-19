@@ -1,6 +1,7 @@
 export const oldOrdersData = [
 	{
 		orderId: 43278,
+		phone: '89031064618',
 		goods: {
 			'4607012590466': 2,
 			'4602048004109': 1,
@@ -13,6 +14,7 @@ export const oldOrdersData = [
 	},
 	{
 		orderId: 76248,
+		phone: '89031064618',
 		goods: {
 			'4791045000150': 1,
 			'4607117891833': 1,

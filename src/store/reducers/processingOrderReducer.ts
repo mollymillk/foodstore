@@ -13,7 +13,8 @@ type Order = {
 		seconds: number;
         address: string,
         totalCost: number
-		canceled?: boolean
+		canceled?: boolean,
+		phone: string
 }
 
 type Orders = Order[];

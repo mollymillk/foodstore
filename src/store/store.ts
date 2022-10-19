@@ -6,6 +6,7 @@ import orderInfoReducer from './reducers/orderInfoReducer';
 import promoReducer from './reducers/promoReducer';
 import proccessOrderReducer from './reducers/processingOrderReducer';
 import authorizationReducer from './reducers/authorizationReducer';
+import usersReducer from './reducers/usersReducer';
 
 const rootReducer = combineReducers({
 	[goodsApi.reducerPath]: goodsApi.reducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
 	promo: promoReducer,
 	orderInfo: orderInfoReducer,
 	processingOrder: proccessOrderReducer,
-	authorization: authorizationReducer
+	authorization: authorizationReducer,
+	users: usersReducer
 });
 
 export const setupStore = () => {

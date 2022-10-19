@@ -15,7 +15,7 @@ type Props = {
 export const OldOrders = ({index, data}:Props) => {
 
 	const [isRateDisabled, setIsRateDisabled] = useState(false);
-	const {orderId, goods, address, time, totalCost} = oldOrdersData[index];
+	const {orderId, phone, goods, address, time, totalCost} = oldOrdersData[index];
 	const entries = Object.entries(goods);
 	const userName = useSelector((state:RootState) => state.authorization.name);
 	const userPhone = useSelector((state:RootState) => state.authorization.phone);

@@ -5,6 +5,8 @@ import 'antd/dist/antd.css';
 import { Checkbox, Form, Input } from 'antd';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../store/reducers/authorizationReducer';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
 
 type Props = {
 	setActive: React.Dispatch<React.SetStateAction<boolean>>
@@ -12,13 +14,25 @@ type Props = {
 
 export const Login = ({setActive}:Props) => {
 
+	const users = useSelector((state:RootState) => state.users);
+
 	const dispatch = useDispatch();
 	const [phone, setPhone] = useState('');
 	const [password, setPassword] = useState('');
+	const [message, setMessage] = useState('');
 
 	const handleSend = () => {
-		dispatch(login(['Дарья', phone, false]));
-		setActive(false);
+
+		const currentUser = users.find(user => user.phone === phone && user.password === password);
+		if (currentUser) {
+			setMessage('')
+			dispatch(login([currentUser.userName, phone, false]));
+			setActive(false);
+
+		} else {
+			setMessage('Неверный телефон или пароль');
+			// setActive(false);
+		}
 	};
 
 	return <div className='login'>
@@ -49,6 +63,7 @@ export const Login = ({setActive}:Props) => {
 
 			<Form.Item
 				label="Пароль"
+				help={message}
 				rules={[
 					{
 						required: true,

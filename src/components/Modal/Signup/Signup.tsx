@@ -5,6 +5,7 @@ import { isPossiblePhoneNumber} from 'libphonenumber-js';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../store/reducers/authorizationReducer';
 import { Form, Input } from 'antd';
+import { addUser } from '../../../store/reducers/usersReducer';
 
 
 type Props = {
@@ -83,6 +84,15 @@ export const Signup = ({setActive}:Props) => {
 		dispatch(login([userName, phone, true]));
 		setActive(false);
 		setIsAccepted(false);
+
+		const userData = {
+			userName: userName,
+			phone: phone,
+			email: email,
+			password: password
+		};
+
+		dispatch(addUser(userData));
 	};
 
 	return <div className='signup'>
