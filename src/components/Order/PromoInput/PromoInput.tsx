@@ -12,8 +12,12 @@ export const PromoInput = () => {
 	const promoSale = useSelector((state:RootState) => state.totalCost.promoSale);
 	const cost = useSelector((state:RootState) => state.totalCost.cost);
 	const orderItems = useSelector((state: RootState)=> state.cartItems);
-	const ordersLength = useSelector((state:RootState) => state.processingOrder.length);
-	const newUser = useSelector((state:RootState) => state.authorization.newUser);
+	const orders = useSelector((state:RootState) => state.processingOrder);
+	const userPhone = useSelector((state:RootState) => state.authorization.phone);
+	
+
+	const currentOrders = orders.filter(order => order.phone === userPhone);
+
 
 
 	const [promo, setPromo] = useState<keyof PromoCodes|string>(promoSale[0]);
@@ -40,7 +44,7 @@ export const PromoInput = () => {
 	useEffect(() => {
 		if (promoCodes[promo]) {
 			const sales = promoCodes[promo];
-			const isFirst = (!ordersLength && newUser) ? true : false;
+			const isFirst = (currentOrders.length === 0) ? true : false;
 			const sale = sales(cost, isFirst);
 			
 			dispatch(addPromoSale([promo, sale]));

@@ -11,6 +11,8 @@ export const oldOrdersData = [
 		address: 'г. Ростов-на-Дону, ул. 8 Марта, 25/29',
 		time: 'четверг, 13 октября 2022 г., 12:39',
 		totalCost: 842,
+		canceled: false,
+		seconds: 1665664763000
 	},
 	{
 		orderId: 76248,
@@ -22,7 +24,9 @@ export const oldOrdersData = [
 			'4600699501121': 1
 		},
 		address: 'г. Краснодар, ул. Восточно-Кругликовская, 30, кв 210',
-		time: 'вторний, 6 сентября 2022 г., 15:17',
+		time: 'вторник, 6 сентября 2022 г., 15:17',
 		totalCost: 652,
+		canceled: false,
+		seconds: 1662477443000
 	}
 ];

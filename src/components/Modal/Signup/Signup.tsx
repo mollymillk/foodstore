@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../../store/reducers/authorizationReducer';
 import { Form, Input } from 'antd';
 import { addUser } from '../../../store/reducers/usersReducer';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../../store/store';
 
 
 type Props = {
@@ -13,6 +15,8 @@ type Props = {
 };
 
 export const Signup = ({setActive}:Props) => {
+
+	const users = useSelector((state:RootState) => state.users);
 
 	const [form] = Form.useForm();
 
@@ -80,19 +84,32 @@ export const Signup = ({setActive}:Props) => {
 	};
 
 	const handleSend = () => {
-		form.resetFields();
-		dispatch(login([userName, phone, true]));
-		setActive(false);
-		setIsAccepted(false);
 
-		const userData = {
-			userName: userName,
-			phone: phone,
-			email: email,
-			password: password
-		};
+		const doubledEmail = users.find(user => user.email === email);
+		const doubledPhone = users.find(user => user.phone === phone);
 
-		dispatch(addUser(userData));
+		if (doubledEmail && !doubledPhone) {
+			setEmailHelper('Email уже занят');
+		} else if (!doubledEmail && doubledPhone) {
+			setPhoneHelper('Телефон уже занят');
+		} else if (doubledEmail && doubledPhone) {
+			setEmailHelper('Email уже занят');
+			setPhoneHelper('Телефон уже занят');
+		} else {
+			form.resetFields();
+			dispatch(login([userName, phone, true]));
+			setActive(false);
+			setIsAccepted(false);
+
+			const userData = {
+				userName: userName,
+				phone: phone,
+				email: email,
+				password: password
+			};
+
+			dispatch(addUser(userData));
+		}
 	};
 
 	return <div className='signup'>

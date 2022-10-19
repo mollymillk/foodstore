@@ -10,6 +10,10 @@ import { Dropdown, Menu } from 'antd';
 import 'antd/dist/antd.css';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../store/reducers/authorizationReducer';
+import { setDefaultItems } from '../../../store/reducers/itemsReducer';
+import { setDefaultCost, removePromoSale } from '../../../store/reducers/costReducer';
+import { setDefaultOrderInfo } from '../../../store/reducers/orderInfoReducer';
+import { resetPromo } from '../../../store/reducers/promoReducer';
 
 
 export const UserMenu = () => {
@@ -20,6 +24,15 @@ export const UserMenu = () => {
 
 	const [isLoginModalActive, setIsLoginModalActive] = useState<boolean>(false);
 	const [isSignUpModalActive, setIsSignUpModalActive] = useState<boolean>(false);
+
+	const handleLogout = () => {
+		dispatch(logout());
+		dispatch(setDefaultItems());
+		dispatch(setDefaultCost());
+		dispatch(setDefaultOrderInfo());
+		dispatch(removePromoSale());
+		dispatch(resetPromo());
+	};
 
 	const dispatch = useDispatch();
 	const loginMenu = (
@@ -68,7 +81,7 @@ export const UserMenu = () => {
 					label: (
 						<><Button
 							className='menu_item'
-							onClick={() => dispatch(logout())}
+							onClick={() => handleLogout()}
 						>
 							Выйти
 						</Button></>

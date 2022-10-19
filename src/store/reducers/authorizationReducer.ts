@@ -4,14 +4,12 @@ import type { RootState } from '../store';
 
 type Authorization = {
 	isAuthorized: boolean,
-	newUser: boolean,
     name: string,
 	phone: string
 }
 
 const initialState:Authorization = {
 	isAuthorized: false,
-	newUser: false,
 	name: '',
 	phone: ''
 };
@@ -20,11 +18,10 @@ export const authorizationSlice = createSlice({
 	name: 'authorization',
 	initialState,
 	reducers: {
-		login: (state, action: PayloadAction<[string, string, boolean]>) => {
+		login: (state, action: PayloadAction<[string, string]>) => {
 			state.isAuthorized = true,
 			state.name = action.payload[0];
 			state.phone = action.payload[1];
-			state.newUser= action.payload[2];
 		},
 		logout: () => initialState
 	}

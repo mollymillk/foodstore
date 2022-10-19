@@ -5,14 +5,18 @@ import './CurrentOrder.sass';
 import type {Products} from '../Goods/getGoods';
 import { Button } from '@mui/material';
 import { Modal } from '../Modal/Modal';
+import { Rate } from 'antd';
 
 
 type Props = {
 	data: Products,
-	index: number
+	index: number,
+	userName: string,
+	phone: string
 }
 
-export const CurrentOrder = ({data, index}:Props) => {
+export const CurrentOrder = ({data, index, userName, phone}:Props) => {
+
 
 	const {orderId, goods, time, seconds, address, totalCost, canceled} = useSelector((state:RootState) => state.processingOrder[index]);
 	
@@ -25,6 +29,7 @@ export const CurrentOrder = ({data, index}:Props) => {
 	const [timer, setTimer] = useState<number>(updatedTime);
 	const [isDelivered, setIsDelivered] = useState<boolean>(false);
 	const [isModalActive, setIsModalActive] = useState<boolean>(false);
+	const [isRateDisabled, setIsRateDisabled] = useState<boolean>(false);
 	
 
 	useEffect(() => {
@@ -67,9 +72,19 @@ export const CurrentOrder = ({data, index}:Props) => {
 			})}
 		</div>
 
+		<div className='user_data'>Получатель: {userName} {phone}</div>
+
 		<div className='order_payment'>
 			<h3 className='order_cost'>{totalCost} ₽</h3>
 			<p className='order_card'>Карта ***6767</p>
+		</div>
+
+		<div className='rate'>
+			<p>Пожалуйста, оцените заказ</p>
+			<Rate
+				disabled={isRateDisabled}
+				onChange={()=>setIsRateDisabled(true)}
+			/>
 		</div>
 
 		
