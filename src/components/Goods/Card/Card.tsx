@@ -83,19 +83,19 @@ const Card = ({img, name, id, price, sale}:Props):JSX.Element => {
 
 				<div className='counter'>
 
-					<Fab className='remove' color="primary" onClick={() => handleRemove()}>
+					<div className='remove' onClick={() => handleRemove()}>
 						<span className="material-icons-outlined">
 							remove_circle_outline
 						</span>
-					</Fab>
+					</div>
 
 					<p className='amount'>{items[id]}</p>
 
-					<Fab className='add' color="primary" onClick={() => handleAddCount()}>
+					<div className='add' onClick={() => handleAddCount()}>
 						<span className="material-icons-outlined">
 							add_circle_outline
 						</span>
-					</Fab>
+					</div>
 				</div>
 			}
 

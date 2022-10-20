@@ -15,6 +15,10 @@
         margin: 10px
         .logo_img 
             width: 130px
+            @media screen and (max-width: 700px)
+                width: 90px
+            @media screen and (max-width: 400px)
+                width: 60px    
 
 
     .main_nav
@@ -32,22 +36,48 @@
         text-decoration: none
         color: #fff
         background: $detailes
-        width: 100px
+        min-width: 100px
         border-radius: 30px
+
+        .cart_icon
+            padding: 5px
         &:hover
             box-shadow: 0px 0px 15px -6px $dark_heading
+        @media screen and (max-width: 700px)
+            height: 40px
+            min-width: 80px
+
+
+        @media screen and (max-width: 550px)
+            height: 30px
+            min-width: 60px
+        @media screen and (max-width: 400px)
+            height: 20px
+            min-width: 40px
+
+        .cart_svg
+            @media screen and (max-width: 700px)
+                width: 25px
+                height: 25px
+            @media screen and (max-width: 550px)
+                width: 20px
+                height: 20px
+            @media screen and (max-width: 400px)
+                width: 10px
+                height: 10px
+            
+
 
         .cart_sum
             font-size: 20px
-            margin: 0
+            margin: 0 0 0 5px
+            @media screen and (max-width: 550px)
+                font-size: 10px
+            @media screen and (max-width: 400px)
+                font-size: 8px
 
             .full_price
                 text-decoration: line-through
                 opacity: 0.7
-
-    .to_user
-        margin: 0
-        color: $dark_heading
-        &:hover
-            color: $heading
+                margin: auto 5px auto 5px
 

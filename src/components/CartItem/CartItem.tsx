@@ -43,12 +43,12 @@ export const CartItem = ({product, amount, data}:Props):JSX.Element => {
 	return <div className='cart_item'>
 
 		<div className='img'>
-			<img className='photo' srcSet={data.image_front_small_url.substring(0, 21)}/>
+			<img className='photo' srcSet={data.image_front_small_url}/>
 		</div>
 
 		<div className='info'>
 
-			<p className='name'>{data.product_name}</p>
+			<p className='name'>{data.product_name.substring(0, 21)}</p>
 			<p className='price'>
 				{data.sale && <span className='full_price'>{data.price}₽</span>}
 				{priceToAdd}₽ x {amount}шт
@@ -56,19 +56,19 @@ export const CartItem = ({product, amount, data}:Props):JSX.Element => {
 
 			<div className='counter'>
 
-				<Fab className='remove' color="primary" onClick={() => handleRemove()}>
+				<div className='remove' color="primary" onClick={() => handleRemove()}>
 					<span className="material-icons-outlined">
 							remove_circle_outline
 					</span>
-				</Fab>
+				</div>
 
 				<p className='amount'>{amount}</p>
 
-				<Fab className='add'color="primary" onClick={() => handleAddCount()}>
+				<div className='add'color="primary" onClick={() => handleAddCount()}>
 					<span className="material-icons-outlined">
 							add_circle_outline
 					</span>
-				</Fab>
+				</div>
 
 			</div>
 		</div>

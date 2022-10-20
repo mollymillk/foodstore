@@ -30,7 +30,7 @@ export const Header = ():JSX.Element => {
 					{totalCost.cost - totalCost.promoSale[1]}₽
 				</p>
 
-				<div className='cart_icon'><BsCart size={30}/></div>
+				<div className='cart_icon'><BsCart className='cart_svg' size={30}/></div>
 			</NavLink>
 		</nav>
 

@@ -7,19 +7,48 @@
     flex-direction: row
 
     .img
-        width: 150px
-        height: 150px
+        width: 130px
+        height: 130px
         background: #fff
         display: flex
         justify-content: space-around
         align-items: center
+        @media screen and (max-width: 1030px)
+            width: 80px
+            height: 80px
+        @media screen and (max-width: 870px)
+            width: 60px
+            height: 60px
+        @media screen and (max-width: 690px)
+            width: 130px
+            height: 130px
+        @media screen and (max-width: 490px)
+            width: 80px
+            height: 80px
+
 
         .photo
             height: 70%
 
     .info
         font-family: 'OverpassBold'
+        font-size: 12px
         margin-left: 30px
+        @media screen and (max-width: 1300px)
+            margin-left: 10px
+            font-size: 10px
+        @media screen and (max-width: 870px)
+            margin-left: 5px
+            font-size: 8px
+        @media screen and (max-width: 760px)
+            margin-left: 3px
+        @media screen and (max-width: 690px)
+            font-size: 12px
+            margin-left: 30px
+        @media screen and (max-width: 490px)
+            margin-left: 10px
+            font-size: 10px
+
 
         .name:hover
             color: $heading
@@ -32,17 +61,61 @@
                 text-decoration: line-through
                 margin-right: 10px
                 opacity: 0.7
+            @media screen and (max-width: 1300px)
+                font-size: 12px
+                .full_price
+                    margin-right: 5px
+
+            @media screen and (max-width: 760px)
+                font-size: 10px
+            @media screen and (max-width: 691px)
+                font-size: 20px
+                .full_price
+                    margin-right: 10px
+            @media screen and (max-width: 490px)
+                font-size: 15px
+                .full_price
+                    margin-right: 5px
+            @media screen and (max-width: 350px)
+                font-size: 12px               
+
 
         .counter
             display: flex
             flex-direction: row
             height: 40px
+            @media screen and (max-width: 870px)
+                height: 30px
+            @media screen and (max-width: 690px)
+                height: 40px
 
             .remove, .add
+                @include centered
                 width: 30px
-                height: 20px
+                height: 30px
                 border-radius: 5px
                 background: $detailes
+                color: $cold_bg
+                font-size: 15px
+                cursor: pointer
+                @media screen and (max-width: 870px)
+                    width: 20px
+                    height: 20px
+                    .material-icons-outlined
+                        font-size: 15px
+                        margin: auto 5px auto 5px
+
+                @media screen and (max-width: 750px)
+                    width: 20px
+                    height: 20px
+                    .material-icons-outlined
+                        font-size: 15px
+
+                @media screen and (max-width: 690px)
+                    width: 30px
+                    height: 30px
+                    .material-icons-outlined
+                        font-size: 20px
 
             .amount
                 margin: auto 10px auto 10px

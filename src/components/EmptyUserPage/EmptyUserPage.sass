@@ -3,19 +3,21 @@
 
 
 .empty_user_page
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: center
+    @include centered
     width: 100%
     height: 80vh
     margin: auto
 
     .empty_icon
         width: 200px
+        @media screen and (max-width: 350px) 
+            width: 150px
 
     .empty_link
         text-decoration: none
         font-family: 'OverpassBold'
         font-size: 20px
+        @media screen and (max-width: 350px) 
+            font-size: 15px
+    
         

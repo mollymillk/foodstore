@@ -7,6 +7,13 @@
     flex-direction: row
     justify-content: space-evenly
     min-height: 80vh
+    @media screen and (max-width: 1030px)
+        font-size: 12px
+    @media screen and (max-width: 690px)
+        @include centered
+        gap: 20px
+
+    
     
     .goods
         display: flex
@@ -17,6 +24,12 @@
         border-radius: 10px
         width: 30%
         min-height: 50%
+        @media screen and (max-width: 870px)
+            width: 40%
+        @media screen and (max-width: 690px)
+            width: 80%
+
+
 
     .empty_cart_container
         align-items: center

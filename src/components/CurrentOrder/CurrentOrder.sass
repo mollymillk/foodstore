@@ -17,6 +17,11 @@
 
         .address, .time
             margin: 0 0 10px 0
+        .cancel_button
+            width: 200px
+            margin-top: 20px
+            font-family: 'OverpassMedium'
+            color: $heading
 
     .goods
         display: flex
@@ -28,9 +33,7 @@
         .product 
 
             .image
-                display: flex
-                flex-direction: column
-                justify-content: center
+                @include centered
                 width: 120px
                 height: 120px
                 .photo
@@ -38,6 +41,13 @@
                     max-width: 100px
                     max-height: 100px
                     margin: auto
+                @media screen and (max-width: 800px)
+                    width: 100px
+                    height: 100px
+                    .photo
+                        max-width: 100px
+                        max-height: 100px
+            
 
             .amount
                 margin: 0 25px 0 auto

@@ -98,7 +98,7 @@ export const UserMenu = () => {
 			placement='bottom'
 		>
 			<Button className='menu_button'>
-				<BiUser size={25}/>
+				<BiUser size={25} className='menu_icon'/>
 				<p className='button_text'>{name ? name : 'Войти'}</p>
 			</Button>
 

@@ -57,7 +57,9 @@ export const PromoInput = () => {
 
 	return <div className='order_promo'>
 		<div className='text'>Промокод</div>
-		<Form>
+		<Form
+			style={{ width: '60%' }}
+		>
 			<Form.Item
 				help={helperText}
 			>

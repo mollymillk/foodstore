@@ -63,7 +63,7 @@ export const CurrentOrder = ({data, index, userName, phone}:Props) => {
 
 			{
 				!isDelivered && !canceled &&
-					<Button onClick={()=> setIsModalActive(true)}>Отменить заказ</Button>
+					<Button className='cancel_button' onClick={()=> setIsModalActive(true)}>Отменить заказ</Button>
 			}
 
 			<p className='address'>{address}</p>

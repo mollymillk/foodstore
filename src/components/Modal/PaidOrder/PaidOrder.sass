@@ -3,9 +3,7 @@
     
 .paid_order
     padding: 20px
-    display: flex
-    flex-direction: column
-    justify-content: center
+    @include centered
     .success_message
         font-family: 'OverpassSemiBold'
         margin: 0
@@ -19,3 +17,4 @@
             &:hover
                 opacity: 0.7
                 background: $detailes
+        
