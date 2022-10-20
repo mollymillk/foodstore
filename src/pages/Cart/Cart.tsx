@@ -13,7 +13,7 @@ import { AuthContainer } from '../../components/AuthContainer/AuthContainer';
 
 type Entries = [string, number];
 
-export const Cart = () => {
+export const Cart = ():JSX.Element => {
 
 	const items = useSelector((state: RootState) => state.cartItems);
 	const isAuthorized = useSelector((state:RootState) => state.authorization.isAuthorized);
@@ -34,7 +34,10 @@ export const Cart = () => {
 				if (amount) {
 
 					orderSum += (data[id].price * amount);
-					data[id].sale ? orderSale += (data[id].sale * amount) : orderSale + 0;
+
+					data[id].sale ?
+						orderSale += (data[id].sale * amount)
+						: orderSale + 0;
 
 					return <CartItem
 						key={id}
@@ -54,7 +57,6 @@ export const Cart = () => {
 		</div>
 		{!!orderSum && 
 		<Order sum={orderSum} sale={orderSale} setActive={setIsModalActive}/>}
-		{/* <Order sum={orderSum} sale={orderSale}/> */}
 	</div>
 	<Modal data='paidOrder' active={isModalActive} setActive={setIsModalActive}/>
 	</>;

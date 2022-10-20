@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import './CurrentOrder.sass';
 import type {Products} from '../Goods/getGoods';
@@ -33,33 +33,47 @@ export const CurrentOrder = ({data, index, userName, phone}:Props) => {
 	
 
 	useEffect(() => {
+
 		timer > 1 ? setInterval(() => {
 			const date = new Date();
 			const updatedTime = (deliveryTime - date.getTime()) / 60000;
 			setTimer(updatedTime);
 		}, 60000)
+
 			:  canceled ? setTimer(0) : setIsDelivered(true);
+
 	}, [canceled, deliveryTime, timer]);
 	
 
 
 	return <> <div className='current_order'>
+
 		<div className='order_data'>
 			<h3 className='orderId'>Заказ {Math.floor(orderId)}</h3>
 
-			{isDelivered ? 
-				<p className='message'>Заказ доставлен</p>
-				:
-				canceled ? <p>Заказ отменен</p> : <p className='timer'>Курьер будет через {Math.floor(timer)} минут</p>
+			{
+				isDelivered ? 
+					<p className='message'>Заказ доставлен</p>
+					:
+					canceled ?
+						<p>Заказ отменен</p>
+						:
+						<p className='timer'>Курьер будет через {Math.floor(timer)} минут</p>
 			}
-			{!isDelivered && !canceled &&
-			<Button onClick={()=> setIsModalActive(true)}>Отменить заказ</Button>}
+
+			{
+				!isDelivered && !canceled &&
+					<Button onClick={()=> setIsModalActive(true)}>Отменить заказ</Button>
+			}
 
 			<p className='address'>{address}</p>
 			<p className='time'>{time}</p>
 		</div>
+
 		<div className='goods'>
+
 			{data && entries.map(([id, amount])=> {
+
 				return !!amount && <div className='product' key={id}> 
 					<div className='image'>
 						<img
@@ -69,7 +83,9 @@ export const CurrentOrder = ({data, index, userName, phone}:Props) => {
 					</div>
 					<p className='amount'>X {amount}</p>
 				</div>;
+
 			})}
+
 		</div>
 
 		<div className='user_data'>Получатель: {userName} {phone}</div>

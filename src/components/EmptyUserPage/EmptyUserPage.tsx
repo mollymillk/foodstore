@@ -5,9 +5,18 @@ import img from './img/empty_user_icon.svg';
 
 
 export const EmptyUserPage = () => {
+
 	return <div className='empty_user_page'>
-		<img src="" alt="" srcSet={img} className='empty_icon'/>
-		<p className='empty_message'>Кажется, у вас ещё нет заказов</p>
-		<NavLink to='/' className='empty_link'>За покупками!</NavLink>
+
+		<img src="" alt="empty_cart" srcSet={img} className='empty_icon'/>
+
+		<p className='empty_message'>
+			Кажется, у вас ещё нет заказов
+		</p>
+
+		<NavLink to='/' className='empty_link'>
+			За покупками!
+		</NavLink>
+
 	</div>;
 };

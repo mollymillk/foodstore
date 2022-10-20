@@ -13,19 +13,26 @@ export const Header = ():JSX.Element => {
 	const totalCost = useSelector((state:RootState) => state.totalCost);
 
 	return <header className='header'>
+
 		<NavLink to='/' className='logo'>
 			<img className="logo_img" alt="logo" srcSet={logo} />
 		</NavLink>
+
 		<nav className='main_nav'>
+
 			<UserMenu/>
+
 			<NavLink to='/cart' className='to_cart'>
+
 				<p className='cart_sum'>
 					{totalCost.fullCost - (totalCost.cost - totalCost.promoSale[1]) > 0 &&
-					<span className='full_price'>{totalCost.fullCost}</span>}
-					{totalCost.cost - totalCost.promoSale[1]}
+					<span className='full_price'>{totalCost.fullCost}₽</span>}
+					{totalCost.cost - totalCost.promoSale[1]}₽
 				</p>
+
 				<div className='cart_icon'><BsCart size={30}/></div>
 			</NavLink>
 		</nav>
+
 	</header>;
 };

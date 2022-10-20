@@ -92,16 +92,19 @@ export const UserMenu = () => {
 	);
 
 
-	return <><Dropdown 
-		overlay= {isAuthorized ? authMenu : loginMenu}
-		placement='bottom'
-	>
-		<Button className='menu_button'>
-			<BiUser size={25}/>
-			<p className='button_text'>{name ? name : 'Войти'}</p>
-		</Button>
-	</Dropdown>
-	<Modal data='login' active={isLoginModalActive} setActive={setIsLoginModalActive}/>
-	<Modal data='signup' active={isSignUpModalActive} setActive={setIsSignUpModalActive}/>
+	return <>
+		<Dropdown 
+			overlay= {isAuthorized ? authMenu : loginMenu}
+			placement='bottom'
+		>
+			<Button className='menu_button'>
+				<BiUser size={25}/>
+				<p className='button_text'>{name ? name : 'Войти'}</p>
+			</Button>
+
+		</Dropdown>
+
+		<Modal data='login' active={isLoginModalActive} setActive={setIsLoginModalActive}/>
+		<Modal data='signup' active={isSignUpModalActive} setActive={setIsSignUpModalActive}/>
 	</>;
 };

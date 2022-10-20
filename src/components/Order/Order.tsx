@@ -14,7 +14,7 @@ type Props = {
 	setActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Order = (props:Props) => {
+export const Order = ({sum, setActive}:Props):JSX.Element => {
 
 	const totalCost = useSelector((state:RootState) => state.totalCost.cost);
 	const promoSale = useSelector((state:RootState) => state.totalCost.promoSale);
@@ -41,8 +41,8 @@ export const Order = (props:Props) => {
 		<div className='order_info'>
 			<h3>Ваш заказ</h3>
 
-			<OrderInfo type='goods' category='Товары' value={props.sum + 'Р'}/>
-			<OrderInfo type='sale' category='Скидка' value={props.sum - Math.floor(totalCost) + promoSale[1]}/>
+			<OrderInfo type='goods' category='Товары' value={sum + '₽'}/>
+			<OrderInfo type='sale' category='Скидка' value={sum - Math.floor(totalCost) + promoSale[1] + '₽'}/>
 			<OrderInfo type='cost' category='Стоимость доставки' value='Бесплатно'/>
 
 		</div>
@@ -54,7 +54,7 @@ export const Order = (props:Props) => {
 			<p className='value'>{Math.floor(totalCost - promoSale[1])}₽</p>
 		</div>
 
-		<OrderButton isPaymentAllowed={isPaymentAllowed} setActive={props.setActive}/>
+		<OrderButton isPaymentAllowed={isPaymentAllowed} setActive={setActive}/>
 
 		<Modal data='card' active={cardModalActive} setActive={setCardModalActive} />
 		<Modal data='address' active={addressModalActive} setActive={setAddressModalActive} />

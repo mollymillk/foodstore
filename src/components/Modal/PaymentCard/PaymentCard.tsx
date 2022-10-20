@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import './PaymentCard.sass';
-import Cards from 'react-credit-cards';
+import Cards, { Focused } from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
@@ -17,11 +17,12 @@ export const PaymentCard = (props:Props) => {
 	const [name, setName] = useState('');
 	const [expiry, setExpiry] = useState('');
 	const [cvc, setCvc] = useState('');
-	const [focus, setFocus] = useState('');
+	const [focus, setFocus] = useState<Focused>('number');
 	const [isAccepted, setIsAccepted] = useState(false);
   
 	useEffect(() => {
-		ref.current.focus();
+		const current:(Focused) = ref.current;
+		current.focus();
 	}, []);
 
 	useEffect(() => {
@@ -75,6 +76,7 @@ export const PaymentCard = (props:Props) => {
 	};
   
 	const ref = useRef(null);
+
 	return (
 		<div className="payment_card">
 			<Cards
@@ -84,7 +86,7 @@ export const PaymentCard = (props:Props) => {
 				cvc={cvc}
 				focused={focus}
 			/>
-			{/* <form className='card_info'> */}
+
 			<Form className='card_form'>
 				<Form.Item className='form_item'>
 					<Input

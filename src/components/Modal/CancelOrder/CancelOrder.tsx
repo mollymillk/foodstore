@@ -7,20 +7,26 @@ import { useDispatch } from 'react-redux';
 
 type Props = {
     setActive: React.Dispatch<React.SetStateAction<boolean>>,
-	orderId: string
+	orderId: number | undefined
 }
 
-export const CancelOrder = ({setActive, orderId}:Props) => {
+export const CancelOrder = ({setActive, orderId}:Props):JSX.Element => {
 
 	const dispatch = useDispatch();
 
 	const handleCancel = () => {
-		dispatch(cancel(orderId));
+		orderId && dispatch(cancel(orderId));
 		setActive(false);
-	}
+	};
+
+
 	return <div className='cancel_order'>
+
 		<p className='cancel_message'>Вы точно хотите отменить заказ?</p>
+
 		<Button className='cancel_button'
-			onClick={()=>handleCancel()}>Да, отменить</Button>
+			onClick={()=>handleCancel()}>Да, отменить
+		</Button>
+
 	</div>;
 };

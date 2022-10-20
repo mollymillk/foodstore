@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import './Login.sass';
 import 'antd/dist/antd.css';
-import { Checkbox, Form, Input } from 'antd';
+import { Form, Input } from 'antd';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../store/reducers/authorizationReducer';
 import { useSelector } from 'react-redux';
@@ -12,26 +12,27 @@ type Props = {
 	setActive: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-export const Login = ({setActive}:Props) => {
+export const Login = ({setActive}:Props):JSX.Element => {
 
 	const users = useSelector((state:RootState) => state.users);
 
 	const dispatch = useDispatch();
-	const [phone, setPhone] = useState('');
-	const [password, setPassword] = useState('');
-	const [message, setMessage] = useState('');
+	const [phone, setPhone] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const [message, setMessage] = useState<string>('');
 
 	const handleSend = () => {
 
-		const currentUser = users.find(user => user.phone === phone && user.password === password);
+		const currentUser = users
+			.find(user => user.phone === phone && user.password === password);
+
 		if (currentUser) {
-			setMessage('')
-			dispatch(login([currentUser.userName, phone, false]));
+			setMessage('');
+			dispatch(login([currentUser.userName, phone]));
 			setActive(false);
 
 		} else {
 			setMessage('Неверный телефон или пароль');
-			// setActive(false);
 		}
 	};
 

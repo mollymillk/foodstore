@@ -14,7 +14,7 @@ type Props = {
 	setActive: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-export const Signup = ({setActive}:Props) => {
+export const Signup = ({setActive}:Props):JSX.Element => {
 
 	const users = useSelector((state:RootState) => state.users);
 
@@ -97,7 +97,7 @@ export const Signup = ({setActive}:Props) => {
 			setPhoneHelper('Телефон уже занят');
 		} else {
 			form.resetFields();
-			dispatch(login([userName, phone, true]));
+			dispatch(login([userName, phone]));
 			setActive(false);
 			setIsAccepted(false);
 

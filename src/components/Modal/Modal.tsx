@@ -11,14 +11,14 @@ type Props = {
     active: boolean,
     setActive: Dispatch<React.SetStateAction<boolean>>,
 	data: string,
-	orderId?: string
+	orderId?: number | undefined
 }
 
-export const Modal = (props:Props):JSX.Element => {
+export const Modal = ({active, setActive, data, orderId}:Props):JSX.Element => {
 
 	return <div 
-		className={props.active ? 'modal active' : 'modal'}
-		onClick={() => props.setActive(false)}
+		className={active ? 'modal active' : 'modal'}
+		onClick={() => setActive(false)}
 	>
 		<div
 			className='modal_container'
@@ -28,15 +28,15 @@ export const Modal = (props:Props):JSX.Element => {
 
 				<GrFormClose
 					size={25}
-					onClick={()=>props.setActive(false)}/>
+					onClick={()=>setActive(false)}/>
 			</div>
 
-			{props.data === 'card' && <PaymentCard setActive={props.setActive}/>}
-			{props.data === 'address' && <Address setActive={props.setActive}/>}
-			{props.data === 'paidOrder' && <PaidOrder setActive={props.setActive}/>}
-			{props.data === 'login' && <Authorization setActive={props.setActive} data='login'/>}
-			{props.data === 'signup' && <Authorization setActive={props.setActive} data='signup'/>}
-			{props.data === 'cancel' && <CancelOrder orderId={props.orderId} setActive={props.setActive}/>}
+			{data === 'card' && <PaymentCard setActive={setActive}/>}
+			{data === 'address' && <Address setActive={setActive}/>}
+			{data === 'paidOrder' && <PaidOrder setActive={setActive}/>}
+			{data === 'login' && <Authorization setActive={setActive} data='login'/>}
+			{data === 'signup' && <Authorization setActive={setActive} data='signup'/>}
+			{data === 'cancel' && <CancelOrder orderId={orderId} setActive={setActive}/>}
 
 
 		</div>

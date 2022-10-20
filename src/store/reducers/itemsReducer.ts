@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
+import type {Products} from '../../components/Goods/getGoods';
 
 type CartItems = {
-	[id:string] : number
+	[id: keyof Products] : number
 }
 
 const initialState:CartItems = {};

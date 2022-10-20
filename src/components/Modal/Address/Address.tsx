@@ -10,7 +10,7 @@ type Props = {
     setActive: Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Address = (props:Props) => {
+export const Address = ({setActive}:Props):JSX.Element => {
 
 	const [value, setValue] = useState<DaDataSuggestion<DaDataAddress> | undefined>();
 	const [isAddressSelected, setIsAddressSelected] = useState(false);
@@ -19,7 +19,7 @@ export const Address = (props:Props) => {
 	const handleSendAddress = () => {
 		if (value) {
 			dispatch(setAddress(value?.value));
-			props.setActive(false);
+			setActive(false);
 		}
 	};
 

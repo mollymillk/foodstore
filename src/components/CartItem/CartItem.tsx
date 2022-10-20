@@ -19,39 +19,39 @@ type Props = {
 	}
 }
 
-export const CartItem = (props:Props):JSX.Element => {
+export const CartItem = ({product, amount, data}:Props):JSX.Element => {
 
 	const dispatch = useDispatch();
 
-	const priceToAdd = props.data.sale ? 
-		props.data.price - props.data.sale :
-		props.data.price;
+	const priceToAdd = data.sale ? 
+		data.price - data.sale :
+		data.price;
 
 	const handleAddCount = () => {
-		dispatch(addCount(props.product));
+		dispatch(addCount(product));
 		dispatch(addToCost(priceToAdd));
-		dispatch(addToFullCost(props.data.price));
+		dispatch(addToFullCost(data.price));
 	};
 
 	const handleRemove = () => {
-		dispatch(remove(props.product));
+		dispatch(remove(product));
 		dispatch(removeFromCost(priceToAdd));
-		dispatch(removeFromFullCost(props.data.price));
+		dispatch(removeFromFullCost(data.price));
 
 	};
 
 	return <div className='cart_item'>
 
 		<div className='img'>
-			<img className='photo' srcSet={props.data.image_front_small_url}/>
+			<img className='photo' srcSet={data.image_front_small_url.substring(0, 21)}/>
 		</div>
 
 		<div className='info'>
 
-			<p className='name'>{props.data.product_name}</p>
+			<p className='name'>{data.product_name}</p>
 			<p className='price'>
-				{props.data.sale && <span className='full_price'>{props.data.price}₽</span>}
-				{priceToAdd}₽ x {props.amount}шт
+				{data.sale && <span className='full_price'>{data.price}₽</span>}
+				{priceToAdd}₽ x {amount}шт
 			</p>
 
 			<div className='counter'>
@@ -62,7 +62,7 @@ export const CartItem = (props:Props):JSX.Element => {
 					</span>
 				</Fab>
 
-				<p className='amount'>{props.amount}</p>
+				<p className='amount'>{amount}</p>
 
 				<Fab className='add'color="primary" onClick={() => handleAddCount()}>
 					<span className="material-icons-outlined">
