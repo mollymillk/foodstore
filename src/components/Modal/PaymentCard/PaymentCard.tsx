@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import './PaymentCard.sass';
-import Cards, { Focused } from 'react-credit-cards';
+import Cards, {Focused} from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
@@ -19,11 +19,6 @@ export const PaymentCard = (props:Props) => {
 	const [cvc, setCvc] = useState('');
 	const [focus, setFocus] = useState<Focused>('number');
 	const [isAccepted, setIsAccepted] = useState(false);
-  
-	useEffect(() => {
-		const current:(Focused) = ref.current;
-		current.focus();
-	}, []);
 
 	useEffect(() => {
 		if (number.length >= 16 
@@ -68,8 +63,8 @@ export const PaymentCard = (props:Props) => {
 
 	const handleSendCard = () => {
 		const lastNumbers = number.includes(' ') ?
-			number.split(' ').join('').substring(13, 17) :
-			number.substring(13, 17);
+			number.split(' ').join('').substring(12, 18) :
+			number.substring(12, 18);
 
 		dispatch(setCard(lastNumbers));
 		props.setActive(false);
@@ -85,7 +80,7 @@ export const PaymentCard = (props:Props) => {
 				name={name}
 				expiry={expiry}
 				cvc={cvc}
-				focused={focus}
+				focused={focus ? focus : 'number'}
 			/>
 
 			<Form className='card_form'>
@@ -96,7 +91,7 @@ export const PaymentCard = (props:Props) => {
 						value={number}
 						ref={ref}
 						placeholder="Номер карты"
-						onFocus={(e) => setFocus(e.target.name)}
+						onFocus={(e) => setFocus(e.target.name as Focused)}
 						onChange = {(e:React.ChangeEvent<HTMLInputElement>) => validateNumberInput(e.target.value)}
 						inputMode= 'numeric'
 						pattern= '[0-9]*'
@@ -110,7 +105,7 @@ export const PaymentCard = (props:Props) => {
 						placeholder="Имя"
 						value={name}
 						onChange={(e:React.ChangeEvent<HTMLInputElement>) => validateNameInput(e.target.value)}
-						onFocus={(e) => setFocus(e.target.name)}/>
+						onFocus={(e) => setFocus(e.target.name as Focused)}/>
 				</Form.Item>
 				<Form.Item className='form_item'>
 					<Input
@@ -119,7 +114,7 @@ export const PaymentCard = (props:Props) => {
 						placeholder="ММГГ"
 						value={expiry}
 						onChange={(e) => validateDateInput(e.target.value)}
-						onFocus={(e) => setFocus(e.target.name)}
+						onFocus={(e) => setFocus(e.target.name as Focused)}
 						inputMode='numeric'
 						pattern='[0-9]*'
 						maxLength={4}
@@ -132,7 +127,7 @@ export const PaymentCard = (props:Props) => {
 						placeholder="CVC"
 						value={cvc}
 						onChange={(e) => validateCvcInput(e.target.value)}
-						onFocus={(e) => setFocus(e.target.name)}
+						onFocus={(e) => setFocus(e.target.name as Focused)}
 						inputMode='numeric'
 						pattern ='[0-9]*'
 						maxLength={3}
