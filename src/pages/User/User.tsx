@@ -13,16 +13,12 @@ export const User = () => {
 	const orderData = useSelector((state:RootState) => state.processingOrder);
 	const {isAuthorized, name, phone } = useSelector((state:RootState) => state.authorization);
 
-	const [currentUserOrders, setCurrentUserOrders] = useState([]);
+	const [currentUserOrders, setCurrentUserOrders] = useState<typeof orderData>([]);
 
 	useEffect(() => {
 		const orders = orderData.filter(order => order.phone === phone);
 		setCurrentUserOrders(orders);
 	}, [orderData, phone]);
-
-	console.log(orderData);
-	console.log(phone);
-	console.log(currentUserOrders);	
 	
 	return <div className='user_page'>
 		{currentUserOrders.length > 0 && isAuthorized &&
