@@ -2,26 +2,30 @@
 @import '../../globalStyles/fonts/stylesheet.css'
     
 .current_order
-    
-    margin: 20px 10% auto 10%
+    padding: 20px
     width: 80%
     background: #fff
     border: 2px solid $heading
     border-radius: 30px
     font-family: 'OverpassMedium'
 
+    @media screen and (max-width: 800px)
+        font-size: 10px
+
     .order_data
         display: flex
         flex-direction: column
-        margin-left: 20px
 
-        .address, .time
-            margin: 0 0 10px 0
-        .cancel_button
-            width: 200px
-            margin-top: 20px
-            font-family: 'OverpassMedium'
-            color: $heading
+        .order_id
+            font-family: 'OverpassBold'
+            @media screen and (max-width: 800px)
+                font-size: 15px
+
+        .orderId
+                font-family: 'OverpassBold'
+                color: $dark_heading
+        .address
+            margin-bottom: 0
 
     .goods
         display: flex
@@ -41,12 +45,25 @@
                     max-width: 100px
                     max-height: 100px
                     margin: auto
-                @media screen and (max-width: 800px)
-                    width: 100px
-                    height: 100px
+                @media screen and (max-width: 1000px)
+                    width: 80px
+                    height: 80px
                     .photo
-                        max-width: 100px
-                        max-height: 100px
+                        max-width: 80px
+                        max-height: 80px
+                @media screen and (max-width: 600px)
+                    width: 60px
+                    height: 60px
+                    .photo
+                        max-width: 60px
+                        max-height: 60px
+                    
+                @media screen and (max-width: 400px)
+                    width: 40px
+                    height: 40px
+                    .photo
+                        max-width: 40px
+                        max-height: 40px
             
 
             .amount
@@ -55,9 +72,26 @@
     .order_payment
         display: flex
         flex-direction: row
+        align-items: center
         gap: 10px
-        margin-left: 20px
+
+        .order_cost
+            margin: 0
 
         .order_card
+            line-height: 19px
             box-shadow: none
             line-height: 30px
+            margin: 0
+    .cancel_button
+        background-color: $cold_bg
+        width: 200px
+        font-family: 'OverpassBold'
+        color: $dark_heading
+        @media screen and (max-width: 800px)
+            width: 140px
+            font-size: 12px
+        @media screen and (max-width: 600px)
+            width: 120px
+            font-size: 9px
+

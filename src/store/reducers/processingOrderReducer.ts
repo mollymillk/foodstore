@@ -14,7 +14,8 @@ type Order = {
         address: string,
         totalCost: number
 		canceled?: boolean,
-		phone: string
+		phone: string,
+		card: string
 }
 
 type Orders = Order[];
@@ -32,7 +33,8 @@ const initialState:Orders = [{
 	time: 'четверг, 13 октября 2022 г., 12:39',
 	totalCost: 842,
 	canceled: false,
-	seconds: 1665664763000
+	seconds: 1665664763000,
+	card: '5666'
 },
 {
 	orderId: 76248,
@@ -47,7 +49,8 @@ const initialState:Orders = [{
 	time: 'вторник, 6 сентября 2022 г., 15:17',
 	totalCost: 652,
 	canceled: false,
-	seconds: 1662477443000
+	seconds: 1662477443000,
+	card: '5666'
 }];
 
 export const processingOrderSlice = createSlice({

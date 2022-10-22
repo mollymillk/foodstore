@@ -18,7 +18,7 @@ type Props = {
 export const CurrentOrder = ({data, index, userName, phone}:Props) => {
 
 
-	const {orderId, goods, time, seconds, address, totalCost, canceled} = useSelector((state:RootState) => state.processingOrder[index]);
+	const {orderId, goods, time, seconds, address, totalCost, canceled, card} = useSelector((state:RootState) => state.processingOrder[index]);
 	
 	const entries = Object.entries(goods);
 
@@ -49,22 +49,19 @@ export const CurrentOrder = ({data, index, userName, phone}:Props) => {
 	return <> <div className='current_order'>
 
 		<div className='order_data'>
-			<h3 className='orderId'>Заказ {Math.floor(orderId)}</h3>
+			<h2 className='order_id'>Заказ {Math.floor(orderId)}</h2>
+
 
 			{
 				isDelivered ? 
-					<p className='message'>Заказ доставлен</p>
+					<h3 className='message'>Заказ доставлен</h3>
 					:
 					canceled ?
-						<p>Заказ отменен</p>
+						<h3>Заказ отменен</h3>
 						:
-						<p className='timer'>Курьер будет через {Math.floor(timer)} минут</p>
+						<h3 className='timer'>Курьер будет через {Math.floor(timer)} мин</h3>
 			}
 
-			{
-				!isDelivered && !canceled &&
-					<Button className='cancel_button' onClick={()=> setIsModalActive(true)}>Отменить заказ</Button>
-			}
 
 			<p className='address'>{address}</p>
 			<p className='time'>{time}</p>
@@ -92,16 +89,24 @@ export const CurrentOrder = ({data, index, userName, phone}:Props) => {
 
 		<div className='order_payment'>
 			<h3 className='order_cost'>{totalCost} ₽</h3>
-			<p className='order_card'>Карта ***6767</p>
+			<p className='order_card'>Карта ****{card}</p>
 		</div>
 
-		<div className='rate'>
-			<p>Пожалуйста, оцените заказ</p>
-			<Rate
-				disabled={isRateDisabled}
-				onChange={()=>setIsRateDisabled(true)}
-			/>
-		</div>
+		{isDelivered &&
+
+			<div className='rate'>
+				<p>Пожалуйста, оцените заказ</p>
+				<Rate
+					disabled={isRateDisabled}
+					onChange={()=>setIsRateDisabled(true)}
+				/>
+			</div>
+		}
+
+		{
+			!isDelivered && !canceled &&
+					<Button className='cancel_button' onClick={()=> setIsModalActive(true)}>Отменить заказ</Button>
+		}
 
 		
 	</div>

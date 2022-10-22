@@ -35,8 +35,6 @@ const options:DateTimeFormatOptions = {
 
 export const OrderButton = ({isPaymentAllowed, setActive}:Props) => {
 
-	// const [isModalActive, setIsModalActive] = useState(false);
-
 	const totalCost = useSelector((state:RootState) => state.totalCost.cost);
 	const orderInfo = useSelector((state:RootState) => state.orderInfo);
 	const goods = useSelector((state:RootState) => state.cartItems);
@@ -57,7 +55,8 @@ export const OrderButton = ({isPaymentAllowed, setActive}:Props) => {
 			seconds: now.getTime(),
 			address: orderInfo.address,
 			totalCost: totalCost,
-			phone: user.phone
+			phone: user.phone,
+			card: orderInfo.card
 		};
 	
 		setActive(true);

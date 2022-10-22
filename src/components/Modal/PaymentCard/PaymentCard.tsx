@@ -37,7 +37,7 @@ export const PaymentCard = (props:Props) => {
 	}, [name, expiry, number, cvc]);
 
 	const validateNumberInput = (value:string) => {
-		const validated = value.replace(/[^\d\s]/g,'');
+		const validated = value.replace(/[\D]/g,'');
 		setNumber(validated);
 	};
 
@@ -68,8 +68,9 @@ export const PaymentCard = (props:Props) => {
 
 	const handleSendCard = () => {
 		const lastNumbers = number.includes(' ') ?
-			number.split(' ').join('').substring(12) :
-			number.substring(12);
+			number.split(' ').join('').substring(13, 17) :
+			number.substring(13, 17);
+
 		dispatch(setCard(lastNumbers));
 		props.setActive(false);
 		
@@ -99,7 +100,7 @@ export const PaymentCard = (props:Props) => {
 						onChange = {(e:React.ChangeEvent<HTMLInputElement>) => validateNumberInput(e.target.value)}
 						inputMode= 'numeric'
 						pattern= '[0-9]*'
-						maxLength={19}
+						maxLength={16}
 					/>
 				</Form.Item>
 				<Form.Item className='form_item'>
