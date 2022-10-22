@@ -15,7 +15,7 @@ export const Header = ():JSX.Element => {
 	return <header className='header'>
 
 		<NavLink to='/' className='logo'>
-			<img className="logo_img" alt="logo" srcSet={logo} />
+			<img alt="logo" srcSet={logo} className='logo_img'/>
 		</NavLink>
 
 		<nav className='main_nav'>

@@ -7,6 +7,11 @@ import { RootState } from '../../../store/store';
 import { PromoCodes, promoCodes } from '../promoCodes';
 import './PromoInput.sass';
 
+type ErrorMessages = {
+	[id in keyof PromoCodes]: string;
+};
+
+
 export const PromoInput = () => {
 
 	const promoSale = useSelector((state:RootState) => state.totalCost.promoSale);
@@ -18,31 +23,43 @@ export const PromoInput = () => {
 
 	const currentOrders = orders.filter(order => order.phone === userPhone);
 
-
-
-	const [promo, setPromo] = useState<keyof PromoCodes|string>(promoSale[0]);
-	const [helperText, setHelperText] = useState<string>('Введите промокод');
-
-	const errorMessages = {
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const errorMessages:ErrorMessages = {
 		catch200: `Добавьте товары на сумму ${1500 - cost} рублей`,
 		fresh20: 'Акция действует до 12:00',
-		new50: 'Акция действует на первый заказ :('
+		new50: 'Акция действует на первый заказ :(',
+		promo: 'Введите промокод'
 	};
+
+	const [inputValue, setInputValue] = useState<string>('');
+	const [promo, setPromo] = useState<keyof PromoCodes>(promoSale[0]);
+	const [helperText, setHelperText] = useState<string | undefined>('Введите промокод');
+
+	const entries = Object.keys(promoCodes);
 
 	const dispatch = useDispatch();
 
 	useEffect(()=> {
-		if (promoSale[0] == 'promo') {
-			setHelperText('Введите промокод');
-		} else if (promoSale[0] !== 'promo' && promoSale[1] == 0) {
-			setHelperText(errorMessages[promo]);
+		if (entries.includes(inputValue)) {
+			setPromo(inputValue as keyof PromoCodes);
+		} else {
+			setPromo('promo');
+		}
+	},[entries, inputValue]);
+
+
+
+	useEffect(()=> {
+		if (promoSale[1] == 0) {
+			const text = errorMessages[promo];
+			setHelperText(text);
 		} else {
 			setHelperText('Промокод применён');
 		}
-	}, [cost, promo, promoSale]);
+	}, [cost, errorMessages, promo, promoSale]);
 	
 	useEffect(() => {
-		if (promoCodes[promo]) {
+		if (promoCodes[promo] && promo !== 'promo') {
 			const sales = promoCodes[promo];
 			const isFirst = (currentOrders.length === 0) ? true : false;
 			const sale = sales(cost, isFirst);
@@ -52,7 +69,7 @@ export const PromoInput = () => {
 			dispatch(removePromoSale());
 		}
 		
-	}, [promo, orderItems, cost, dispatch]);
+	}, [promo, orderItems, cost, dispatch, currentOrders.length]);
 
 
 	return <div className='order_promo'>
@@ -66,7 +83,7 @@ export const PromoInput = () => {
 				<Input
 					placeholder='Промокод'
 					defaultValue={promoSale[1] ? promoSale[0] : ''}
-					onChange={(e) => setPromo(e.target.value)}
+					onChange={(e) => setInputValue(e.target.value)}
 				/>
 
 			</Form.Item>

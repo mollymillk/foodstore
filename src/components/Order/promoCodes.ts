@@ -1,16 +1,12 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-
 export type PromoCodes = {
-	'new50': (cost:number) => number,
+	'new50': (cost:number, isFirst?:boolean) => number,
 	'catch200': (cost:number) => number,
-	'fresh20': (cost:number) => number
+	'fresh20': (cost:number) => number,
+	'promo'?:()=>number
 }
 
-// const totalCost = useSelector((state:RootState) => state.totalCost);
-
 export const promoCodes:PromoCodes = {
-	new50: (cost:number, isFirst:boolean) => {
+	new50: (cost:number, isFirst?:boolean) => {
 		if (!isFirst) {
 			return 0;
 		}

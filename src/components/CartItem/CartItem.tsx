@@ -1,22 +1,15 @@
 import React from 'react';
-import { Fab } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { addToCost, addToFullCost, removeFromCost, removeFromFullCost } from '../../store/reducers/costReducer';
 import { remove, addCount } from '../../store/reducers/itemsReducer';
 import './CartItem.sass';
+import { Product, Products } from '../Goods/getGoods';
 
 
 type Props = {
-	product: string,
+	product: keyof Products,
 	amount: number,
-	data: {
-		image_front_small_url: string,
-		product_name: string,
-		id: string,
-		price: number,
-		category: string,
-		sale: number
-	}
+	data: Product
 }
 
 export const CartItem = ({product, amount, data}:Props):JSX.Element => {

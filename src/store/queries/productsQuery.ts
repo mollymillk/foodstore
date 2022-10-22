@@ -2,14 +2,15 @@ export type ProductQuery = {
     id: string,
 	price: number,
 	category: string,
-	sale?: number
+	sale: number
 }
 
 export const productsData: ProductQuery[] = [
 	{
 		id: '4607012590466',
 		price: 90,
-		category: 'base'
+		category: 'base',
+		sale: 0
 	},
 	{
 		id: '4670002810028',
@@ -26,33 +27,40 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '4600699501121',
 		price: 120,
-		category: 'base'
+		category: 'base',
+		sale: 0
+
 	},
 	{
 		id: '4601751015655',
 		price: 40,
-		category: 'base'
+		category: 'base',
+		sale: 0
 	},
 	{
 		id: '2490035000010',
 		price: 40,
-		category: 'bread'
+		category: 'bread',
+		sale: 0
 	},
 	{
 		id: '4601347007934',
 		price: 35,
-		category: 'bread'
+		category: 'bread',
+		sale: 0
+
 	},
 	{
 		id: '4607065714192',
 		price: 120,
 		category: 'bread',
-		sale: 12
+		sale: 12,
 	},
 	{
 		id: '4665297602496',
 		price: 40,
-		category: 'bread'
+		category: 'bread',
+		sale: 0
 	},
 	{
 		id: '4607064327188',
@@ -63,7 +71,8 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '4607016455341',
 		price: 70,
-		category: 'bread'
+		category: 'bread',
+		sale: 0
 	},
 	{
 		id: '4601751003775',
@@ -74,7 +83,8 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '4601075342390',
 		price: 85,
-		category: 'milk'
+		category: 'milk',
+		sale: 0
 	},
 	{
 		id: '4602048004109',
@@ -85,7 +95,8 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '4620016810873',
 		price: 65,
-		category: 'milk'
+		category: 'milk',
+		sale: 0
 	},
 	{
 		id: '4600657412117',
@@ -96,12 +107,14 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '4620016810354',
 		price: 56,
-		category: 'milk'
+		category: 'milk',
+		sale: 0
 	},
 	{
 		id: '4600605022207',
 		price: 35,
-		category: 'milk'
+		category: 'milk',
+		sale: 0
 	},
 	{
 		id: '2800110010146',
@@ -112,7 +125,8 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '4607808380578',
 		price: 410,
-		category: 'meat'
+		category: 'meat',
+		sale: 0
 	},
 	{
 		id: '2800110010009',
@@ -123,22 +137,26 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '4607066050077',
 		price: 310,
-		category: 'meat'
+		category: 'meat',
+		sale: 0
 	},
 	{
 		id: '4640010204980',
 		price: 270,
-		category: 'meat'
+		category: 'meat',
+		sale: 0
 	},
 	{
 		id: '4607104812988',
 		price: 310,
-		category: 'meat'
+		category: 'meat',
+		sale: 0
 	},
 	{
 		id: '4610009511634',
 		price: 370,
-		category: 'meat'
+		category: 'meat',
+		sale: 0
 	},
 	{
 		id: '4607001771555',
@@ -149,7 +167,8 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '4620007590951',
 		price: 410,
-		category: 'coffee'
+		category: 'coffee',
+		sale: 0
 	},
 	{
 		id: '7610121710622',
@@ -160,52 +179,62 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '7613034227775',
 		price: 310,
-		category: 'coffee'
+		category: 'coffee',
+		sale: 0
 	},
 	{
 		id: '7613032573867',
 		price: 270,
-		category: 'coffee'
+		category: 'coffee',
+		sale: 0
 	},
 	{
 		id: '7613036942683',
 		price: 710,
-		category: 'coffee'
+		category: 'coffee',
+		sale: 0
 	},
 	{
 		id: '5760466995764',
 		price: 370,
-		category: 'coffee'
+		category: 'coffee',
+		sale: 0
 	},
 	{
 		id: '4607051158238',
 		price: 250,
-		category: 'tea'
+		category: 'tea',
+		sale: 0
 	},
 	{
 		id: '4791045000150',
 		price: 210,
-		category: 'tea'
+		category: 'tea',
+		sale: 0
 	},
 	{
 		id: '9312631150674',
 		price: 350,
-		category: 'tea'
+		category: 'tea',
+		sale: 0
 	},
 	{
 		id: '4605246008986',
 		price: 310,
-		category: 'tea'
+		category: 'tea',
+		sale: 0
 	},
 	{
 		id: '4603422004104',
 		price: 270,
-		category: 'tea'
+		category: 'tea',
+		sale: 0
 	},
 	{
 		id: '8717163842218',
 		price: 410,
-		category: 'tea'
+		category: 'tea',
+		sale: 0
 	},
 	{
 		id: '4650061000097',
@@ -216,7 +245,8 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '4607117892113',
 		price: 120,
-		category: 'sweet'
+		category: 'sweet',
+		sale: 0
 	},
 	{
 		id: '4600300071067',
@@ -227,12 +257,15 @@ export const productsData: ProductQuery[] = [
 	{
 		id: '4606272028757',
 		price: 95,
-		category: 'sweet'
+		category: 'sweet',
+		sale: 0
 	},
 	{
 		id: '4607117891833',
 		price: 210,
-		category: 'sweet'
+		category: 'sweet',
+		sale: 0
+
 	},
 ];
 

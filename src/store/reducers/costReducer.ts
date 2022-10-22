@@ -1,3 +1,4 @@
+import { PromoCodes } from './../../components/Order/promoCodes';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
@@ -5,7 +6,7 @@ import type { RootState } from '../store';
 type TotalCost = {
 	fullCost: number;
 	cost: number,
-	promoSale: [string, number]
+	promoSale: [keyof PromoCodes, number]
 }
 
 const initialState:TotalCost = {
@@ -30,7 +31,7 @@ export const costSlice = createSlice({
 		removeFromFullCost: (state, action: PayloadAction<number>) => {
 			state.fullCost -= action.payload;
 		},
-		addPromoSale: (state, action: PayloadAction<[string, number]>) => {
+		addPromoSale: (state, action: PayloadAction<[keyof PromoCodes, number]>) => {
 			state.promoSale = action.payload;
 		},
 		removePromoSale: (state) => {

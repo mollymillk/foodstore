@@ -9,9 +9,10 @@ import img from './img/trolley.png';
 import { NavLink } from 'react-router-dom';
 import { Modal } from '../../components/Modal/Modal';
 import { AuthContainer } from '../../components/AuthContainer/AuthContainer';
+import { Products } from '../../components/Goods/getGoods';
 
 
-type Entries = [string, number];
+type Entries = [keyof Products, number];
 
 export const Cart = ():JSX.Element => {
 
@@ -34,10 +35,7 @@ export const Cart = ():JSX.Element => {
 				if (amount) {
 
 					orderSum += (data[id].price * amount);
-
-					data[id].sale ?
-						orderSale += (data[id].sale * amount)
-						: orderSale + 0;
+					orderSale += (data[id].sale * amount);
 
 					return <CartItem
 						key={id}

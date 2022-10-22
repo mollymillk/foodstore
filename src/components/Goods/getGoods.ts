@@ -1,8 +1,8 @@
 import { useGetGoodsByNameQuery } from '../../store/goodsApi';
 import { productsData } from '../../store/queries/productsQuery';
 
-type Product = {
-	sale?: number; 
+export type Product = {
+	sale: number; 
 	image_front_small_url: string,
 	product_name: string,
 	id: string,

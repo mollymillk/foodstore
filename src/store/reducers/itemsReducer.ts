@@ -14,13 +14,13 @@ export const itemsSlice = createSlice({
 	name: 'cartItems',
 	initialState,
 	reducers: {
-		addItem: (state, action: PayloadAction<string>) => {
+		addItem: (state, action: PayloadAction<keyof Products>) => {
 			state[action.payload] = 1;
 		},
-		addCount: (state, action: PayloadAction<string>) => {
+		addCount: (state, action: PayloadAction<keyof Products>) => {
 			state[action.payload] = state[action.payload] + 1;
 		},
-		remove: (state, action: PayloadAction<string>) => {
+		remove: (state, action: PayloadAction<keyof Products>) => {
 			state[action.payload] = state[action.payload] - 1;
 		},
 		setDefaultItems: (state) => {

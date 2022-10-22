@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
+	"types": "custom.d.ts",
 	"scripts": {
 		"start": "webpack serve --config webpack.config.js --open",
 		"test": "echo \"Error: no test specified\" && exit 1",

@@ -1,6 +1,11 @@
-import * as React from 'react';
-
 declare module '*.svg' {
-    const value: string;
-    export = value;
+
+  const svg: string;
+
+  export default svg;
+}
+
+declare module '*.png' {
+  const value: string;
+  export = value;
 }

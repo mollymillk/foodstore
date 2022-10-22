@@ -24,8 +24,11 @@ export const CancelOrder = ({setActive, orderId}:Props):JSX.Element => {
 
 		<p className='cancel_message'>Вы точно хотите отменить заказ?</p>
 
-		<Button className='cancel_button'
-			onClick={()=>handleCancel()}>Да, отменить
+		<Button
+			className='cancel_button'
+			onClick={()=>handleCancel()}
+		>
+			Да, отменить
 		</Button>
 
 	</div>;

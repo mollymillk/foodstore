@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Fab } from '@mui/material';
+import { Button } from '@mui/material';
 import type { RootState } from '../../../store/store';
 import {useSelector, useDispatch} from 'react-redux';
 import { addItem, addCount, remove } from '../../../store/reducers/itemsReducer';

@@ -9,7 +9,7 @@ type Promo = {
 const initialState:Promo = {
 	'new50': false,
 	'catch200': false,
-	'fresh20': false
+	'fresh20': false,
 };
 
 export const promoSlice = createSlice({

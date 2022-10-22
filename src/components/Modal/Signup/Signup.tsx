@@ -140,6 +140,7 @@ export const Signup = ({setActive}:Props):JSX.Element => {
 				<Input
 					onBlur={(e)=>checkUserName(e.target.value)}
 					maxLength={15}
+					autoComplete="name"
 				/>
 			</Form.Item>
 			<Form.Item
@@ -174,6 +175,7 @@ export const Signup = ({setActive}:Props):JSX.Element => {
 			>
 				<Input 
 					onBlur={(e)=>checkPhone(e.target.value)}
+					autoComplete="tel"
 				/>
 			</Form.Item>
 			<Form.Item
@@ -192,6 +194,7 @@ export const Signup = ({setActive}:Props):JSX.Element => {
 			>
 				<Input.Password
 					onChange={(e)=>checkPassword(e.target.value)}
+					autoComplete="current-password"
 				/>
 			</Form.Item>
 

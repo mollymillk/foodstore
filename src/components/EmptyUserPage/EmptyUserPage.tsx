@@ -8,7 +8,7 @@ export const EmptyUserPage = () => {
 
 	return <div className='empty_user_page'>
 
-		<img src="" alt="empty_cart" srcSet={img} className='empty_icon'/>
+		<img srcSet={img} alt="empty_cart" className='empty_icon'/>
 
 		<p className='empty_message'>
 			Кажется, у вас ещё нет заказов
