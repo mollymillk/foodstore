@@ -1,6 +1,6 @@
 # 🍕 Foodstore - доставка продуктов за 15 минут!
 
-# Стек
+## Стек
 - Typescript
 - React
 - Redux Toolkit + RTK Query
