@@ -54,7 +54,7 @@ export const Order = ({sum, setActive}:Props):JSX.Element => {
 			<p className='value'>{Math.floor(totalCost - promoSale[1])}₽</p>
 		</div>
 
-		<OrderButton isPaymentAllowed={isPaymentAllowed} setActive={setActive}/>
+		<OrderButton isPaymentAllowed={isPaymentAllowed} setActive={setActive} cost={Math.floor(totalCost - promoSale[1])}/>
 
 		<Modal data='card' active={cardModalActive} setActive={setCardModalActive} />
 		<Modal data='address' active={addressModalActive} setActive={setAddressModalActive} />

@@ -12,7 +12,8 @@ import { proccessOrder } from '../../../store/reducers/processingOrderReducer';
 
 type Props = {
 	isPaymentAllowed: boolean,
-	setActive: React.Dispatch<React.SetStateAction<boolean>>
+	setActive: React.Dispatch<React.SetStateAction<boolean>>,
+	cost: number
 }
 
 interface DateTimeFormatOptions {
@@ -33,7 +34,7 @@ const options:DateTimeFormatOptions = {
 	minute: 'numeric',
 };
 
-export const OrderButton = ({isPaymentAllowed, setActive}:Props) => {
+export const OrderButton = ({isPaymentAllowed, setActive, cost}:Props) => {
 
 	const totalCost = useSelector((state:RootState) => state.totalCost.cost);
 	const orderInfo = useSelector((state:RootState) => state.orderInfo);
@@ -54,7 +55,7 @@ export const OrderButton = ({isPaymentAllowed, setActive}:Props) => {
 			time: timeToSend,
 			seconds: now.getTime(),
 			address: orderInfo.address,
-			totalCost: totalCost,
+			totalCost: cost,
 			phone: user.phone,
 			card: orderInfo.card
 		};

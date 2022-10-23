@@ -26,7 +26,8 @@ export const Promo = (props:Props):JSX.Element => {
 	return  <Tooltip title={tooltipText}>
 
 		<div className={containerClassName} 
-			onClick={() => copyUrl()}>
+			onClick={() => copyUrl()}
+			onMouseLeave={() => setHasCopied(false)}>
 
 			<div className='sale'>
 				<div className='text'>{props.heading}</div>

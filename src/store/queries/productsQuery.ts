@@ -7,12 +7,6 @@ export type ProductQuery = {
 
 export const productsData: ProductQuery[] = [
 	{
-		id: '4607012590466',
-		price: 90,
-		category: 'base',
-		sale: 0
-	},
-	{
 		id: '4670002810028',
 		price: 160,
 		category: 'base',

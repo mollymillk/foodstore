@@ -5,11 +5,12 @@ import {useSelector, useDispatch} from 'react-redux';
 import { addItem, addCount, remove } from '../../../store/reducers/itemsReducer';
 import { addToCost, addToFullCost, removeFromCost, removeFromFullCost } from '../../../store/reducers/costReducer';
 import './Card.sass';
+import { Products } from '../getGoods';
 
 type Props = {
 	img: string,
 	name: string,
-	id: string
+	id: keyof Products,
 	price: number,
 	sale: number,
 }

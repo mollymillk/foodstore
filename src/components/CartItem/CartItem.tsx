@@ -16,7 +16,7 @@ export const CartItem = ({product, amount, data}:Props):JSX.Element => {
 
 	const dispatch = useDispatch();
 
-	const priceToAdd = data.sale ? 
+	const priceToAdd = data.sale > 0 ? 
 		data.price - data.sale :
 		data.price;
 
@@ -43,7 +43,7 @@ export const CartItem = ({product, amount, data}:Props):JSX.Element => {
 
 			<p className='name'>{data.product_name.substring(0, 21)}</p>
 			<p className='price'>
-				{data.sale && <span className='full_price'>{data.price}₽</span>}
+				{data.sale > 0 && <span className='full_price'>{data.price}₽</span>}
 				{priceToAdd}₽ x {amount}шт
 			</p>
 

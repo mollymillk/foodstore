@@ -19,7 +19,9 @@ export const OrderInput = ({inputType, setModalActive}:Props) => {
 		</p>
 		{orderInfo[inputType] ?
 			<div className={inputType +'_info'}>
-				<p className='text'>{orderInfo[inputType]}</p>
+				<p className='text'>{orderInfo[inputType].length > 40
+					? orderInfo[inputType].substring(0, 40) + '...'
+					: orderInfo[inputType]}</p>
 				<p className='change_button' onClick={() => setModalActive(true)}>изменить</p>
 			</div>
 			: <p className={inputType+'_value'} onClick={() => setModalActive(true)}>Выбрать</p>}
