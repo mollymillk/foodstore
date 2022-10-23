@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { getGoods } from '../../components/Goods/getGoods';
 import './Cart.sass';
 import { Order } from '../../components/Order/Order';
-import img from './img/trolley.png';
+import img from './img/empty_cart_icon.svg';
 import { NavLink } from 'react-router-dom';
 import { Modal } from '../../components/Modal/Modal';
 import { AuthContainer } from '../../components/AuthContainer/AuthContainer';
@@ -28,7 +28,9 @@ export const Cart = ():JSX.Element => {
 	let orderSale = 0;	
 
 	return <><div className='cart'>
+
 		<div className="goods">
+
 			{!isAuthorized && <AuthContainer/>}
 			{isAuthorized && entries && entries.map(([id, amount])=> {
 
@@ -45,17 +47,23 @@ export const Cart = ():JSX.Element => {
 					/>;
 				}
 			})}
+
 			{!orderSum && isAuthorized &&
+
 			<div className='empty_cart_container'>
 				<img srcSet={img} className='cart_img'/>
 				<p className='empty_cart'>В корзине пусто :(</p>
 				<NavLink to='/' className='to_main'>За покупками!</NavLink>
 			</div>
+
 			}
 		</div>
+
 		{!!orderSum && 
-		<Order sum={orderSum} sale={orderSale} setActive={setIsModalActive}/>}
+			<Order sum={orderSum} sale={orderSale} setActive={setIsModalActive}/>
+		}
 	</div>
+
 	<Modal data='paidOrder' active={isModalActive} setActive={setIsModalActive}/>
 	</>;
 };
